@@ -1,0 +1,19 @@
+Mapname
+Mapstats | cols and rows NEED to be == | Row Col Debug mapType
+Description
+*Required* General 0 0 0 0 0 0 0
+/-------------\
+|  F       F  |
+|             |
+|             |
+|   _     _   |
+|             |
+|             |
+|      _      |
+|             |
+|             |
+|   _     _   |
+|             |
+|             |
+|      P      |
+\_____________/
