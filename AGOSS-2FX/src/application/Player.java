@@ -240,7 +240,7 @@ public class Player {
 	    	}
 	    }
 		
-		public void levelup(Mob1 attacker, Frame frame) {
+		public void levelup(Mob1 attacker) {
 			//Reward EXP
 			this.exp = this.exp + attacker.getLevel()*4;
 			System.out.println("You gained "+ attacker.getLevel()*4 +" EXP!");
