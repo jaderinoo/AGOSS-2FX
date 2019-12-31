@@ -22,6 +22,7 @@ public class Main extends Application
 {
 	static Scene menuScene;
 	static Scene loadScene;
+	static Scene CharCreateScene;
 	static Stage window;
 	
 	public static void main(String[] args)
@@ -35,12 +36,14 @@ public class Main extends Application
 		window = stage;
 		
 	    //Setup scenes   
-		VBox menuVBox = (VBox) FXMLLoader.load(getClass().getResource("MenuScene.fxml"));
-		VBox loadVbox = (VBox) FXMLLoader.load(getClass().getResource("loadScene.fxml"));
-        
+		VBox menuVBox = (VBox) FXMLLoader.load(getClass().getResource("scenes\\MenuScene.fxml"));
+		VBox loadVbox = (VBox) FXMLLoader.load(getClass().getResource("scenes\\loadScene.fxml"));
+		VBox CharCreateVbox = (VBox) FXMLLoader.load(getClass().getResource("scenes\\CharCreateScene.fxml"));
+		
 		// Create the Scene
-		menuScene = new Scene(menuVBox);
-		loadScene = new Scene(loadVbox);
+		menuScene = new Scene(menuVBox, 500, 500);
+		loadScene = new Scene(loadVbox, 500, 500);
+		CharCreateScene = new Scene(CharCreateVbox, 500, 500);
 		
 		// Set the Scene to the Stage
 		window.setScene(menuScene);
@@ -48,6 +51,7 @@ public class Main extends Application
 		window.setTitle("JavaFx Testing Environment");
 		// Display the Stage
 		window.show();
+
 	}
 	
 	public static void loadScene() {
@@ -56,6 +60,10 @@ public class Main extends Application
 	
 	public static void menuScene() {
 		window.setScene(menuScene);
+	}
+	
+	public static void CharScene() {
+		window.setScene(CharCreateScene);
 	}
 
 }
