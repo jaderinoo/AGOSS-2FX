@@ -36,7 +36,7 @@ public class Updater {
     	}
     	
     	//Write JSON file
-        try (FileWriter file = new FileWriter("src\\saves\\" + name + "\\" + name + ".json")) {
+        try (FileWriter file = new FileWriter("AGOSS-2FX\\src\\application\\saves\\" + name + "\\" + name + ".json")) {
  
             file.write(objList.toJSONString());
             file.flush();
@@ -51,8 +51,8 @@ public class Updater {
     	ArrayList<Player> playerList = new ArrayList<Player>();
     	
     	JSONParser jsonParser = new JSONParser();
-        
-        try (FileReader reader = new FileReader("src\\saves\\" + name + "\\" + name + ".json"))
+
+        try (FileReader reader = new FileReader("AGOSS-2FX\\src\\application\\saves\\" + name + "\\" + name + ".json"))
         {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
@@ -126,7 +126,7 @@ public class Updater {
     	
     	
     	//Write JSON file
-        try (FileWriter file = new FileWriter("src\\saves\\" + name + "\\" + name + "_Bag.json")) {
+        try (FileWriter file = new FileWriter("AGOSS-2FX\\src\\application\\saves\\" + name + "\\" + name + "_Bag.json")) {
  
             file.write(bagObject.toJSONString());
             file.flush();
@@ -143,7 +143,7 @@ public class Updater {
         
     	Bag bag = new Bag(0, 0, 0, "");
     	
-        try (FileReader reader = new FileReader("src\\saves\\" + name + "\\" + name + "_Bag.json"))
+        try (FileReader reader = new FileReader("AGOSS-2FX\\src\\application\\saves\\" + name + "\\" + name + "_Bag.json"))
         {
             //Read JSON file
             Object bagItems = jsonParser.parse(reader);
