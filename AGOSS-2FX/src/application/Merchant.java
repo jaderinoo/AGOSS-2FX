@@ -5,7 +5,6 @@ public class Merchant {
 	int mapY;
 	
 	public Merchant(int mapX, int mapY) {
-		int[] Bag = {mapX,mapY};
 		
 		this.mapX = mapX;
 		this.mapY = mapY;

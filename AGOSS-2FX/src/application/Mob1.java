@@ -16,8 +16,6 @@ public class Mob1 {
 
 		public Mob1(String name, int strength,int agility,int armor,int maxHp,int special,int level,int currentHp,int getMapX, int getMapY, char type) {
 
-	    	Object[] Statistics = {name, strength, agility, armor, maxHp, special, level, getMapX, getMapY, type};
-	    	
 	    	this.getMapX = getMapX;
 	    	this.getMapY = getMapY;
 	    	this.name = name;

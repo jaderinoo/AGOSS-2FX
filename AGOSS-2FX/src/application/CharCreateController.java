@@ -3,7 +3,6 @@ package application;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.nio.file.Files;
 
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;

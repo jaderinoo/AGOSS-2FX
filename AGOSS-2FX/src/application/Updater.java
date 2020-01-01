@@ -136,8 +136,7 @@ public class Updater {
         }
 	}
     
-    @SuppressWarnings("unchecked")
-	public static Bag bagReader(String name) throws org.json.simple.parser.ParseException, IOException {
+    public static Bag bagReader(String name) throws org.json.simple.parser.ParseException, IOException {
     	
     	JSONParser jsonParser = new JSONParser();
         
