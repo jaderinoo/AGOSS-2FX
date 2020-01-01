@@ -131,6 +131,11 @@ public class Main extends Application
         timeline.play();
 	}
 	
+	public static void debugSetter() {
+		loadType = 2;
+		determined = "test";
+	}
+	
 	public static void fadeOut() {
         Timeline timelineOut = new Timeline();
         KeyFrame key2 = new KeyFrame(Duration.millis(500),

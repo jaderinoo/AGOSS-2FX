@@ -27,6 +27,9 @@ public class MenuSceneController
 	@FXML
 	public Button quitBtn;
 	
+	@FXML
+	public CheckBox debugCheck;
+	
 	// location and resources will be automatically injected by the FXML loader
 	@FXML
 	private URL location;
@@ -37,6 +40,7 @@ public class MenuSceneController
 	@FXML
 	private void initialize()
 	{
+		
 		quitBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -54,6 +58,10 @@ public class MenuSceneController
 		LoadGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+            	//If debug is checked, use debug settings (2,"test")
+        		if(debugCheck.isSelected()) {
+            		Main.debugSetter();
+            	}
         		Main.loadScene();
             }
         });
