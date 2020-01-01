@@ -45,6 +45,22 @@ public class MenuSceneController
             }
         });
 
+		//Check Boxes
+		loadMapBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	loadMapListBox.setSelected(false);
+            }
+        });
+		//Check Boxes
+		loadMapListBox.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	loadMapBox.setSelected(false);
+            }
+        });
+		
+		
 		LoadGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
