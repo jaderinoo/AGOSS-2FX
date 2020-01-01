@@ -35,7 +35,6 @@ public class MenuSceneController
 		LoadGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	
         		Main.loadScene();
             }
         });
