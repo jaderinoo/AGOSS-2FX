@@ -70,6 +70,12 @@ public class LoadSceneController
 					e.printStackTrace();
 				}
 
+				//Move to game
+				try {
+					Main.loadGameWithType(playerListResume,bagResume);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
             }
         });
         

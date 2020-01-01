@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 
@@ -23,7 +24,7 @@ public class CharCreateController
 	int currentArmor = 5;
 	int currentHP = 50;
 	int currentSpecial = 10;
-    
+	
 	@FXML
 	public Label errorCatcher;
 	
@@ -102,8 +103,8 @@ public class CharCreateController
 							Updater.bagUpdater(bag, ((String) player.getName()));
 	
 							//Move to game
-							//Adventure.Resume(playerList, bag, 1, frame);
-						} catch (IOException e) {
+							Adventure.Resume(playerList, bag, 1);
+						} catch (Exception e) {
 							e.printStackTrace();
 						}
             		}else {

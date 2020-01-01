@@ -7,14 +7,23 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 
 public class MenuSceneController
 {
+	
+	int loadType = 1;
 	@FXML
 	public Button LoadGameBtn;
 	
 	@FXML
 	public Button NewGameBtn;
+	
+	@FXML
+	public CheckBox loadMapBox;
+	
+	@FXML
+	public CheckBox loadMapListBox;
 	
 	@FXML
 	public Button quitBtn;
@@ -39,7 +48,12 @@ public class MenuSceneController
 		LoadGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-        		Main.loadScene();
+            	if(loadMapBox.isSelected()) {
+            		loadType = 2;
+            	}else if(loadMapListBox.isSelected()) {
+            		loadType = 3;
+            	}
+        		Main.loadScene(loadType);
             }
         });
         

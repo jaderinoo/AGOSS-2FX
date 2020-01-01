@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -28,6 +29,7 @@ public class Main extends Application
 	static Scene charCreateScene;
 	static Stage window;
 	static Timeline timeline = new Timeline();
+	static int loadType;
 	
 	public static void main(String[] args)
 	{
@@ -58,8 +60,18 @@ public class Main extends Application
 
 	}
 	
-	public static void loadScene() {
-        KeyFrame key = new KeyFrame(Duration.millis(500),new KeyValue (window.getScene().getRoot().opacityProperty(), 0)); 
+	public static void loadGameWithType(ArrayList<Player> playerList, Bag bag) {
+		try {
+			Adventure.Resume(playerList, bag, loadType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void loadScene(int x) {
+        loadType = x;
+        
+		KeyFrame key = new KeyFrame(Duration.millis(500),new KeyValue (window.getScene().getRoot().opacityProperty(), 0)); 
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished((ae) -> {
         	window.setScene(loadScene);
