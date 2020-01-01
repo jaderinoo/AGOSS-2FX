@@ -13,6 +13,8 @@ public class MenuSceneController
 {
 	
 	int loadType = 1;
+	String determined = "";
+	
 	@FXML
 	public Button LoadGameBtn;
 	
@@ -20,10 +22,7 @@ public class MenuSceneController
 	public Button NewGameBtn;
 	
 	@FXML
-	public CheckBox loadMapBox;
-	
-	@FXML
-	public CheckBox loadMapListBox;
+	public Button optionBtn;
 	
 	@FXML
 	public Button quitBtn;
@@ -44,32 +43,18 @@ public class MenuSceneController
         		Main.quitGame();
             }
         });
-
-		//Check Boxes
-		loadMapBox.setOnAction(new EventHandler<ActionEvent>() {
+		
+		optionBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	loadMapListBox.setSelected(false);
+            	Main.optionsScene();
             }
         });
-		//Check Boxes
-		loadMapListBox.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	loadMapBox.setSelected(false);
-            }
-        });
-		
-		
+	
 		LoadGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	if(loadMapBox.isSelected()) {
-            		loadType = 2;
-            	}else if(loadMapListBox.isSelected()) {
-            		loadType = 3;
-            	}
-        		Main.loadScene(loadType);
+        		Main.loadScene();
             }
         });
         

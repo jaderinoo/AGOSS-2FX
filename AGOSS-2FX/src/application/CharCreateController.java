@@ -103,7 +103,7 @@ public class CharCreateController
 							Updater.bagUpdater(bag, ((String) player.getName()));
 	
 							//Move to game
-							Adventure.Resume(playerList, bag, 1);
+							Adventure.Resume(playerList, bag, 1, null);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -122,7 +122,7 @@ public class CharCreateController
         ReturnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	Main.menuScene();
+            	Main.menuScene(0, null);
             }
         });
         

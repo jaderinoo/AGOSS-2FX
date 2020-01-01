@@ -27,9 +27,11 @@ public class Main extends Application
 	static Scene menuScene;
 	static Scene loadScene;
 	static Scene charCreateScene;
+	static Scene optionsScene;
 	static Stage window;
 	static Timeline timeline = new Timeline();
 	static int loadType;
+	static String determined;
 	
 	public static void main(String[] args)
 	{
@@ -45,11 +47,13 @@ public class Main extends Application
 		VBox menuVBox = (VBox) FXMLLoader.load(getClass().getResource("scenes\\MenuScene.fxml"));
 		VBox loadVbox = (VBox) FXMLLoader.load(getClass().getResource("scenes\\loadScene.fxml"));
 		VBox charCreateVbox = (VBox) FXMLLoader.load(getClass().getResource("scenes\\CharCreateScene.fxml"));
+		VBox optionsVbox = (VBox) FXMLLoader.load(getClass().getResource("scenes\\OptionsScene.fxml"));
 		
 		// Create the Scene
 		menuScene = new Scene(menuVBox, 500, 500);
 		loadScene = new Scene(loadVbox, 500, 500);
 		charCreateScene = new Scene(charCreateVbox, 500, 500);
+		optionsScene = new Scene(optionsVbox, 500, 500);
 		
 		// Set the Scene to the Stage
 		window.setScene(menuScene);
@@ -62,15 +66,13 @@ public class Main extends Application
 	
 	public static void loadGameWithType(ArrayList<Player> playerList, Bag bag) {
 		try {
-			Adventure.Resume(playerList, bag, loadType);
+			Adventure.Resume(playerList, bag, loadType, determined);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static void loadScene(int x) {
-        loadType = x;
-        
+	public static void loadScene() {
 		KeyFrame key = new KeyFrame(Duration.millis(500),new KeyValue (window.getScene().getRoot().opacityProperty(), 0)); 
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished((ae) -> {
@@ -80,7 +82,10 @@ public class Main extends Application
         timeline.play();
 	}
 	
-	public static void menuScene() {
+	public static void menuScene(int x, String s) {
+        loadType = x;
+        determined = s;
+        
         KeyFrame key = new KeyFrame(Duration.millis(500),new KeyValue (window.getScene().getRoot().opacityProperty(), 0)); 
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished((ae) -> {
@@ -95,6 +100,16 @@ public class Main extends Application
         timeline.getKeyFrames().add(key);
         timeline.setOnFinished((ae) -> {
         	window.setScene(charCreateScene);
+        	fadeOut();
+        }); 
+        timeline.play();
+	}
+	
+	public static void optionsScene() {
+        KeyFrame key = new KeyFrame(Duration.millis(500),new KeyValue (window.getScene().getRoot().opacityProperty(), 0)); 
+        timeline.getKeyFrames().add(key);
+        timeline.setOnFinished((ae) -> {
+        	window.setScene(optionsScene);
         	fadeOut();
         }); 
         timeline.play();

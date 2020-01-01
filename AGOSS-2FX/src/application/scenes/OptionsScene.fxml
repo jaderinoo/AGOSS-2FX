@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?language JavaScript?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="vbox" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OptionsSceneController">
+  <style>
+	-fx-padding: 10;
+  </style>
+  <children>
+      <Pane prefHeight="438.0" prefWidth="480.0">
+         <children>
+          <Label fx:id="inputLbl" alignment="CENTER_LEFT" cache="true" cacheHint="SCALE" prefHeight="30.0" prefWidth="200.0" text="Options" textAlignment="LEFT" />
+            <VBox alignment="BASELINE_LEFT" layoutX="14.0" layoutY="30.0" prefHeight="90.0" prefWidth="253.0" style="-fx-spacing: 10;" />
+            <CheckBox fx:id="loadMapBox" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" text="Load Map" />
+            <CheckBox fx:id="loadMapListBox" layoutX="14.0" layoutY="175.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="Load MapList" />
+            <TextField fx:id="loadMapField" disable="true" layoutX="126.0" layoutY="127.0" />
+            <TextField fx:id="loadMapListField" disable="true" layoutX="126.0" layoutY="171.0" />
+         </children>
+      </Pane>
+      <ButtonBar prefHeight="40.0" prefWidth="480.0">
+         <buttons>
+          <Button fx:id="returnBtn" alignment="CENTER" cacheShape="false" mnemonicParsing="false" text="Return" textAlignment="CENTER" />
+         </buttons>
+      </ButtonBar>
+  </children>
+</VBox>

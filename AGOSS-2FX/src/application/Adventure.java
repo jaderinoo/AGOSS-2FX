@@ -11,14 +11,15 @@ public class Adventure {
 	static boolean winStatus = false;
 	static ArrayList<String> listOfLines = new ArrayList<>();
 
-	public static void Resume(ArrayList<Player> playerList, Bag bag, int type) throws Exception {
+	public static void Resume(ArrayList<Player> playerList, Bag bag, int type, String determined) throws Exception {
 		
 		//Decide next selection based off menu button press
 		switch(type) {
 			
 			//Load player selected Map
 			case 2:
-				System.out.println(type);
+				String mapName = determined;
+				System.out.println("Selection type: " + type + "\nMapname: " + mapName);
 				
 				//frame.add(Frame.loadMap());
 				
@@ -28,8 +29,8 @@ public class Adventure {
 			//Load mapLists
 			case 3:	
 			case 1:
-				String mapList = "";
-				
+				String mapList = determined;
+				System.out.println("Selection type: " + type + "\nMapList name: " + mapList);
 				//Load BASE game
 				if(type == 1) {
 					System.out.println(type);
