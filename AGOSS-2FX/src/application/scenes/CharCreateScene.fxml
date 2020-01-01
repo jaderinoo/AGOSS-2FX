@@ -71,6 +71,7 @@
                      <children>
                       <Button fx:id="Continue" alignment="CENTER" contentDisplay="RIGHT" layoutX="166.0" layoutY="7.0" mnemonicParsing="false" text="Contunue" textAlignment="CENTER" />
                       <Button fx:id="ReturnBtn" alignment="CENTER" cacheShape="false" layoutX="90.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Return" textAlignment="CENTER" />
+                      <Button fx:id="ResetBtn" alignment="CENTER" cacheShape="false" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Reset" textAlignment="CENTER" />
                      </children>
                   </AnchorPane>
               </items>

@@ -1,5 +1,6 @@
 package application;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,9 +37,6 @@ public class CharCreateController
 	int currentArmor = 5;
 	int currentHP = 50;
 	int currentSpecial = 10;
-
-    static ArrayList<Player> playerListResume = new ArrayList<Player>();
-    static Bag bagResume = new Bag(0, 0, 0, null);
     
     @FXML
     public TextField remPoints;
@@ -60,6 +58,9 @@ public class CharCreateController
     
 	@FXML
 	public Button ReturnBtn;
+	
+	@FXML
+	public Button ResetBtn;
 	
 	@FXML
 	public Button Continue;
@@ -94,20 +95,37 @@ public class CharCreateController
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		Player player = new Player(saveField.getText(), 5, 5, 5, 50, 10, 1, 0, 0);
+            		//Create new player with stats selected
+            		Player player = new Player(saveField.getText(), spinStrength.getValue(), spinAgility.getValue(), spinArmor.getValue(), spinHP.getValue(), spinSpecial.getValue(), 1, 0, 0);
             		
-					playerListResume = Updater.saveReader(saveField.getText());
-				} catch (ParseException | IOException e) {
-					//CREATE A POP UP
-					e.printStackTrace();
-				}
-				try {
-					bagResume = Updater.bagReader(saveField.getText());
-				} catch (ParseException | IOException e) {
-					//CREATE A POP UP
-					e.printStackTrace();
-				}
+            		//Create Folder for new player
+            		new File("AGOSS-2FX\\src\\application\\saves\\" + player.getName()).mkdir();
+            		ArrayList<Player> playerList = new ArrayList<Player>();
+            		
+            		//Add player to playerlist
+            		playerList.add(player);
+            		
+            		//Save playerlist 
+					Updater.saveUpdater(playerList, saveField.getText());
+					
+					//Create new bag
+	            	Bag bag = new Bag(0, 0, 0, "start");
 
+					try {
+						//Save Bag
+						Updater.bagUpdater(bag, ((String) player.getName()));
+
+						//Move to game
+						//Adventure.Resume(playerList, bag, 1, frame);
+					} catch (IOException e) {
+						//CREATE A POP UP for invalid name
+						e.printStackTrace();
+					}
+
+				} catch (IOException e) {
+					//CREATE A POP Up
+					e.printStackTrace();
+				}
             }
         });
         
@@ -118,6 +136,28 @@ public class CharCreateController
             	Main.menuScene();
             }
         });
+        
+      //Return to main menu
+        ResetBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	spinStrength.getValueFactory().setValue(5);
+            	spinAgility.getValueFactory().setValue(5);
+            	spinArmor.getValueFactory().setValue(5);
+            	spinHP.getValueFactory().setValue(50);
+            	spinSpecial.getValueFactory().setValue(10);
+            	
+            	points = 3;
+            	remPoints.setText(Integer.toString(points));
+            	
+      			spinStrength.setDisable(false);
+      			spinAgility.setDisable(false);
+      			spinArmor.setDisable(false);
+      			spinHP.setDisable(false);
+      			spinSpecial.setDisable(false);
+            }
+        });
+        
 	}
 	
 	public void charPoints(int newValue, int oldValue) {
@@ -126,9 +166,11 @@ public class CharCreateController
   		}else {
   			points--;
   		}
+  		
+  		//(0,0,spinStrength.getValue(),0)
   		remPoints.setText(Integer.toString(points));
   		if(points == 0) {
-  			spinStrength.valueFactory(0,0,spinStrength.getValue(),0);
+  			spinStrength.setDisable(true);
   			spinAgility.setDisable(true);
   			spinArmor.setDisable(true);
   			spinHP.setDisable(true);
