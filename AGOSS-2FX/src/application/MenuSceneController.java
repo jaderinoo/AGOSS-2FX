@@ -16,6 +16,9 @@ public class MenuSceneController
 	@FXML
 	public Button NewGameBtn;
 	
+	@FXML
+	public Button quitBtn;
+	
 	// location and resources will be automatically injected by the FXML loader
 	@FXML
 	private URL location;
@@ -26,7 +29,13 @@ public class MenuSceneController
 	@FXML
 	private void initialize()
 	{
-        
+		quitBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+        		Main.quitGame();
+            }
+        });
+
 		LoadGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -37,7 +46,7 @@ public class MenuSceneController
 		NewGameBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	Main.CharScene();
+            	Main.charScene();
             }
         });
 	}
