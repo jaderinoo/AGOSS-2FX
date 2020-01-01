@@ -103,7 +103,7 @@ public class CharCreateController
 							Updater.bagUpdater(bag, ((String) player.getName()));
 	
 							//Move to game
-							Adventure.Resume(playerList, bag, 1, null);
+							Adventure.Resume(playerList, bag, 1, "baseGame");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

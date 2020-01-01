@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class OptionsSceneController
 {
-	int loadType;
+	int loadType = 1;
 	String determined = "";
 
 	@FXML
@@ -43,6 +44,7 @@ public class OptionsSceneController
             	loadMapListField.setDisable(true);
             }
         });
+		
 		//Check Boxes
 		loadMapListBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -52,7 +54,7 @@ public class OptionsSceneController
             	loadMapListField.setDisable(false);
             }
         });
-
+		
 		//Return to main menu
         returnBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override

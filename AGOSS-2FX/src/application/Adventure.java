@@ -30,15 +30,14 @@ public class Adventure {
 			case 3:	
 			case 1:
 				String mapList = determined;
-				System.out.println("Selection type: " + type + "\nMapList name: " + mapList);
+
 				//Load BASE game
 				if(type == 1) {
-					System.out.println(type);
-					mapList = "test";
+					System.out.println("Selection type: " + type + "\nMapList name: " + mapList);
 					
 				//Load CUSTOM mapList
 				}else if(type == 3) {
-					System.out.println(type);
+					System.out.println("Selection type: " + type + "\nMapList name: " + mapList);
 					//Use player determined map list
 				}
 				break;

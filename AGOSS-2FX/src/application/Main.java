@@ -65,6 +65,12 @@ public class Main extends Application
 	}
 	
 	public static void loadGameWithType(ArrayList<Player> playerList, Bag bag) {
+
+		//If no extra settings were set, use default settings
+		if(loadType <= 1) {
+			loadType = 1;
+			determined = "baseGame";
+		}
 		try {
 			Adventure.Resume(playerList, bag, loadType, determined);
 		} catch (Exception e) {
