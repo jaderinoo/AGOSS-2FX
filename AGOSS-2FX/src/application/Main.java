@@ -61,6 +61,12 @@ public class Main extends Application
 		charCreateScene = new Scene(charCreateVbox, 500, 500);
 		optionsScene = new Scene(optionsVbox, 500, 500);
 		
+		//Set the background to black for all Scenes
+		menuScene.setFill(Color.BLACK);
+		loadScene.setFill(Color.BLACK);
+		charCreateScene.setFill(Color.BLACK);
+		optionsScene.setFill(Color.BLACK);
+		
 		// Set the Scene to the Stage
 		window.setScene(menuScene);
 		// Set the Title to the Stage
