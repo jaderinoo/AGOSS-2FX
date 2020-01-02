@@ -33,6 +33,12 @@ public class Main extends Application
 	static int loadType;
 	static String determined;
 	
+	//	Adventure class information
+	//	Load Base Game: 1
+	//	Load Map	  : 2
+	//	Load Map List : 3
+	
+	
 	public static void main(String[] args)
 	{
 		Application.launch(args);
