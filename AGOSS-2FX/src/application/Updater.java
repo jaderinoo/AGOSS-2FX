@@ -69,8 +69,6 @@ public class Updater {
             e.printStackTrace();
         }
         
-        ////////LOAD CHARACTER FROM HERE
-        //frame.add(Frame.loadCharacter(playerList.get(0)));
     	return playerList;
     }
     

@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Adventure {
+	
 	static Scanner scanner = new Scanner(System.in);
 	static boolean winStatus = false;
 	static ArrayList<String> listOfLines = new ArrayList<>();
 
-	public static void Resume(ArrayList<Player> playerList, Bag bag, int type, String determined) throws Exception {
+	public static void Resume(ArrayList<Player> passedPlayerList, Bag bag, int type, String determined) throws Exception {
 		
 		//Decide next selection based off menu button press
 		switch(type) {
@@ -21,7 +22,8 @@ public class Adventure {
 				String mapName = determined;
 				System.out.println("Selection type: " + type + "\nMapname: " + mapName);
 				
-				//frame.add(Frame.loadMap());
+				//Load map
+				mapInitialization.init(passedPlayerList,mapName);
 				
 				break;
 			
@@ -34,11 +36,17 @@ public class Adventure {
 				//Load BASE game
 				if(type == 1) {
 					System.out.println("Selection type: " + type + "\nMapList name: " + mapList);
+					System.out.println(passedPlayerList.get(0).getName() + " " + passedPlayerList.get(1).getName());
+				
+					//Load CUSTOM mapList
 					
-				//Load CUSTOM mapList
 				}else if(type == 3) {
 					System.out.println("Selection type: " + type + "\nMapList name: " + mapList);
+					
+					
 					//Use player determined map list
+					
+					
 				}
 				break;
 		}
