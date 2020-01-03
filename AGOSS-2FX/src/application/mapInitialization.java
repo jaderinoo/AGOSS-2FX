@@ -5,11 +5,9 @@ import java.util.ArrayList;
 
 public class mapInitialization {
 	
-	//Create a playerList for the current map
-	static ArrayList<Player> playerListCurrent = new ArrayList<Player>();
-	
 	//Create a mobList for the current map
 	static ArrayList<Mob1> mobList = new ArrayList<Mob1>();
+	
 	static int rows;
 	static int cols;
 	static String mapName;
@@ -21,8 +19,7 @@ public class mapInitialization {
 	static int enemyCounter;
 	
     //Initialize the main menu
-    public static void init(ArrayList<Player> passedPlayerList, String passedMapName) throws Exception{
-    	playerListCurrent = passedPlayerList;
+    public static void init(String passedMapName) throws Exception{
     	
     	String[] batch = loadMap.inputToString("AGOSS-2FX\\src\\application\\maps\\" + passedMapName + ".txt");
 
@@ -52,9 +49,9 @@ public class mapInitialization {
 		//Saves the initial map
 		map = loadMap.saveMap(data,rows,cols);
 		
-		for(int i = 0; i != playerListCurrent.size(); i++) {
-			System.out.println(playerListCurrent.get(i).getName() + " X: " + playerListCurrent.get(i).getMapX()
-				+ "  Y: " + playerListCurrent.get(i).getMapY());
+		for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
+			System.out.println(Adventure.playerListCurrent.get(i).getName() + " X: " + Adventure.playerListCurrent.get(i).getMapX()
+				+ "  Y: " + Adventure.playerListCurrent.get(i).getMapY());
 		}
 		
 		for(int i = 0; i != mobList.size(); i++) {
@@ -70,8 +67,8 @@ public class mapInitialization {
     }
     
 	public static void addPlayerLocation(int x, int y, int occupantInt) {
-		playerListCurrent.get(occupantInt).setMapX(x);
-		playerListCurrent.get(occupantInt).setMapY(y);
+		Adventure.playerListCurrent.get(occupantInt).setMapX(x);
+		Adventure.playerListCurrent.get(occupantInt).setMapY(y);
 	}
 	
 	public static void enemyCreate(int y, int x, char mobType, int level) {

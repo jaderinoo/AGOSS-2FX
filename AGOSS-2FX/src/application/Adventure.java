@@ -8,11 +8,17 @@ import java.util.Scanner;
 
 public class Adventure {
 	
+	//Creates a player list for the current session
+	public static ArrayList<Player> playerListCurrent = new ArrayList<Player>();
+	
 	static Scanner scanner = new Scanner(System.in);
 	static boolean winStatus = false;
 	static ArrayList<String> listOfLines = new ArrayList<>();
 
 	public static void Resume(ArrayList<Player> passedPlayerList, Bag bag, int type, String determined) throws Exception {
+		
+		//Sets the current session with the passed list
+		playerListCurrent = passedPlayerList;
 		
 		//Decide next selection based off menu button press
 		switch(type) {
@@ -23,7 +29,7 @@ public class Adventure {
 				System.out.println("Selection type: " + type + "\nMapname: " + mapName);
 				
 				//Load map
-				mapInitialization.init(passedPlayerList,mapName);
+				mapInitialization.init(mapName);
 				
 				break;
 			
@@ -36,7 +42,7 @@ public class Adventure {
 				//Load BASE game
 				if(type == 1) {
 					System.out.println("Selection type: " + type + "\nMapList name: " + mapList);
-					System.out.println(passedPlayerList.get(0).getName() + " " + passedPlayerList.get(1).getName());
+					System.out.println(playerListCurrent.get(0).getName() + " " + playerListCurrent.get(1).getName());
 				
 					//Load CUSTOM mapList
 					

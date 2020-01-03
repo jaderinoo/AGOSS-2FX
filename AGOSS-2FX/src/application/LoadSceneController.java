@@ -97,7 +97,6 @@ public class LoadSceneController
 	}
 	
 	public void populateList() {
-		
 		File file = new File("AGOSS-2FX\\src\\application\\saves\\");
 		
 		String[] directories = file.list(new FilenameFilter() {
