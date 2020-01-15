@@ -63,7 +63,7 @@ public class mapInitialization {
 		
 		
 		//Move onto game
-		
+		printMap.mapPrinter(map,rows,cols,Adventure.playerListCurrent,mobList);
     }
     
 	public static void addPlayerLocation(int x, int y, int occupantInt) {
