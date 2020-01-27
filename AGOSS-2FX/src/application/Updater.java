@@ -30,8 +30,29 @@ public class Updater {
     		playerDetails.put("Level",playerList.get(i).getLevel());
     		playerDetails.put("Exp",playerList.get(i).getExp());
     		playerDetails.put("CurrentHp",playerList.get(i).getCurrentHp());
+    		playerDetails.put("Type",playerList.get(i).getType());
+    		
+    		JSONObject playerBagDetails = new JSONObject();
+
+    		playerBagDetails.put("Item_Id_0",playerList.get(i).playerBag.getItem_Id(0));
+    		playerBagDetails.put("Item_Id_0_Usage",playerList.get(i).playerBag.getItem_Id_Usage(0));
+    		
+    		playerBagDetails.put("Item_Id_1",playerList.get(i).playerBag.getItem_Id(1));
+    		playerBagDetails.put("Item_Id_1_Usage",playerList.get(i).playerBag.getItem_Id_Usage(1));
+    		
+    		playerBagDetails.put("Item_Id_2",playerList.get(i).playerBag.getItem_Id(2));
+    		playerBagDetails.put("Item_Id_2_Usage",playerList.get(i).playerBag.getItem_Id_Usage(2));
+    		
+    		playerBagDetails.put("Item_Id_3",playerList.get(i).playerBag.getItem_Id(3));
+    		playerBagDetails.put("Item_Id_3_Usage",playerList.get(i).playerBag.getItem_Id_Usage(3));
+    		
+    		playerBagDetails.put("Item_Id_4",playerList.get(i).playerBag.getItem_Id(4));
+    		playerBagDetails.put("Item_Id_4_Usage",playerList.get(i).playerBag.getItem_Id_Usage(4));
+			 
+    		
     		JSONObject PlayerObject = new JSONObject(); 
     		PlayerObject.put("Character", playerDetails);
+    		PlayerObject.put("Bag", playerBagDetails);
     		objList.add(PlayerObject);
     	}
     	
@@ -80,44 +101,51 @@ public class Updater {
         //Get employee first name
         String name = (String) playerObject.get("Name");    
          
-        //Get strength
+        //Get stats
         int strength = Math.toIntExact((long) playerObject.get("Strength"));  
-        
-        //Get agility
         int agility = Math.toIntExact((long) playerObject.get("Agility")); 
-        
-        //Get armor
         int armor = Math.toIntExact((long) playerObject.get("Armor"));
-        
-        //Get maxHp
         int maxHp = Math.toIntExact((long) playerObject.get("MaxHp"));
-        
-        //Get special
         int special = Math.toIntExact((long) playerObject.get("Special"));
-        
-        //Get level
         int level = Math.toIntExact((long) playerObject.get("Level"));
-        
-        //Get exp
         int exp = Math.toIntExact((long) playerObject.get("Exp"));
-        
-        //Get currentHp
         int currentHp = Math.toIntExact((long) playerObject.get("CurrentHp"));
-
-        Player player = new Player(name,strength, agility, armor, maxHp, special, level, exp, currentHp);
+        int type = Math.toIntExact((long) playerObject.get("Type"));
+        
+        //Get playerBag info
+        JSONObject playerBagObject = (JSONObject) character.get("Bag");
+        
+        //Get playerBagInfo
+        int Item_Id_0 = Math.toIntExact((long) playerBagObject.get("Item_Id_0"));
+		int Item_Id_0_Usage = Math.toIntExact((long) playerBagObject.get("Item_Id_0_Usage"));
+		
+		int Item_Id_1 = Math.toIntExact((long) playerBagObject.get("Item_Id_1"));
+		int Item_Id_1_Usage = Math.toIntExact((long) playerBagObject.get("Item_Id_1_Usage"));
+		
+		int Item_Id_2 = Math.toIntExact((long) playerBagObject.get("Item_Id_2"));
+		int Item_Id_2_Usage = Math.toIntExact((long) playerBagObject.get("Item_Id_2_Usage"));
+		
+		int Item_Id_3 = Math.toIntExact((long) playerBagObject.get("Item_Id_3"));
+		int Item_Id_3_Usage = Math.toIntExact((long) playerBagObject.get("Item_Id_3_Usage"));
+		
+		int Item_Id_4 = Math.toIntExact((long) playerBagObject.get("Item_Id_4"));
+		int Item_Id_4_Usage = Math.toIntExact((long) playerBagObject.get("Item_Id_4_Usage"));
+		
+        //Initialize playerBag object and send it to player
+        playerBags playerBag = new playerBags(Item_Id_0,Item_Id_0_Usage,Item_Id_1,Item_Id_1_Usage,Item_Id_2,Item_Id_2_Usage,Item_Id_3,Item_Id_3_Usage,Item_Id_4,Item_Id_4_Usage);
+        
+        //Create player here
+        Player player = new Player(name,strength, agility, armor, maxHp, special, level, exp, currentHp, type, playerBag);
         playerList.add(player);
     }
 	
 	//Save bag state
     @SuppressWarnings("unchecked")
-	public static void bagUpdater(Bag bag, String name) throws IOException {
+	public static void globalBagUpdater(Bag bag, String name) throws IOException {
     	
 		JSONObject bagDetails = new JSONObject();
-		bagDetails.put("Potions", bag.getPotions());
-		bagDetails.put("Boosters", bag.getBoosters());
 		bagDetails.put("Gold", bag.getGold());
 		bagDetails.put("Current Location", bag.getLocation());
-
 
 		JSONObject bagObject = new JSONObject(); 
 		bagObject.put("BagItems", bagDetails);
@@ -134,11 +162,11 @@ public class Updater {
         }
 	}
     
-    public static Bag bagReader(String name) throws org.json.simple.parser.ParseException, IOException {
+    public static Bag globalBagReader(String name) throws org.json.simple.parser.ParseException, IOException {
     	
     	JSONParser jsonParser = new JSONParser();
         
-    	Bag bag = new Bag(0, 0, 0, "");
+    	Bag bag = new Bag(0, "");
     	
         try (FileReader reader = new FileReader("AGOSS-2FX\\src\\application\\saves\\" + name + "\\" + name + "_Bag.json"))
         {
@@ -156,12 +184,6 @@ public class Updater {
 
             //Get employee first name
             bag.setLocation((String) bagObject.get("Current Location")); 
-
-            //Get strength
-            bag.setPotions(Math.toIntExact((long) bagObject.get("Potions")));  
-            
-            //Get agility
-            bag.setBoosters(Math.toIntExact((long) bagObject.get("Boosters"))); 
             
             //Get armor
             bag.setGold(Math.toIntExact((long) bagObject.get("Gold")));
