@@ -2,6 +2,8 @@ package application;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Player {
+	
+		String name;
 
 	    int strength;
 		int agility;
@@ -13,9 +15,10 @@ public class Player {
 		int currentHp;
 		int mapX;
 		int mapY;
-		String name;
-
-		public Player(String name, int strength,int agility,int armor,int maxHp,int special, int level, int exp, int currentHp) {
+		int type;
+		playerBags playerBag;
+		
+		public Player(String name, int strength,int agility,int armor,int maxHp,int special, int level, int exp, int currentHp, int type, playerBags playerBag) {
 	    	
 	    	//Use this as a ledger for player.txt 
 	    	this.name = name;
@@ -27,6 +30,8 @@ public class Player {
 	    	this.level = level;
 	    	this.exp = exp;
 	    	this.currentHp = currentHp;
+	    	this.playerBag = playerBag;
+	    	this.type = type;
 	   }
 		
 		public String getName() {
@@ -85,6 +90,11 @@ public class Player {
 	    public int getCurrentHp() {
 	    	return currentHp;
 	    }
+	    
+	    public int getType() {
+	    	return type;
+	    }
+	    
 	    
 		public int addStrength(int i) {
 			for(int x = 0; x != i; x++) {
@@ -151,94 +161,6 @@ public class Player {
 			return this.mapY;
 		}
 		
-		//Using items
-		public int usePotion() {
-			return this.currentHp;
-		}
-		
-		public void useBooster() {
-			addStrength(2);
-		}
-		
-		public void resetBooster() {
-			removeStrength(2);
-		}
-		
-	    public void setWpnBonus(int weapon) {
-			
-	    	if(weapon == 0) {
-	    		addStrength(0);
-	    	}
-	    	
-	    	if(weapon == 1) {
-	    		addStrength(1);
-	    	}
-	    	
-	    	if(weapon == 2) {
-	    		addStrength(2);
-	    	}
-	    	
-	    	if(weapon == 3) {
-	    		addStrength(3);
-	    	}
-	    }
-	    
-	    public void resetWpnBonus(int weapon) {
-			
-	    	if(weapon == 0) {
-	    		removeStrength(0);
-	    	}
-	    	
-	    	if(weapon == 1) {
-	    		removeStrength(1);
-	    	}
-	    	
-	    	if(weapon == 2) {
-	    		removeStrength(2);
-	    	}
-	    	
-	    	if(weapon == 3) {
-	    		removeStrength(3);
-	    	}
-	    }
-	    
-	    public void setShieldBonus(int shield) {
-			
-	    	if(shield == 0) {
-	    		addArmor(0);
-	    	}
-	    	
-	    	if(shield == 1) {
-	    		addArmor(1);
-	    	}
-	    	
-	    	if(shield == 2) {
-	    		addArmor(2);
-	    	}
-	    	
-	    	if(shield == 3) {
-	    		addArmor(3);
-	    	}
-	    }
-	    
-	    public void resetShieldBonus(int shield) {
-			
-	    	if(shield == 0) {
-	    		removeArmor(0);
-	    	}
-	    	
-	    	if(shield == 1) {
-	    		removeArmor(1);
-	    	}
-	    	
-	    	if(shield == 2) {
-	    		removeArmor(2);
-	    	}
-	    	
-	    	if(shield == 3) {
-	    		removeArmor(3);
-	    	}
-	    }
 		
 		public void levelup(Mob1 attacker) {
 			//Reward EXP
