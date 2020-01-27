@@ -24,6 +24,7 @@
                   <Label prefHeight="17.0" prefWidth="125.0" text="Character Name:" />
                   <TextField fx:id="saveField" prefHeight="25.0" prefWidth="268.0" />
                   <Label fx:id="errorCatcher" textFill="#a43535" />
+                  <Label prefHeight="0.0" prefWidth="125.0" text="Character Name:" />
                </children>
             </VBox>
             <SplitPane dividerPositions="0.5" layoutX="15.0" layoutY="137.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" style="-fx-box-border: transparent; -fx-padding: 20 0 0 0;">
@@ -37,6 +38,7 @@
                               <Label text="Armor:" />
                               <Label text="MaxHP:" />
                               <Label text="Special:" />
+                              <Label text="Type:" />
                            </children>
                         </VBox>
                      </children>
@@ -50,6 +52,7 @@
                               <Spinner fx:id="spinArmor" initialValue="5" max="100" min="1" />
                               <Spinner fx:id="spinHP" amountToStepBy="10" initialValue="50" max="100" min="1" />
                               <Spinner fx:id="spinSpecial" initialValue="10" max="100" min="1" />
+                              <TextField editable="false" maxWidth="-Infinity" prefHeight="25.0" text="Knight" />
                            </children>
                         </VBox>
                      </children>

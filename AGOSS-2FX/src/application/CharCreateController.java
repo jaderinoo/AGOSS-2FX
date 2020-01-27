@@ -77,9 +77,12 @@ public class CharCreateController
             @Override
             public void handle(ActionEvent event) {
             	try {
-            		//Create new player with stats selected
-            		Player player = new Player(saveField.getText(), spinStrength.getValue(), spinAgility.getValue(), spinArmor.getValue(), spinHP.getValue(), spinSpecial.getValue(), 1, 0, 0);
+            												//Change IDs when created.... eventually lmao
+            		playerBags playerBag = new playerBags(0,0,0,0,0,0,0,0,0,0);
             		
+            		//Create new player with stats selected																											//Create player bag and insert here v
+            		Player player = new Player(saveField.getText(), spinStrength.getValue(), spinAgility.getValue(), spinArmor.getValue(), spinHP.getValue(), spinSpecial.getValue(), 1, 0, 0, 0, playerBag);
+            																																						  //Choose player type here^
             		//Save file path
             		File file = new File("AGOSS-2FX\\src\\application\\saves\\" + player.getName());
             		
@@ -96,11 +99,11 @@ public class CharCreateController
 						Updater.saveUpdater(playerList, saveField.getText());
 
 						//Create new bag
-		            	Bag bag = new Bag(0, 0, 0, "start");
+		            	Bag bag = new Bag(0, "start");
 	
 						try {
 							//Save Bag
-							Updater.bagUpdater(bag, ((String) player.getName()));
+							Updater.globalBagUpdater(bag, ((String) player.getName()));
 	
 							//Move to game
 							Adventure.Resume(playerList, bag, 1, "baseGame");

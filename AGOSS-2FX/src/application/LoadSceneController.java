@@ -24,7 +24,7 @@ public class LoadSceneController
 {
 	
     static ArrayList<Player> playerListResume = new ArrayList<Player>();
-    static Bag bagResume = new Bag(0, 0, 0, null);
+    static Bag bagResume = new Bag(0, "");
     @FXML
     public ListView<String> saveList;
     
@@ -65,7 +65,7 @@ public class LoadSceneController
 					e.printStackTrace();
 				}
 				try {
-					bagResume = Updater.bagReader(saveList.getSelectionModel().getSelectedItem());
+					bagResume = Updater.globalBagReader(saveList.getSelectionModel().getSelectedItem());
 				} catch (ParseException | IOException e) {
 					e.printStackTrace();
 				}
