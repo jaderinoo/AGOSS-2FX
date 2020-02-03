@@ -66,10 +66,11 @@ public class Updater {
             e.printStackTrace();
         }
 	}
-
+    
+    static ArrayList<Player> playerList = new ArrayList<Player>();
+    
     @SuppressWarnings("unchecked")
 	public static ArrayList<Player> saveReader(String name) throws org.json.simple.parser.ParseException, IOException {
-    	ArrayList<Player> playerList = new ArrayList<Player>();
     	
     	JSONParser jsonParser = new JSONParser();
 

@@ -62,8 +62,11 @@ public class mapInitialization {
 		//We have the Map, mobList, playerList, mapDetails, tileSets, and all positions
 		
 		
-		//Move onto game
-		printMap.mapPrinter(map,rows,cols,Adventure.playerListCurrent,mobList);
+		//Print map background
+		printMap.mapPrinter(map,rows,cols);
+		
+		//Print map forground
+		printMap.spriteLayer(map,rows,cols);
     }
     
 	public static void addPlayerLocation(int x, int y, int occupantInt) {
@@ -75,7 +78,12 @@ public class mapInitialization {
 		enemyCounter++;
 		if(mobType == 'f') {
 			mobList.add(new Mob1("FootSoldier" + enemyCounter, level*2, level*2, level*2, level*2, level*5, level*1, level*12, x, y, mobType));
-			
+			mobList.get(mobList.size() - 1).setImg("Footsoldier");
+		}
+		
+		if(mobType == 'k') {
+			mobList.add(new Mob1("Knight" + enemyCounter, level*2, level*2, level*2, level*2, level*5, level*1, level*12, x, y, mobType));
+			mobList.get(mobList.size() - 1).setImg("Knight");
 		}
 	}
 

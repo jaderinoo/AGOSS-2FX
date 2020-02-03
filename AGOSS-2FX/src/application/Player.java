@@ -1,6 +1,8 @@
 package application;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javafx.scene.image.Image;
+
 public class Player {
 	
 		String name;
@@ -16,6 +18,8 @@ public class Player {
 		int mapX;
 		int mapY;
 		int type;
+		int posCounter;
+		Image charImg;
 		playerBags playerBag;
 		
 		public Player(String name, int strength,int agility,int armor,int maxHp,int special, int level, int exp, int currentHp, int type, playerBags playerBag) {
@@ -32,7 +36,21 @@ public class Player {
 	    	this.currentHp = currentHp;
 	    	this.playerBag = playerBag;
 	    	this.type = type;
+	    	
+	    	setImg(name);
 	   }
+		
+		public void setImg(String name) {
+			if(Updater.playerList.size() == 0) {
+				this.charImg = new Image("application\\tilesets\\MainCharacter.png");	
+			}else {
+				this.charImg = new Image("application\\tilesets\\" + name + ".png");
+			}
+		}
+		
+		public Image getImg() {
+			return charImg;
+		}
 		
 		public String getName() {
 	        return name;

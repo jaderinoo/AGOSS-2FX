@@ -1,5 +1,7 @@
 package application;
 
+import javafx.scene.image.Image;
+
 public class Mob1 {
 
 	    int strength;
@@ -12,6 +14,7 @@ public class Mob1 {
 		int getMapY;
 		int getMapX;
 		char type;
+		Image imgMob;
 		Object name;
 
 		public Mob1(String name, int strength,int agility,int armor,int maxHp,int special,int level,int currentHp,int getMapX, int getMapY, char type) {
@@ -28,6 +31,15 @@ public class Mob1 {
 	    	this.currentHp = maxHp;
 	    	this.type = type;
 	   }
+		
+		
+		public void setImg(String name) {
+			this.imgMob = new Image("application\\tilesets\\" + name + ".png");
+		}
+		
+		public Image getImg() {
+			return imgMob;
+		}
 		
 		public char getType() {
 	        return type;
