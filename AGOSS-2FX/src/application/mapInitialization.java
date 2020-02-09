@@ -65,7 +65,7 @@ public class mapInitialization {
 		//Print map background
 		printMap.mapPrinter(map,rows,cols);
 		
-		//Print map forground
+		//Print map foreground
 		printMap.spriteLayer(map,rows,cols);
     }
     
