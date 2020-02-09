@@ -1,21 +1,26 @@
 package application;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class printMap {
 	static AnchorPane root = new AnchorPane();
 	static double horizontalSetter = 0;
 	static double verticalSetter = 0;
+	static List <Shape> shapes = new ArrayList<>();
 	
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) {
 	        
@@ -56,6 +61,14 @@ public class printMap {
 				    	if(x == Adventure.playerListCurrent.get(i).getMapX() && y == Adventure.playerListCurrent.get(i).getMapY()) {
 				    		sprite = new Rectangle(horizontal * y, vertical * x, horizontal, vertical);
 				    		sprite.setFill(new ImagePattern(Adventure.playerListCurrent.get(i).getImg()));
+				    		
+				    		//Sets the Sprites ID 
+				    		sprite.setId(Adventure.playerListCurrent.get(i).getName());
+				    		Adventure.playerListCurrent.get(i).setMapId(sprite.getId());
+				    		
+				    		//Adds the sprite to the layer and arraylist
+				    		System.out.println("Sprite Id: " + sprite.getId());
+				    		shapes.add(sprite);
 				    		spriteLayer.getChildren().add(sprite);
 				    	}
 			    	}
@@ -64,6 +77,14 @@ public class printMap {
 				    	if(x == mapInitialization.mobList.get(i).getMapX() && y == mapInitialization.mobList.get(i).getMapY()) {
 				    		sprite = new Rectangle(horizontal * y, vertical * x, horizontal, vertical);
 				    		sprite.setFill(new ImagePattern(mapInitialization.mobList.get(i).getImg()));
+				    		
+				    		//Sets the Sprites ID 
+				    		sprite.setId(mapInitialization.mobList.get(i).getName());
+				    		mapInitialization.mobList.get(i).setMapId(sprite.getId());
+				    		
+				    		//Adds the sprite to the layer and arraylist
+				    		System.out.println("Sprite Id: " + sprite.getId());
+				    		shapes.add(sprite);
 				    		spriteLayer.getChildren().add(sprite);
 				    	}
 			    	}
@@ -73,11 +94,22 @@ public class printMap {
 		   root.getChildren().add(spriteLayer);
 	   }
 	   
-	   public static void moveSprite() {
-		   TimerTask task;
-		   
+	   static int pos = 0;
+	   
+	   public static void moveSprite(String Id) {
+		   TimerTask task; 
+		   pos = 0;
+
+		   //Finds the sprite that needs to be moved by initially grabbing its ID
+		   for(int i = 0; i < shapes.size(); i++) {
+			   if(shapes.get(i).getId() == Id) {
+				   System.out.println("Moving character: " + shapes.get(i).getId());
+				   pos = i;
+			   }  
+			}
+
 		   task = new TimerTask() {
-		        private final int MAX_SECONDS = 3;
+		        private final int MAX_SECONDS = 2;
 
 		        @Override
 		        public void run() { 
@@ -86,7 +118,8 @@ public class printMap {
 		                seconds++;
 		                //x += 10;
 		                //y += 10;
-		                //rect1.relocate(x,y);
+
+		                shapes.get(pos).relocate(seconds,seconds);
 		            } else {
 		                // stop the timer
 		                cancel();
