@@ -19,6 +19,7 @@ public class Player {
 		int mapY;
 		int type;
 		int posCounter;
+		String mapId;
 		Image charImg;
 		playerBags playerBag;
 		
@@ -46,6 +47,14 @@ public class Player {
 			}else {
 				this.charImg = new Image("application\\tilesets\\" + name + ".png");
 			}
+		}
+		
+		public void setMapId(String Id) {
+			this.mapId = Id;
+		}
+		
+		public String getMapId() {
+			return this.mapId;
 		}
 		
 		public Image getImg() {

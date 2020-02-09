@@ -14,8 +14,9 @@ public class Mob1 {
 		int getMapY;
 		int getMapX;
 		char type;
+		String mapId;
 		Image imgMob;
-		Object name;
+		String name;
 
 		public Mob1(String name, int strength,int agility,int armor,int maxHp,int special,int level,int currentHp,int getMapX, int getMapY, char type) {
 
@@ -40,6 +41,14 @@ public class Mob1 {
 		public Image getImg() {
 			return imgMob;
 		}
+	
+		public void setMapId(String Id) {
+			this.mapId = Id;
+		}
+		
+		public String getMapId() {
+			return this.mapId;
+		}
 		
 		public char getType() {
 	        return type;
@@ -63,7 +72,7 @@ public class Mob1 {
 			return this.getMapY;
 		}
 		
-		public Object getName() {
+		public String getName() {
 	        return name;
 	    }
 		
