@@ -34,7 +34,7 @@ public class printMap {
 			//Print map
 			for (int y=0; y < rows; y++) {
 			    for (int x=0; x < cols; x++) {
-	                rect = new Rectangle(horizontal * y, vertical * x, horizontal, vertical);
+	                rect = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
 	                rect.setStroke(new Color(1f,1f,1f,.05f));
 	                System.out.println("application\\tilesets\\" + map[x][y].getType() + ".png");
 		    		Image img = new Image("application\\tilesets\\" + map[x][y].getType() + ".png");
@@ -59,7 +59,7 @@ public class printMap {
 			    for (int x=0; x < cols; x++) {
 			    	for (int i = 0; i < Adventure.playerListCurrent.size(); i++) {
 				    	if(x == Adventure.playerListCurrent.get(i).getMapX() && y == Adventure.playerListCurrent.get(i).getMapY()) {
-				    		sprite = new Rectangle(horizontal * y, vertical * x, horizontal, vertical);
+				    		sprite = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
 				    		sprite.setFill(new ImagePattern(Adventure.playerListCurrent.get(i).getImg()));
 				    		
 				    		//Sets the Sprites ID 
@@ -75,7 +75,7 @@ public class printMap {
 			    	
 			    	for (int i = 0; i < mapInitialization.mobList.size(); i++) {
 				    	if(x == mapInitialization.mobList.get(i).getMapX() && y == mapInitialization.mobList.get(i).getMapY()) {
-				    		sprite = new Rectangle(horizontal * y, vertical * x, horizontal, vertical);
+				    		sprite = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
 				    		sprite.setFill(new ImagePattern(mapInitialization.mobList.get(i).getImg()));
 				    		
 				    		//Sets the Sprites ID 
@@ -95,10 +95,13 @@ public class printMap {
 	   }
 	   
 	   static int pos = 0;
-	   
-	   public static void moveSprite(String Id) {
+	   static int x = mapInitialization.mobList.get(1).getMapX();
+	   static int y = mapInitialization.mobList.get(1).getMapY();
+	   public static void moveSprite(String Id, String direction) {
 		   TimerTask task; 
 		   pos = 0;
+
+		   double horizontal = 32*(horizontalSetter/32), vertical = 32*(verticalSetter/32);
 
 		   //Finds the sprite that needs to be moved by initially grabbing its ID
 		   for(int i = 0; i < shapes.size(); i++) {
@@ -109,17 +112,22 @@ public class printMap {
 			}
 
 		   task = new TimerTask() {
-		        private final int MAX_SECONDS = 2;
+		        private final int MAX_SECONDS = 3;
 
 		        @Override
 		        public void run() { 
+		     		
 		            if (seconds < MAX_SECONDS) {
+		            	
 		                System.out.println("Seconds = " + seconds);
 		                seconds++;
-		                //x += 10;
-		                //y += 10;
 
-		                shapes.get(pos).relocate(seconds,seconds);
+		                if(direction == "left") {
+		                	x--;
+		                	System.out.println("X = " + x + "Y = " + y);
+		                }
+		                
+		                shapes.get(pos).relocate(horizontal*x,vertical*y);
 		            } else {
 		                // stop the timer
 		                cancel();
