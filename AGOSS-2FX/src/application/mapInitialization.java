@@ -69,7 +69,7 @@ public class mapInitialization {
 		printMap.spriteLayer(map,rows,cols);
 		
 		//Test move characters
-		printMap.moveSprite(mobList.get(1).getMapId());
+		printMap.moveSprite(mobList.get(1).getMapId(),"left");
     }
     
 	public static void addPlayerLocation(int x, int y, int occupantInt) {
