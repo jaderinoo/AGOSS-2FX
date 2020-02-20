@@ -68,8 +68,8 @@ public class mapInitialization {
 		//Print map foreground
 		printMap.spriteLayer(map,rows,cols);
 		
-		//Test move characters
-		printMap.moveSprite(mobList.get(1).getMapId(),"left");
+		//Test move characters		sprite ID		Direction			X						Y
+		printMap.moveSprite(mobList.get(1).getMapId(),"left", mobList.get(1).getMapX(), mobList.get(1).getMapY());
     }
     
 	public static void addPlayerLocation(int x, int y, int occupantInt) {
