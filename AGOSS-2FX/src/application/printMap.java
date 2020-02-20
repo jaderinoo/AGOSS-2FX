@@ -24,7 +24,7 @@ public class printMap {
 	
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) {
 	        
-	        Scene scene = new Scene(root, Main.window.getWidth(), Main.window.getHeight());
+	        Scene scene = new Scene(root, Main.window.getHeight(), Main.window.getWidth());
 	        horizontalSetter = (Main.window.getWidth()/cols);
 	        verticalSetter = (Main.window.getHeight()/rows);
 	        
@@ -95,13 +95,10 @@ public class printMap {
 	   }
 	   
 	   static int pos = 0;
-	   static int x = mapInitialization.mobList.get(1).getMapX();
-	   static int y = mapInitialization.mobList.get(1).getMapY();
-	   public static void moveSprite(String Id, String direction) {
-		   TimerTask task; 
+	   public static void moveSprite(String Id, String direction, int x, int y) {
 		   pos = 0;
-
 		   double horizontal = 32*(horizontalSetter/32), vertical = 32*(verticalSetter/32);
+		   TimerTask task; 
 
 		   //Finds the sprite that needs to be moved by initially grabbing its ID
 		   for(int i = 0; i < shapes.size(); i++) {
@@ -112,28 +109,50 @@ public class printMap {
 			}
 
 		   task = new TimerTask() {
-		        private final int MAX_SECONDS = 3;
-
+		        private final int MAX_SECONDS = 2;
+			    private int mapX = x;
+			    private int mapY = y;
 		        @Override
 		        public void run() { 
-		     		
 		            if (seconds < MAX_SECONDS) {
-		            	
 		                System.out.println("Seconds = " + seconds);
 		                seconds++;
 
 		                if(direction == "left") {
-		                	x--;
-		                	System.out.println("X = " + x + "Y = " + y);
+		                	setMapX(getMapX() - 1);
 		                }
 		                
-		                shapes.get(pos).relocate(horizontal*x,vertical*y);
+		                if(direction == "right") {
+		                	setMapX(getMapX() + 1);
+		                }
+		                
+		                if(direction == "down") {
+		                	setMapY(getMapY() - 1);
+		                }
+		                
+		                if(direction == "up") {
+		                	setMapY(getMapY() + 1);
+		                }
+		                System.out.println("X = " + getMapX() + "Y = " + getMapY());
+		                shapes.get(pos).relocate(horizontal*getMapX(),vertical*getMapY());
 		            } else {
 		                // stop the timer
 		                cancel();
 		            }
 		        }
+				public int getMapX() {
+					return mapX;
+				}
+				public void setMapX(int mapX) {
+					this.mapX = mapX;
+				}
+				public int getMapY() {
+					return mapY;
+				}
+				public void setMapY(int mapY) {
+					this.mapY = mapY;
+				}
 		    };
-		    timer.schedule(task, 0, 100);
+		    timer.schedule(task, 0, 1000);
 	   }
 }
