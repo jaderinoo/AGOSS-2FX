@@ -110,52 +110,62 @@ public class printMap {
 
 		   task = new TimerTask() {
 		        private final int MAX_SECONDS = directions.length;
-			    private int mapX = x;
-			    private int mapY = y;
+			    private double mapX = x;
+			    private double mapY = y;
 			    private int i;
+			    private double mover;
 		        @Override
 		        public void run() { 
-		            if (seconds < MAX_SECONDS) {
+		            if (seconds < MAX_SECONDS*5) {
 		                System.out.println("Seconds = " + seconds);
-		                seconds++;
-
+		                
 		                if(directions[i] == "left") {
-		                	setMapX(getMapX() - 1);
+		                	setMapX(getMapX() - .2);
+		                	mover += .2;
 		                }
 		                
 		                if(directions[i] == "right") {
-		                	setMapX(getMapX() + 1);
+  		                	setMapX(getMapX() + .2);
+  		                	mover += .2;
 		                }
 		                
 		                if(directions[i] == "up") {
-		                	setMapY(getMapY() - 1);
+		                	setMapY(getMapY() - .2);
+  		                	mover += .2;	
 		                }
 		                
 		                if(directions[i] == "down") {
-		                	setMapY(getMapY() + 1);
+		                	setMapY(getMapY() + .2);
+  		                	mover += .2;
 		                }
 		                
-		                i++;
-		                System.out.println("X = " + getMapX() + "Y = " + getMapY());
-		                shapes.get(pos).relocate(horizontal*getMapX(),vertical*getMapY());
+		                if(mover == 1) {
+		                	mover = 0;
+			                i++;
+		                }
+		                seconds++;
+		                System.out.println("X" + getMapX());
+		                System.out.println("Y" + getMapY());
+				        shapes.get(pos).relocate(horizontal*getMapX(),vertical*getMapY());
+		                
 		            } else {
 		                // stop the timer
 		                cancel();
 		            }
 		        }
-				public int getMapX() {
+				public double getMapX() {
 					return mapX;
 				}
-				public void setMapX(int mapX) {
+				public void setMapX(double mapX) {
 					this.mapX = mapX;
 				}
-				public int getMapY() {
+				public double getMapY() {
 					return mapY;
 				}
-				public void setMapY(int mapY) {
+				public void setMapY(double mapY) {
 					this.mapY = mapY;
 				}
 		    };
-		    timer.schedule(task, 0, 1000);
+		    timer.schedule(task, 0, 250);
 	   }
 }

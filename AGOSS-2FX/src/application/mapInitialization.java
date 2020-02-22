@@ -69,10 +69,15 @@ public class mapInitialization {
 		printMap.spriteLayer(map,rows,cols);
 		
 		//Create a string array that contains the movement of the sprite.
-		String[] testMove = {"left","up","right","down"};
+		String[] testMove = {"left","left","up","down","down"};
+		
 		
 		//Test move characters		sprite ID		Direction			X						Y
 		printMap.moveSprite(mobList.get(1).getMapId(),testMove, mobList.get(1).getMapX(), mobList.get(1).getMapY());
+		
+		//Change characters location
+		mobList.get(1).setMapX(mobList.get(1).getMapX()-2);
+		mobList.get(1).setMapY(mobList.get(1).getMapY()+1);
     }
     
 	public static void addPlayerLocation(int x, int y, int occupantInt) {
