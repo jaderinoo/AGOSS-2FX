@@ -95,7 +95,7 @@ public class printMap {
 	   }
 	   
 	   static int pos = 0;
-	   public static void moveSprite(String Id, String direction, int x, int y) {
+	   public static void moveSprite(String Id, String[] directions, int x, int y) {
 		   pos = 0;
 		   double horizontal = 32*(horizontalSetter/32), vertical = 32*(verticalSetter/32);
 		   TimerTask task; 
@@ -109,30 +109,33 @@ public class printMap {
 			}
 
 		   task = new TimerTask() {
-		        private final int MAX_SECONDS = 2;
+		        private final int MAX_SECONDS = directions.length;
 			    private int mapX = x;
 			    private int mapY = y;
+			    private int i;
 		        @Override
 		        public void run() { 
 		            if (seconds < MAX_SECONDS) {
 		                System.out.println("Seconds = " + seconds);
 		                seconds++;
 
-		                if(direction == "left") {
+		                if(directions[i] == "left") {
 		                	setMapX(getMapX() - 1);
 		                }
 		                
-		                if(direction == "right") {
+		                if(directions[i] == "right") {
 		                	setMapX(getMapX() + 1);
 		                }
 		                
-		                if(direction == "down") {
+		                if(directions[i] == "up") {
 		                	setMapY(getMapY() - 1);
 		                }
 		                
-		                if(direction == "up") {
+		                if(directions[i] == "down") {
 		                	setMapY(getMapY() + 1);
 		                }
+		                
+		                i++;
 		                System.out.println("X = " + getMapX() + "Y = " + getMapY());
 		                shapes.get(pos).relocate(horizontal*getMapX(),vertical*getMapY());
 		            } else {
