@@ -116,30 +116,31 @@ public class printMap {
 			    private double mover;
 		        @Override
 		        public void run() { 
-		            if (seconds < MAX_SECONDS*5) {
+		            if (seconds < MAX_SECONDS*10) {
 		                System.out.println("Seconds = " + seconds);
 		                
 		                if(directions[i] == "left") {
-		                	setMapX(getMapX() - .2);
-		                	mover += .2;
+		                	setMapX(getMapX() - .1);
+		                	mover += .1;
+		                	shapes.get(pos).setFill(Color.BEIGE);
 		                }
 		                
 		                if(directions[i] == "right") {
-  		                	setMapX(getMapX() + .2);
-  		                	mover += .2;
+  		                	setMapX(getMapX() + .1);
+  		                	mover += .1;
 		                }
 		                
 		                if(directions[i] == "up") {
-		                	setMapY(getMapY() - .2);
-  		                	mover += .2;	
+		                	setMapY(getMapY() - .1);
+  		                	mover += .1;	
 		                }
 		                
 		                if(directions[i] == "down") {
-		                	setMapY(getMapY() + .2);
-  		                	mover += .2;
+		                	setMapY(getMapY() + .1);
+  		                	mover += .1;
 		                }
 		                
-		                if(mover == 1) {
+		                if(mover >= .99) {
 		                	mover = 0;
 			                i++;
 		                }
@@ -149,6 +150,23 @@ public class printMap {
 				        shapes.get(pos).relocate(horizontal*getMapX(),vertical*getMapY());
 		                
 		            } else {
+		            	
+		            	//Searches and resets the sprite icon - Enemylist
+		     		   for(int i = 0; i < mapInitialization.mobList.size(); i++) {
+		    			   if(mapInitialization.mobList.get(i).getMapId() == Id) {
+		    				   System.out.println(Id);
+		    				   shapes.get(pos).setFill(new ImagePattern(mapInitialization.mobList.get(1).getImg()));
+		    			   }  
+		    			}
+		     		   
+		     		   //Searches and resets the sprite icon - playerlist
+		     		  for(int i = 0; i < Adventure.playerListCurrent.size(); i++) {
+		    			   if(Adventure.playerListCurrent.get(i).getMapId() == Id) {
+		    				   System.out.println(Id);
+		    				   shapes.get(pos).setFill(new ImagePattern(Adventure.playerListCurrent.get(1).getImg()));
+		    			   }  
+		    			}
+
 		                // stop the timer
 		                cancel();
 		            }
@@ -166,6 +184,6 @@ public class printMap {
 					this.mapY = mapY;
 				}
 		    };
-		    timer.schedule(task, 0, 250);
+		    timer.schedule(task, 0, 100);
 	   }
 }
