@@ -35,7 +35,7 @@ public class Mob1 {
 		
 		
 		public void setImg(String name) {
-			this.imgMob = new Image("application\\tilesets\\" + name + ".png");
+			this.imgMob = new Image("application\\tilesets\\" + name + ".gif");
 		}
 		
 		public Image getImg() {

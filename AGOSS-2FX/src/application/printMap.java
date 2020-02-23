@@ -114,28 +114,44 @@ public class printMap {
 			    private double mapY = y;
 			    private int i;
 			    private double mover;
+			    String cleanID = Id.replaceAll("\\d","");
 		        @Override
 		        public void run() { 
 		            if (seconds < MAX_SECONDS*20) {
 		                System.out.println("Seconds = " + seconds);
 		                
 		                if(directions[i] == "left") {
+		                	if(mover == 0) {
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "_left.gif");
+		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                	}
 		                	setMapX(getMapX() - .05);
 		                	mover += .05;
-		                	shapes.get(pos).setFill(Color.BEIGE);
 		                }
 		                
 		                if(directions[i] == "right") {
+		                	if(mover == 0) {
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "_right.gif");
+		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                	}
   		                	setMapX(getMapX() + .05);
   		                	mover += .05;
 		                }
 		                
 		                if(directions[i] == "up") {
+		                	if(mover == 0) {
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "_up.gif");
+		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                	}
 		                	setMapY(getMapY() - .05);
   		                	mover += .05;	
 		                }
 		                
 		                if(directions[i] == "down") {
+		                	if(mover == 0) {
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "_down.gif");
+		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                	}
 		                	setMapY(getMapY() + .05);
   		                	mover += .05;
 		                }
@@ -151,21 +167,7 @@ public class printMap {
 		                
 		            } else {
 		            	
-		            	//Searches and resets the sprite icon - Enemylist
-		     		   for(int i = 0; i < mapInitialization.mobList.size(); i++) {
-		    			   if(mapInitialization.mobList.get(i).getMapId() == Id) {
-		    				   System.out.println(Id);
-		    				   shapes.get(pos).setFill(new ImagePattern(mapInitialization.mobList.get(1).getImg()));
-		    			   }  
-		    			}
-		     		   
-		     		   //Searches and resets the sprite icon - playerlist
-		     		  for(int i = 0; i < Adventure.playerListCurrent.size(); i++) {
-		    			   if(Adventure.playerListCurrent.get(i).getMapId() == Id) {
-		    				   System.out.println(Id);
-		    				   shapes.get(pos).setFill(new ImagePattern(Adventure.playerListCurrent.get(1).getImg()));
-		    			   }  
-		    			}
+		            	resetImg(Id);
 
 		                // stop the timer
 		                cancel();
@@ -184,6 +186,24 @@ public class printMap {
 					this.mapY = mapY;
 				}
 		    };
-		    timer.schedule(task, 0, 25);
+		    timer.schedule(task, 0, 20);
+	   }
+	   
+	   public static void resetImg(String Id) {
+		 //Searches and resets the sprite icon - Enemylist
+ 		   for(int i = 0; i < mapInitialization.mobList.size(); i++) {
+			   if(mapInitialization.mobList.get(i).getMapId() == Id) {
+				   System.out.println(Id);
+				   shapes.get(pos).setFill(new ImagePattern(mapInitialization.mobList.get(1).getImg()));
+			   }  
+			}
+ 		   
+ 		   //Searches and resets the sprite icon - playerlist
+ 		  for(int i = 0; i < Adventure.playerListCurrent.size(); i++) {
+			   if(Adventure.playerListCurrent.get(i).getMapId() == Id) {
+				   System.out.println(Id);
+				   shapes.get(pos).setFill(new ImagePattern(Adventure.playerListCurrent.get(1).getImg()));
+			   }  
+			}
 	   }
 }
