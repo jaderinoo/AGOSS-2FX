@@ -147,7 +147,7 @@ public class printMap {
 		                seconds++;
 		                System.out.println("X" + getMapX());
 		                System.out.println("Y" + getMapY());
-				        shapes.get(pos).relocate(horizontal*getMapX(),vertical*getMapY());
+				        shapes.get(pos).relocate(vertical*getMapX(),horizontal*getMapY());
 		                
 		            } else {
 		            	
