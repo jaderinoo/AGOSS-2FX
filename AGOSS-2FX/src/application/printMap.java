@@ -116,28 +116,28 @@ public class printMap {
 			    private double mover;
 		        @Override
 		        public void run() { 
-		            if (seconds < MAX_SECONDS*10) {
+		            if (seconds < MAX_SECONDS*20) {
 		                System.out.println("Seconds = " + seconds);
 		                
 		                if(directions[i] == "left") {
-		                	setMapX(getMapX() - .1);
-		                	mover += .1;
+		                	setMapX(getMapX() - .05);
+		                	mover += .05;
 		                	shapes.get(pos).setFill(Color.BEIGE);
 		                }
 		                
 		                if(directions[i] == "right") {
-  		                	setMapX(getMapX() + .1);
-  		                	mover += .1;
+  		                	setMapX(getMapX() + .05);
+  		                	mover += .05;
 		                }
 		                
 		                if(directions[i] == "up") {
-		                	setMapY(getMapY() - .1);
-  		                	mover += .1;	
+		                	setMapY(getMapY() - .05);
+  		                	mover += .05;	
 		                }
 		                
 		                if(directions[i] == "down") {
-		                	setMapY(getMapY() + .1);
-  		                	mover += .1;
+		                	setMapY(getMapY() + .05);
+  		                	mover += .05;
 		                }
 		                
 		                if(mover >= .99) {
@@ -184,6 +184,6 @@ public class printMap {
 					this.mapY = mapY;
 				}
 		    };
-		    timer.schedule(task, 0, 100);
+		    timer.schedule(task, 0, 25);
 	   }
 }
