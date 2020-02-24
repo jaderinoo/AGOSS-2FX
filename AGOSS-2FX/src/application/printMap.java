@@ -90,8 +90,11 @@ public class printMap {
 			    	}
 			    }
 	       }
-
 		   root.getChildren().add(spriteLayer);
+		   
+		   //Loads cursor layer and pastes icon
+		   Pane cursorLayer = MapCursor.init(cols,rows);
+		   root.getChildren().add(cursorLayer);
 	   }
 	   
 	   static int pos = 0;
