@@ -43,9 +43,9 @@ public class Player {
 		
 		public void setImg(String name) {
 			if(Updater.playerList.size() == 0) {
-				this.charImg = new Image("application\\tilesets\\MainCharacter.png");	
+				this.charImg = new Image("application\\tilesets\\MainCharacter\\MainCharacter.png");	
 			}else {
-				this.charImg = new Image("application\\tilesets\\" + name + ".png");
+				this.charImg = new Image("application\\tilesets\\" + name + "\\" + name + ".png");
 			}
 		}
 		
