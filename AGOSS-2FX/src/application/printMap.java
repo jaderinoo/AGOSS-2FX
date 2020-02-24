@@ -36,8 +36,8 @@ public class printMap {
 			    for (int x=0; x < cols; x++) {
 	                rect = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
 	                rect.setStroke(new Color(1f,1f,1f,.05f));
-	                System.out.println("application\\tilesets\\" + map[x][y].getType() + ".png");
-		    		Image img = new Image("application\\tilesets\\" + map[x][y].getType() + ".png");
+	                System.out.println("application\\tilesets\\tilesets\\" + map[x][y].getType() + ".png");
+		    		Image img = new Image("application\\tilesets\\tilesets\\" + map[x][y].getType() + ".png");
 		    		rect.setFill(new ImagePattern(img));
 	                root.getChildren().add(rect);
 			    }
@@ -122,7 +122,7 @@ public class printMap {
 		                
 		                if(directions[i] == "left") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "_left.gif");
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_left.gif");
 		                		shapes.get(pos).setFill(new ImagePattern(img));
 		                	}
 		                	setMapX(getMapX() - .05);
@@ -131,7 +131,7 @@ public class printMap {
 		                
 		                if(directions[i] == "right") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "_right.gif");
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_right.gif");
 		                		shapes.get(pos).setFill(new ImagePattern(img));
 		                	}
   		                	setMapX(getMapX() + .05);
@@ -140,7 +140,7 @@ public class printMap {
 		                
 		                if(directions[i] == "up") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "_up.gif");
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_up.gif");
 		                		shapes.get(pos).setFill(new ImagePattern(img));
 		                	}
 		                	setMapY(getMapY() - .05);
@@ -149,7 +149,7 @@ public class printMap {
 		                
 		                if(directions[i] == "down") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "_down.gif");
+		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_down.gif");
 		                		shapes.get(pos).setFill(new ImagePattern(img));
 		                	}
 		                	setMapY(getMapY() + .05);
