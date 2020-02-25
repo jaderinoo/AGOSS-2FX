@@ -9,6 +9,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -22,7 +24,7 @@ public class printMap {
 	public static double verticalSetter = 0;
 	static List <Shape> shapes = new ArrayList<>();
 	
-	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) {
+	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException {
 	        
 	        Scene scene = new Scene(root, Main.window.getHeight(), Main.window.getWidth());
 	        horizontalSetter = (Main.window.getWidth()/cols);
@@ -43,6 +45,38 @@ public class printMap {
 			    }
 			    System.out.println();
 			}
+			
+			//Print map foreground
+			spriteLayer(map,rows,cols);
+			
+			//Setup keypress handlers 
+			scene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
+	            System.out.println("Key pressed");
+	            
+	            if (event.getCode() == KeyCode.UP) {
+	                MapCursor.moveUp();
+	            }
+	            
+	            if (event.getCode() == KeyCode.DOWN) {
+	            	MapCursor.moveDown();
+	            }
+	            
+	            if (event.getCode() == KeyCode.LEFT) {
+	            	MapCursor.moveLeft();
+	            }
+	            
+	            if (event.getCode() == KeyCode.RIGHT) {
+	            	MapCursor.moveRight();
+	            }
+	            
+	            if (event.getCode() == KeyCode.ESCAPE) {
+	                System.out.println("ESCAPE");
+	            }
+	            event.consume();
+	        });
+			
+			
+			
 			//Set the scene
 	        Main.window.setScene(scene);
 	         
@@ -93,12 +127,16 @@ public class printMap {
 		   root.getChildren().add(spriteLayer);
 		   
 		   //Loads cursor layer and pastes icon
-		   Pane cursorLayer = MapCursor.init(cols,rows);
+		   Pane cursorLayer = MapCursor.init();
 		   root.getChildren().add(cursorLayer);
+		   
+		   
+		   
 	   }
 	   
 	   static int pos = 0;
 	   public static void moveSprite(String Id, String[] directions, int x, int y) {
+		   MapCursor.canMove = false;
 		   pos = 0;
 		   double horizontal = 32*(horizontalSetter/32), vertical = 32*(verticalSetter/32);
 		   TimerTask task; 
@@ -172,6 +210,7 @@ public class printMap {
 		            	
 		            	resetImg(Id);
 		            	MapCursor.resetCursor();
+		            	MapCursor.canMove = true;
 		                // stop the timer
 		                cancel();
 		            }

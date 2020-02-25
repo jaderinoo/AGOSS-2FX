@@ -2,6 +2,11 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 
 public class mapInitialization {
 	
@@ -65,12 +70,14 @@ public class mapInitialization {
 		//Print map background
 		printMap.mapPrinter(map,rows,cols);
 		
-		//Print map foreground
-		printMap.spriteLayer(map,rows,cols);
+		
+		
+		
+		
+		//TEST COMMANDS HERE V
 		
 		//Create a string array that contains the movement of the sprite.
 		String[] testMove = {"left","left","up","down","down"};
-		
 		
 		//Test move characters		sprite ID		Direction			X						Y
 		printMap.moveSprite(mobList.get(1).getMapId(),testMove, mobList.get(1).getMapX(), mobList.get(1).getMapY());
