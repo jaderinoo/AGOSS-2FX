@@ -7,19 +7,15 @@ import javafx.scene.shape.Rectangle;
 
 public class MapCursor {
 	private static Image cursor;
-	static double horizontalSetter = 0;
-	static double verticalSetter = 0;
 
 	public static Pane init(int cols, int rows)
 	{
 		Rectangle sprite = null;
 		cursor = new Image("application\\tilesets\\cursor\\cursor.gif");
-		horizontalSetter = (Main.window.getWidth()/cols);
-        verticalSetter = (Main.window.getHeight()/rows);
         
-        double horizontal = 32*(horizontalSetter/32), vertical = 32*(verticalSetter/32);
-		sprite = new Rectangle( vertical, horizontal);
-		
+        double horizontal = 32*(printMap.horizontalSetter/32), vertical = 32*(printMap.verticalSetter/32);
+
+		sprite = new Rectangle(vertical * Adventure.playerListCurrent.get(0).getMapX(), horizontal * Adventure.playerListCurrent.get(0).getMapY(), vertical, horizontal);
 		sprite.setFill(new ImagePattern(cursor));
 		
 		printMap.shapes.add(sprite);

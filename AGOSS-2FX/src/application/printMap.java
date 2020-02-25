@@ -18,8 +18,8 @@ import javafx.scene.shape.Shape;
 
 public class printMap {
 	static AnchorPane root = new AnchorPane();
-	static double horizontalSetter = 0;
-	static double verticalSetter = 0;
+	public static double horizontalSetter = 0;
+	public static double verticalSetter = 0;
 	static List <Shape> shapes = new ArrayList<>();
 	
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) {
