@@ -171,7 +171,7 @@ public class printMap {
 		            } else {
 		            	
 		            	resetImg(Id);
-
+		            	MapCursor.resetCursor();
 		                // stop the timer
 		                cancel();
 		            }

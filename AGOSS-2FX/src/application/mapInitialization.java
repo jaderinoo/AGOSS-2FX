@@ -78,6 +78,7 @@ public class mapInitialization {
 		//Change characters location
 		mobList.get(1).setMapX(mobList.get(1).getMapX()-2);
 		mobList.get(1).setMapY(mobList.get(1).getMapY()+1);
+		
     }
     
 	public static void addPlayerLocation(int x, int y, int occupantInt) {
