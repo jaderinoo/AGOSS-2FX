@@ -10,8 +10,9 @@ public class MapCursor {
 	private static int cursorPosition;
 	public static double horizontal = 32*(printMap.horizontalSetter/32), vertical = 32*(printMap.verticalSetter/32);
 	private static int cursorX = Adventure.playerListCurrent.get(0).getMapX(), cursorY = Adventure.playerListCurrent.get(0).getMapY();
+	public static boolean canMove = false;
 	
-	public static Pane init(int cols, int rows)
+	public static Pane init()
 	{
 		Rectangle sprite = null;
 		cursor = new Image("application\\tilesets\\cursor\\cursor.gif");
@@ -36,4 +37,40 @@ public class MapCursor {
 		cursorX = Adventure.playerListCurrent.get(0).getMapX();
 		cursorY = Adventure.playerListCurrent.get(0).getMapY();
 	}
+	
+	public static void moveUp() 
+    {
+		if(canMove == true) {
+			System.out.println("UP \nCursorY: " + cursorY);
+			cursorY--;
+			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
+		}
+    }
+	
+	public static void moveDown() 
+    {
+		if(canMove == true) {
+			System.out.println("UP \nCursorY: " + cursorY);
+			cursorY++;
+			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
+		}
+    }
+	
+	public static void moveLeft() 
+    {
+		if(canMove == true) {
+			System.out.println("UP \nCursorY: " + cursorY);
+			cursorX--;
+			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
+		}
+    }
+	
+	public static void moveRight() 
+    {
+		if(canMove == true) {
+			System.out.println("UP \nCursorY: " + cursorY);
+			cursorX++;
+			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
+		}
+    }
 }
