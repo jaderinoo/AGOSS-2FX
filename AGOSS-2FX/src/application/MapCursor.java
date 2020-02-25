@@ -9,7 +9,7 @@ public class MapCursor {
 	private static Image cursor;
 	private static int cursorPosition;
 	public static double horizontal = 32*(printMap.horizontalSetter/32), vertical = 32*(printMap.verticalSetter/32);
-	private static int cursorX = Adventure.playerListCurrent.get(0).getMapX(), cursorY = Adventure.playerListCurrent.get(0).getMapY();
+	static int cursorX = Adventure.playerListCurrent.get(0).getMapX(), cursorY = Adventure.playerListCurrent.get(0).getMapY();
 	public static boolean canMove = true;
 	
 	public static Pane init()
@@ -28,6 +28,7 @@ public class MapCursor {
 		cursorLayer.getChildren().add(sprite);
 		
 		System.out.println("Cursor created.");
+		System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 		return cursorLayer;
 	}
 	
@@ -46,8 +47,8 @@ public class MapCursor {
 	public static void moveUp() 
     {
 		if(canMove == true) {
-			System.out.println("UP \nCursorY: " + cursorY);
 			cursorY--;
+			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
 		}
     }
@@ -55,8 +56,8 @@ public class MapCursor {
 	public static void moveDown() 
     {
 		if(canMove == true) {
-			System.out.println("UP \nCursorY: " + cursorY);
 			cursorY++;
+			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
 		}
     }
@@ -64,8 +65,8 @@ public class MapCursor {
 	public static void moveLeft() 
     {
 		if(canMove == true) {
-			System.out.println("UP \nCursorY: " + cursorY);
 			cursorX--;
+			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
 		}
     }
@@ -73,8 +74,8 @@ public class MapCursor {
 	public static void moveRight() 
     {
 		if(canMove == true) {
-			System.out.println("UP \nCursorY: " + cursorY);
 			cursorX++;
+			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
 		}
     }
@@ -85,18 +86,11 @@ public class MapCursor {
 			if(cursorX == Adventure.playerListCurrent.get(i).getMapX() && cursorY == Adventure.playerListCurrent.get(i).getMapY()) {
 				System.out.println("playerfound");
 				System.out.println(Adventure.playerListCurrent.get(i).getName());
-				/*
-				 * String[] testMove = {"left"};
-				 * 
-				 * //Test move characters sprite ID Direction X Y
-				 * printMap.moveSprite(mapInitialization.mobList.get(i).getMapId(),testMove,
-				 * Adventure.playerListCurrent.get(i).getMapX(),
-				 * Adventure.playerListCurrent.get(i).getMapY());
-				 * 
-				 * //Change characters location
-				 * Adventure.playerListCurrent.get(i).setMapX(Adventure.playerListCurrent.get(i)
-				 * .getMapX()-1);
-				 */
+				
+				String[] testMove = {"up"};
+				  
+				//Test move characters sprite 								Direction 
+				printMap.moveSprite(null, Adventure.playerListCurrent.get(i), testMove);
 			}
 		}
 		
@@ -107,11 +101,8 @@ public class MapCursor {
 				
 				String[] testMove = {"up"};
 				  
-				//Test move characters sprite 				ID 					Direction 				X 										Y
-				printMap.moveSprite(mapInitialization.mobList.get(i).getMapId(), testMove, mapInitialization.mobList.get(i).getMapX(), mapInitialization.mobList.get(i).getMapY());
-				  
-				//Change characters location
-				mapInitialization.mobList.get(i).setMapY(mapInitialization.mobList.get(i).getMapY()-1);
+				//Test move characters sprite 								Direction 
+				printMap.moveSprite(mapInitialization.mobList.get(i), null, testMove);
 				 
 			}
 
