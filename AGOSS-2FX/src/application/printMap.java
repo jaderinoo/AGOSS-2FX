@@ -140,6 +140,7 @@ public class printMap {
 		   MapCursor.canMove = false;
 		   pos = 0;
 		   String id = null;
+		   TranslateTransition translate = new TranslateTransition(); 
 		   
 		   if(player == null) {
 			   id = mob.getMapId();
@@ -178,7 +179,7 @@ public class printMap {
 			   }
 
 			   if(directions[i] == "up") {
-				   TranslateTransition translate = new TranslateTransition(); 
+				   translate = new TranslateTransition(); 
 				   //setting the duration for the Translate transition   
 			       translate.setDuration(Duration.millis(500));  
 				   try {
@@ -190,15 +191,13 @@ public class printMap {
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()-1);
 					   //setting Circle as the node onto which the transition will be applied  
-					   double x = (mob.getMapY()*horizontal);
-					   translate.setByY(-x);  
+					   translate.setByY(-horizontal);  
 				       translate.setNode(shapes.get(pos));  	
 				   }else if (mob == null) {
 					   player.setMapY(player.getMapY()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
 					   //setting Circle as the node onto which the transition will be applied  
-					   double x = (player.getMapY()*horizontal);
-					   translate.setByY(-x);
+					   translate.setByY(-horizontal);
 				       translate.setNode(shapes.get(pos));   
 				   }
 				   //playing the transition   
