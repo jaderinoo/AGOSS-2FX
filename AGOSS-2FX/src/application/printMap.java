@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -15,8 +17,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 
 public class printMap {
 	static AnchorPane root = new AnchorPane();
@@ -72,6 +78,11 @@ public class printMap {
 	            if (event.getCode() == KeyCode.ESCAPE) {
 	                System.out.println("ESCAPE");
 	            }
+	            
+	            if (event.getCode() == KeyCode.ENTER) {
+	            	MapCursor.checkSpace();
+	            }	
+	            
 	            event.consume();
 	        });
 			
@@ -83,7 +94,6 @@ public class printMap {
 	   }
 	   
 	   static int seconds = 0;
-	   static Timer timer = new Timer();
 	   public static void spriteLayer(GridSpace[][] map, int rows, int cols) throws InterruptedException {
 		   Pane spriteLayer = new Pane(); 
 	       Rectangle sprite = null;
@@ -133,13 +143,13 @@ public class printMap {
 		   
 		   
 	   }
-	   
+	   static Timer timer;
+	   static TimerTask task;
 	   static int pos = 0;
 	   public static void moveSprite(String Id, String[] directions, int x, int y) {
 		   MapCursor.canMove = false;
 		   pos = 0;
 		   double horizontal = 32*(horizontalSetter/32), vertical = 32*(verticalSetter/32);
-		   TimerTask task; 
 
 		   //Finds the sprite that needs to be moved by initially grabbing its ID
 		   for(int i = 0; i < shapes.size(); i++) {
@@ -148,7 +158,8 @@ public class printMap {
 				   pos = i;
 			   }  
 			}
-
+		   
+		   timer = new Timer();
 		   task = new TimerTask() {
 		        private final int MAX_SECONDS = directions.length;
 			    private double mapX = x;
@@ -163,8 +174,12 @@ public class printMap {
 		                
 		                if(directions[i] == "left") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_left.gif");
-		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                		try {
+		                			Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_left.gif");
+		                			shapes.get(pos).setFill(new ImagePattern(img));
+		                		} catch (Exception e) {
+		                			System.out.println("Image not found");
+		                		}	
 		                	}
 		                	setMapX(getMapX() - .05);
 		                	mover += .05;
@@ -172,8 +187,12 @@ public class printMap {
 		                
 		                if(directions[i] == "right") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_right.gif");
-		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                		try {
+		                			Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_right.gif");
+		                			shapes.get(pos).setFill(new ImagePattern(img));
+		                		} catch (Exception e) {
+		                			System.out.println("Image not found");
+		                		}	
 		                	}
   		                	setMapX(getMapX() + .05);
   		                	mover += .05;
@@ -181,8 +200,12 @@ public class printMap {
 		                
 		                if(directions[i] == "up") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_up.gif");
-		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                		try {
+		                			Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_up.gif");
+		                			shapes.get(pos).setFill(new ImagePattern(img));
+		                		} catch (Exception e) {
+		                			System.out.println("Image not found");
+		                		}	
 		                	}
 		                	setMapY(getMapY() - .05);
   		                	mover += .05;	
@@ -190,8 +213,12 @@ public class printMap {
 		                
 		                if(directions[i] == "down") {
 		                	if(mover == 0) {
-		                		Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_down.gif");
-		                		shapes.get(pos).setFill(new ImagePattern(img));
+		                		try {
+		                			Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_down.gif");
+		                			shapes.get(pos).setFill(new ImagePattern(img));
+		                		} catch (Exception e) {
+		                			System.out.println("Image not found");
+		                		}
 		                	}
 		                	setMapY(getMapY() + .05);
   		                	mover += .05;
@@ -207,12 +234,16 @@ public class printMap {
 				        shapes.get(pos).relocate(vertical*getMapX(),horizontal*getMapY());
 		                
 		            } else {
-		            	
+		            	//Reset image to default stance
 		            	resetImg(Id);
-		            	MapCursor.resetCursor();
+		            	
+		            	//Allow mouse movement and reset to main character
+		            	//MapCursor.resetCursor();
 		            	MapCursor.canMove = true;
+		            	
 		                // stop the timer
-		                cancel();
+		                timer.cancel();
+		                timer.purge();
 		            }
 		        }
 				public double getMapX() {
@@ -235,16 +266,16 @@ public class printMap {
 		 //Searches and resets the sprite icon - Enemylist
  		   for(int i = 0; i < mapInitialization.mobList.size(); i++) {
 			   if(mapInitialization.mobList.get(i).getMapId() == Id) {
-				   System.out.println(Id);
-				   shapes.get(pos).setFill(new ImagePattern(mapInitialization.mobList.get(1).getImg()));
+				   System.out.println("Resetting: " + Id);
+				   shapes.get(pos).setFill(new ImagePattern(mapInitialization.mobList.get(i).getImg()));
 			   }  
 			}
  		   
  		   //Searches and resets the sprite icon - playerlist
  		  for(int i = 0; i < Adventure.playerListCurrent.size(); i++) {
 			   if(Adventure.playerListCurrent.get(i).getMapId() == Id) {
-				   System.out.println(Id);
-				   shapes.get(pos).setFill(new ImagePattern(Adventure.playerListCurrent.get(1).getImg()));
+				   System.out.println("Resetting: " + Id);
+				   shapes.get(pos).setFill(new ImagePattern(Adventure.playerListCurrent.get(i).getImg()));
 			   }  
 			}
 	   }
