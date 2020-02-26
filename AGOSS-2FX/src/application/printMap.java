@@ -158,24 +158,61 @@ public class printMap {
 				   pos = i;
 			   }  
 		   }
-
+		   
+		   //Depending on direction, move and change sprite
 		   for (int i = 0; i < directions.length; i++) {
 			   if(directions[i] == "left") {
+				   translate = new TranslateTransition(); 
+				   //setting the duration for the Translate transition   
+			       translate.setDuration(Duration.millis(500));  
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_left.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
-				   }		
+				   }	
+				   System.out.println(directions[i]);
+				   if(player == null) {
+					   mob.setMapX(mob.getMapX()-1);
+ 
+					   translate.setByX(-vertical);  
+				       translate.setNode(shapes.get(pos));  	
+				   }else if (mob == null) {
+					   player.setMapX(player.getMapX()-1);
+					   System.out.println(player.getMapX() + ", " + player.getMapY());
+ 
+					   translate.setByX(-vertical);
+				       translate.setNode(shapes.get(pos));   
+				   }
+				   //playing the transition   
+			       translate.play();
 			   }
 
 			   if(directions[i] == "right") {
+				   translate = new TranslateTransition(); 
+				   //setting the duration for the Translate transition   
+			       translate.setDuration(Duration.millis(500));  
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_right.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
 				   }	
+				   System.out.println(directions[i]);
+				   if(player == null) {
+					   mob.setMapX(mob.getMapX()+1);
+ 
+					   translate.setByX(vertical);  
+				       translate.setNode(shapes.get(pos));  	
+				   }else if (mob == null) {
+					   player.setMapX(player.getMapX()+1);
+					   System.out.println(player.getMapX() + ", " + player.getMapY());
+
+					   translate.setByX(vertical);
+				       translate.setNode(shapes.get(pos));   
+				   }
+				   //playing the transition   
+			       translate.play();
 			   }
 
 			   if(directions[i] == "up") {
@@ -188,15 +225,16 @@ public class printMap {
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
 				   }	
+				   System.out.println(directions[i]);
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()-1);
-					   //setting Circle as the node onto which the transition will be applied  
+
 					   translate.setByY(-horizontal);  
 				       translate.setNode(shapes.get(pos));  	
 				   }else if (mob == null) {
 					   player.setMapY(player.getMapY()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-					   //setting Circle as the node onto which the transition will be applied  
+
 					   translate.setByY(-horizontal);
 				       translate.setNode(shapes.get(pos));   
 				   }
@@ -205,13 +243,30 @@ public class printMap {
 			   }
 
 			   if(directions[i] == "down") {
-
+				   translate = new TranslateTransition(); 
+				   //setting the duration for the Translate transition   
+			       translate.setDuration(Duration.millis(500));  
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_down.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
 				   }
+				   System.out.println(directions[i]);
+				   if(player == null) {
+					   mob.setMapY(mob.getMapY()+1);
+
+					   translate.setByY(horizontal);  
+				       translate.setNode(shapes.get(pos));  	
+				   }else if (mob == null) {
+					   player.setMapY(player.getMapY()-1);
+					   System.out.println(player.getMapX() + ", " + player.getMapY());
+
+					   translate.setByY(horizontal);
+				       translate.setNode(shapes.get(pos));   
+				   }
+				   //playing the transition   
+			       translate.play();
 			   }
 		   }
 		   

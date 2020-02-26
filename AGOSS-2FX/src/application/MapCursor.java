@@ -99,7 +99,7 @@ public class MapCursor {
 				System.out.println("enemyfound");
 				System.out.println(mapInitialization.mobList.get(i).getName());
 				
-				String[] testMove = {"up"};
+				String[] testMove = {"up","down","down","left"};
 				  
 				//Test move characters sprite 								Direction 
 				printMap.moveSprite(mapInitialization.mobList.get(i), null, testMove);
