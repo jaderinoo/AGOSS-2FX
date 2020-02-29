@@ -51,6 +51,11 @@ public class MapCursor {
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
 		}
+		
+		if(Arrow.isOn == true) {
+			Arrow.arrowY--;
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
+		}
     }
 	
 	public static void moveDown() 
@@ -59,6 +64,11 @@ public class MapCursor {
 			cursorY++;
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
+		}
+		
+		if(Arrow.isOn == true) {
+			Arrow.arrowY++;
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
 		}
     }
 	
@@ -69,6 +79,11 @@ public class MapCursor {
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
 		}
+		
+		if(Arrow.isOn == true) {
+			Arrow.arrowX--;
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
+		}
     }
 	
 	public static void moveRight() 
@@ -77,6 +92,11 @@ public class MapCursor {
 			cursorX++;
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 			printMap.shapes.get(cursorPosition).relocate(vertical * cursorX, horizontal * cursorY);
+		}
+		
+		if(Arrow.isOn == true) {
+			Arrow.arrowX++;
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
 		}
     }
 	
@@ -87,10 +107,20 @@ public class MapCursor {
 				System.out.println("playerfound");
 				System.out.println(Adventure.playerListCurrent.get(i).getName());
 				
-				String[] testMove = {"up","down","down","left"};
+				if(Arrow.isOn == false) {
+					canMove = false;
+					Arrow.toggleArrow(true);
+				} else {
+					canMove = true;
+					Arrow.toggleArrow(false);
+				}
+				
+				Arrow.setLocation(Adventure.playerListCurrent.get(i).getMapX(), Adventure.playerListCurrent.get(i).getMapY());
+				
+				//String[] testMove = {"up"};
 				  
 				//Test move characters sprite 								Direction 
-				printMap.moveSprite(null, Adventure.playerListCurrent.get(i), testMove);
+				//printMap.moveSprite(null, Adventure.playerListCurrent.get(i), testMove);
 			}
 		}
 		
@@ -99,10 +129,10 @@ public class MapCursor {
 				System.out.println("enemyfound");
 				System.out.println(mapInitialization.mobList.get(i).getName());
 				
-				String[] testMove = {"up","down","down","left"};
+				//String[] testMove = {"up"};
 				  
 				//Test move characters sprite 								Direction 
-				printMap.moveSprite(mapInitialization.mobList.get(i), null, testMove);
+				//printMap.moveSprite(mapInitialization.mobList.get(i), null, testMove);
 				 
 			}
 

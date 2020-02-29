@@ -133,6 +133,11 @@ public class printMap {
 		   Pane cursorLayer = MapCursor.init();
 		   root.getChildren().add(cursorLayer);
 		   
+		   //Loads the arrow layer
+		   Pane arrowLayer = Arrow.init();
+		   root.getChildren().add(arrowLayer);
+		   
+		   printMap.shapes.get(Arrow.arrowTipPosition).setVisible(false);
 		   
 		   
 	   }
@@ -265,9 +270,7 @@ public class printMap {
 		     //MapCursor.resetCursor();
 		     return;
 	   }
-
-	   
-	   
+  
 	   public static void resetImg(String Id) {
 		 //Searches and resets the sprite icon - Enemylist
  		   for(int i = 0; i < mapInitialization.mobList.size(); i++) {
