@@ -87,7 +87,7 @@ public class MapCursor {
 				System.out.println("playerfound");
 				System.out.println(Adventure.playerListCurrent.get(i).getName());
 				
-				String[] testMove = {"up"};
+				String[] testMove = {"up","down","down","left"};
 				  
 				//Test move characters sprite 								Direction 
 				printMap.moveSprite(null, Adventure.playerListCurrent.get(i), testMove);

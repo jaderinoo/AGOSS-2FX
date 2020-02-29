@@ -2,6 +2,7 @@ package application;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.PathTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,9 +12,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
+
 
 public class printMap {
 	static AnchorPane root = new AnchorPane();
@@ -84,7 +89,6 @@ public class printMap {
 	        Main.window.setScene(scene);
 	         
 	   }
-	   
 	   public static void spriteLayer(GridSpace[][] map, int rows, int cols) throws InterruptedException {
 		   Pane spriteLayer = new Pane(); 
 	       Rectangle sprite = null;
@@ -95,7 +99,6 @@ public class printMap {
 				    	if(x == Adventure.playerListCurrent.get(i).getMapX() && y == Adventure.playerListCurrent.get(i).getMapY()) {
 				    		sprite = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
 				    		sprite.setFill(new ImagePattern(Adventure.playerListCurrent.get(i).getImg()));
-				    		
 				    		//Sets the Sprites ID 
 				    		sprite.setId(Adventure.playerListCurrent.get(i).getName());
 				    		Adventure.playerListCurrent.get(i).setMapId(sprite.getId());
@@ -140,12 +143,25 @@ public class printMap {
 		   MapCursor.canMove = false;
 		   pos = 0;
 		   String id = null;
-		   TranslateTransition translate = new TranslateTransition(); 
 		   
+		     //Setting up the path   
+		     Path path = new Path();  
+		     PathTransition pathTransition = new PathTransition();  
+		     
+		     //Set duration to be tile based
+		     pathTransition.setDuration(Duration.millis(directions.length*250));  
+		     
+		     //Display path
+		     //root.getChildren().add(path);
+		     
 		   if(player == null) {
 			   id = mob.getMapId();
+			   path.getElements().add(new MoveTo(vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2)));
+			   
 		   }else if (mob == null) {
 			   id = player.getMapId();
+			   path.getElements().add(new MoveTo((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));
+			   
 		   }
 		   
 		   //Clean the id for shape search
@@ -156,42 +172,33 @@ public class printMap {
 			   if(shapes.get(i).getId() == id) {
 				   System.out.println("Moving character: " + shapes.get(i).getId());
 				   pos = i;
+				   pathTransition.setNode(shapes.get(pos));  
 			   }  
 		   }
 		   
 		   //Depending on direction, move and change sprite
 		   for (int i = 0; i < directions.length; i++) {
 			   if(directions[i] == "left") {
-				   translate = new TranslateTransition(); 
-				   //setting the duration for the Translate transition   
-			       translate.setDuration(Duration.millis(500));  
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_left.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
 				   }	
+				   
 				   System.out.println(directions[i]);
 				   if(player == null) {
 					   mob.setMapX(mob.getMapX()-1);
- 
-					   translate.setByX(-vertical);  
-				       translate.setNode(shapes.get(pos));  	
+					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 
+ 	
 				   }else if (mob == null) {
 					   player.setMapX(player.getMapX()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
- 
-					   translate.setByX(-vertical);
-				       translate.setNode(shapes.get(pos));   
+					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));  
 				   }
-				   //playing the transition   
-			       translate.play();
 			   }
 
 			   if(directions[i] == "right") {
-				   translate = new TranslateTransition(); 
-				   //setting the duration for the Translate transition   
-			       translate.setDuration(Duration.millis(500));  
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_right.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
@@ -201,24 +208,15 @@ public class printMap {
 				   System.out.println(directions[i]);
 				   if(player == null) {
 					   mob.setMapX(mob.getMapX()+1);
- 
-					   translate.setByX(vertical);  
-				       translate.setNode(shapes.get(pos));  	
+					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
 				   }else if (mob == null) {
 					   player.setMapX(player.getMapX()+1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-
-					   translate.setByX(vertical);
-				       translate.setNode(shapes.get(pos));   
+					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));   
 				   }
-				   //playing the transition   
-			       translate.play();
 			   }
 
 			   if(directions[i] == "up") {
-				   translate = new TranslateTransition(); 
-				   //setting the duration for the Translate transition   
-			       translate.setDuration(Duration.millis(500));  
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_up.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
@@ -228,24 +226,15 @@ public class printMap {
 				   System.out.println(directions[i]);
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()-1);
-
-					   translate.setByY(-horizontal);  
-				       translate.setNode(shapes.get(pos));  	
+					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
 				   }else if (mob == null) {
 					   player.setMapY(player.getMapY()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-
-					   translate.setByY(-horizontal);
-				       translate.setNode(shapes.get(pos));   
+					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));  
 				   }
-				   //playing the transition   
-			       translate.play();
 			   }
 
 			   if(directions[i] == "down") {
-				   translate = new TranslateTransition(); 
-				   //setting the duration for the Translate transition   
-			       translate.setDuration(Duration.millis(500));  
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_down.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
@@ -255,26 +244,26 @@ public class printMap {
 				   System.out.println(directions[i]);
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()+1);
-
-					   translate.setByY(horizontal);  
-				       translate.setNode(shapes.get(pos));  	
+					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
 				   }else if (mob == null) {
-					   player.setMapY(player.getMapY()-1);
+					   player.setMapY(player.getMapY()+1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-
-					   translate.setByY(horizontal);
-				       translate.setNode(shapes.get(pos));   
+					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));
 				   }
-				   //playing the transition   
-			       translate.play();
 			   }
 		   }
 		   
+
+		     //setting path for the path transition   
+		     pathTransition.setPath(path);
+		     //Playing path transition   
+		     pathTransition.play();  
+		     resetImg(id);
 		   
-		   //Allow movement and return;
-		   MapCursor.canMove = true;
-		   //MapCursor.resetCursor();
-		   return;
+		     //Allow movement and return;
+		     MapCursor.canMove = true;
+		     //MapCursor.resetCursor();
+		     return;
 	   }
 
 	   
