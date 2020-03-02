@@ -78,6 +78,10 @@ public class printMap {
 	            
 	            if (event.getCode() == KeyCode.ENTER) {
 	            	MapCursor.checkSpace();
+	            	
+	            	if(Arrow.isOn == true) {
+	            		printMap.moveSprite(null, Adventure.playerListCurrent.get(MapCursor.isOnMover), MapCursor.moveSequence);
+	            	}
 	            }	
 	            
 	            event.consume();
@@ -144,7 +148,7 @@ public class printMap {
 	   
 	   static int pos = 0;
 	   
-	   public static void moveSprite( Mob1 mob, Player player, String[] directions) {
+	   public static void moveSprite( Mob1 mob, Player player, ArrayList<String> directions) {
 		   MapCursor.canMove = false;
 		   pos = 0;
 		   String id = null;
@@ -154,7 +158,7 @@ public class printMap {
 		     PathTransition pathTransition = new PathTransition();  
 		     
 		     //Set duration to be tile based
-		     pathTransition.setDuration(Duration.millis(directions.length*250));  
+		     pathTransition.setDuration(Duration.millis(directions.size()*250));  
 		     
 		     //Display path
 		     //root.getChildren().add(path);
@@ -182,8 +186,8 @@ public class printMap {
 		   }
 		   
 		   //Depending on direction, move and change sprite
-		   for (int i = 0; i < directions.length; i++) {
-			   if(directions[i] == "left") {
+		   for (int i = 0; i < directions.size(); i++) {
+			   if(directions.get(i) == "left") {
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_left.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
@@ -191,7 +195,7 @@ public class printMap {
 					   System.out.println("Image not found");
 				   }	
 				   
-				   System.out.println(directions[i]);
+				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapX(mob.getMapX()-1);
 					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 
@@ -203,14 +207,14 @@ public class printMap {
 				   }
 			   }
 
-			   if(directions[i] == "right") {
+			   if(directions.get(i) == "right") {
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_right.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
 				   }	
-				   System.out.println(directions[i]);
+				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapX(mob.getMapX()+1);
 					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
@@ -221,14 +225,14 @@ public class printMap {
 				   }
 			   }
 
-			   if(directions[i] == "up") {
+			   if(directions.get(i) == "up") {
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_up.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
 				   }	
-				   System.out.println(directions[i]);
+				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()-1);
 					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
@@ -239,14 +243,14 @@ public class printMap {
 				   }
 			   }
 
-			   if(directions[i] == "down") {
+			   if(directions.get(i) == "down") {
 				   try {
 					   Image img = new Image("application\\tilesets\\" + cleanID + "\\" + cleanID + "_down.gif");
 					   shapes.get(pos).setFill(new ImagePattern(img));
 				   } catch (Exception e) {
 					   System.out.println("Image not found");
 				   }
-				   System.out.println(directions[i]);
+				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()+1);
 					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
@@ -264,7 +268,9 @@ public class printMap {
 		     //Playing path transition   
 		     pathTransition.play();  
 		     resetImg(id);
-		   
+		     //Clears the previous move sequence
+		     MapCursor.moveSequence.clear();
+		     
 		     //Allow movement and return;
 		     MapCursor.canMove = true;
 		     //MapCursor.resetCursor();

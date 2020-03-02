@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
@@ -11,6 +13,7 @@ public class MapCursor {
 	public static double horizontal = 32*(printMap.horizontalSetter/32), vertical = 32*(printMap.verticalSetter/32);
 	static int cursorX = Adventure.playerListCurrent.get(0).getMapX(), cursorY = Adventure.playerListCurrent.get(0).getMapY();
 	public static boolean canMove = true;
+	public static ArrayList<String> moveSequence = new ArrayList<String>();
 	
 	public static Pane init()
 	{
@@ -55,6 +58,7 @@ public class MapCursor {
 		if(Arrow.isOn == true) {
 			Arrow.arrowY--;
 			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
+			moveSequence.add("up");
 		}
     }
 	
@@ -69,6 +73,7 @@ public class MapCursor {
 		if(Arrow.isOn == true) {
 			Arrow.arrowY++;
 			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
+			moveSequence.add("down");
 		}
     }
 	
@@ -83,6 +88,7 @@ public class MapCursor {
 		if(Arrow.isOn == true) {
 			Arrow.arrowX--;
 			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
+			moveSequence.add("left");
 		}
     }
 	
@@ -97,8 +103,11 @@ public class MapCursor {
 		if(Arrow.isOn == true) {
 			Arrow.arrowX++;
 			printMap.shapes.get(Arrow.arrowTipPosition).relocate(vertical * Arrow.arrowX, horizontal * Arrow.arrowY);
+			moveSequence.add("right");
 		}
     }
+	
+	public static int isOnMover = 0;
 	
 	public static void checkSpace() {
 		
@@ -110,13 +119,14 @@ public class MapCursor {
 				if(Arrow.isOn == false) {
 					canMove = false;
 					Arrow.toggleArrow(true);
-				} else {
+				} else { //Setup space check here for available tiles / enemies / whatever
 					canMove = true;
 					Arrow.toggleArrow(false);
+					isOnMover = 0;
 				}
 				
 				Arrow.setLocation(Adventure.playerListCurrent.get(i).getMapX(), Adventure.playerListCurrent.get(i).getMapY());
-				
+				isOnMover = i;
 				//String[] testMove = {"up"};
 				  
 				//Test move characters sprite 								Direction 
