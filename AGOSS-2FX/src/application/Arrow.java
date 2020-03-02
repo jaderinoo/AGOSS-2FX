@@ -32,7 +32,6 @@ public class Arrow {
 		
 		printMap.shapes.add(arrow);
 		arrowTipPosition = printMap.shapes.size() - 1;
-
 		
 		return arrowLayer;
 	}

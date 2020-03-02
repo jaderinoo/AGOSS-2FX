@@ -77,10 +77,12 @@ public class printMap {
 	            }
 	            
 	            if (event.getCode() == KeyCode.ENTER) {
-	            	MapCursor.checkSpace();
-	            	
 	            	if(Arrow.isOn == true) {
 	            		printMap.moveSprite(null, Adventure.playerListCurrent.get(MapCursor.isOnMover), MapCursor.moveSequence);
+	            		Arrow.toggleArrow(false);
+	            		MapCursor.resetCursor();
+	            	}else {
+	            		MapCursor.checkSpace();
 	            	}
 	            }	
 	            
@@ -268,12 +270,13 @@ public class printMap {
 		     //Playing path transition   
 		     pathTransition.play();  
 		     resetImg(id);
+		     
 		     //Clears the previous move sequence
 		     MapCursor.moveSequence.clear();
 		     
 		     //Allow movement and return;
 		     MapCursor.canMove = true;
-		     //MapCursor.resetCursor();
+
 		     return;
 	   }
   
