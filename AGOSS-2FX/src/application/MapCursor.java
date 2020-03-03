@@ -109,30 +109,19 @@ public class MapCursor {
 	
 	public static int isOnMover = 0;
 	
-	public static void checkSpace() {
-		
-		for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
-			if(cursorX == Adventure.playerListCurrent.get(i).getMapX() && cursorY == Adventure.playerListCurrent.get(i).getMapY()) {
-				System.out.println("playerfound");
-				System.out.println(Adventure.playerListCurrent.get(i).getName());
-				
-				if(Arrow.isOn == false) {
-					canMove = false;
-					Arrow.toggleArrow(true);
-				} else { //Setup space check here for available tiles / enemies / whatever
-					canMove = true;
-					Arrow.toggleArrow(false);
-					isOnMover = 0;
-				}
-				
-				Arrow.setLocation(Adventure.playerListCurrent.get(i).getMapX(), Adventure.playerListCurrent.get(i).getMapY());
-				isOnMover = i;
-				//String[] testMove = {"up"};
-				  
-				//Test move characters sprite 								Direction 
-				//printMap.moveSprite(null, Adventure.playerListCurrent.get(i), testMove);
-			}
+	public static void checkSpace(int current) {
+
+		if(Arrow.isOn == false) {
+			canMove = false;
+			Arrow.toggleArrow(true);
+		} else { //Setup space check here for available tiles / enemies / whatever
+			canMove = true;
+			Arrow.toggleArrow(false);
+			isOnMover = 0;
 		}
+
+		Arrow.setLocation(Adventure.playerListCurrent.get(current).getMapX(), Adventure.playerListCurrent.get(current).getMapY());
+
 		
 		for(int i = 0; i != mapInitialization.mobList.size(); i++) {
 			if(cursorX == mapInitialization.mobList.get(i).getMapX() && cursorY == mapInitialization.mobList.get(i).getMapY()) {
