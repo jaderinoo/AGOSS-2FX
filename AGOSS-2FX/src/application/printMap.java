@@ -24,6 +24,7 @@ public class printMap {
 	static AnchorPane root = new AnchorPane();
 	public static double horizontalSetter = 0, verticalSetter = 0, horizontal = 0 , vertical = 0;
 	static List <Shape> shapes = new ArrayList<>();
+	public static int currentPlayerHover = 0;
 	
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException {
 	        
@@ -56,6 +57,15 @@ public class printMap {
 			scene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
 	            System.out.println("Key pressed");
 	            
+	            for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
+	    			if(MapCursor.cursorX == Adventure.playerListCurrent.get(i).getMapX() && MapCursor.cursorY == Adventure.playerListCurrent.get(i).getMapY()) {
+	    				currentPlayerHover = i;
+	    				System.out.println("playerfound in previous tile");
+	    				System.out.println(Adventure.playerListCurrent.get(currentPlayerHover).getName());
+	    	            System.out.println(currentPlayerHover);
+	    			}
+	            }
+	            
 	            if (event.getCode() == KeyCode.UP) {
 	                MapCursor.moveUp();
 	            }
@@ -78,11 +88,13 @@ public class printMap {
 	            
 	            if (event.getCode() == KeyCode.ENTER) {
 	            	if(Arrow.isOn == true) {
-	            		printMap.moveSprite(null, Adventure.playerListCurrent.get(MapCursor.isOnMover), MapCursor.moveSequence);
+	            		printMap.moveSprite(null, Adventure.playerListCurrent.get(currentPlayerHover), MapCursor.moveSequence);
 	            		Arrow.toggleArrow(false);
 	            		MapCursor.resetCursor();
-	            	}else {
-	            		MapCursor.checkSpace();
+	            	}else{
+	            		if(Adventure.playerListCurrent.get(currentPlayerHover).getHasMoved() == false) {
+	            			MapCursor.checkSpace(currentPlayerHover);
+	            		}
 	            	}
 	            }	
 	            
@@ -263,21 +275,26 @@ public class printMap {
 				   }
 			   }
 		   }
+
+
+		   //setting path for the path transition   
+		   pathTransition.setPath(path);
+		   //Playing path transition   
+		   pathTransition.play();  
+		   resetImg(id);
+		   Adventure.playerListCurrent.get(MapCursor.isOnMover).setHasMoved(true);
+
+		   if(mob == null) {
+			   player.setHasMoved(true);
+		   }
 		   
+		   //Clears the previous move sequence
+		   MapCursor.moveSequence.clear();
 
-		     //setting path for the path transition   
-		     pathTransition.setPath(path);
-		     //Playing path transition   
-		     pathTransition.play();  
-		     resetImg(id);
-		     
-		     //Clears the previous move sequence
-		     MapCursor.moveSequence.clear();
-		     
-		     //Allow movement and return;
-		     MapCursor.canMove = true;
+		   //Allow movement and return;
+		   MapCursor.canMove = true;
 
-		     return;
+		   return;
 	   }
   
 	   public static void resetImg(String Id) {
