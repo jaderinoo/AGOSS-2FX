@@ -22,6 +22,7 @@ public class Player {
 		String mapId;
 		Image charImg;
 		playerBags playerBag;
+		boolean hasMoved;
 		
 		public Player(String name, int strength,int agility,int armor,int maxHp,int special, int level, int exp, int currentHp, int type, playerBags playerBag) {
 	    	
@@ -37,7 +38,7 @@ public class Player {
 	    	this.currentHp = currentHp;
 	    	this.playerBag = playerBag;
 	    	this.type = type;
-	    	
+	    	this.hasMoved = false;
 	    	setImg(name);
 	   }
 		
@@ -47,6 +48,14 @@ public class Player {
 			}else {
 				this.charImg = new Image("application\\tilesets\\" + name + "\\" + name + ".png");
 			}
+		}
+
+		public void setHasMoved(boolean decider) {
+			this.hasMoved = decider;
+		}
+		
+		public boolean getHasMoved() {
+			return this.hasMoved;
 		}
 		
 		public void setMapId(String Id) {
