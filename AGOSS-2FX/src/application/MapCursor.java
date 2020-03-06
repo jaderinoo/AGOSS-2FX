@@ -121,24 +121,6 @@ public class MapCursor {
 		}
 
 		Arrow.setLocation(Adventure.playerListCurrent.get(current).getMapX(), Adventure.playerListCurrent.get(current).getMapY());
-
-		
-		for(int i = 0; i != mapInitialization.mobList.size(); i++) {
-			if(cursorX == mapInitialization.mobList.get(i).getMapX() && cursorY == mapInitialization.mobList.get(i).getMapY()) {
-				System.out.println("enemyfound");
-				System.out.println(mapInitialization.mobList.get(i).getName());
-				
-				//String[] testMove = {"up"};
-				  
-				//Test move characters sprite 								Direction 
-				//printMap.moveSprite(mapInitialization.mobList.get(i), null, testMove);
-				 
-			}
-
-		}
-		
-		
-
 	}
 }
 

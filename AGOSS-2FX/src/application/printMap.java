@@ -1,9 +1,13 @@
 package application;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.animation.PathTransition;
 import javafx.animation.TranslateTransition;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -22,11 +26,12 @@ import javafx.util.Duration;
 
 public class printMap {
 	static AnchorPane root = new AnchorPane();
+	static Pane moveSpaceMenu = new Pane();
 	public static double horizontalSetter = 0, verticalSetter = 0, horizontal = 0 , vertical = 0;
 	static List <Shape> shapes = new ArrayList<>();
 	public static int currentPlayerHover = 0;
 	
-	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException {
+	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
 	        
 	        Scene scene = new Scene(root, Main.window.getHeight(), Main.window.getWidth());
 	        horizontalSetter = (Main.window.getWidth()/cols);
@@ -107,7 +112,7 @@ public class printMap {
 	        Main.window.setScene(scene);
 	         
 	   }
-	   public static void spriteLayer(GridSpace[][] map, int rows, int cols) throws InterruptedException {
+	   public static void spriteLayer(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
 		   Pane spriteLayer = new Pane(); 
 	       Rectangle sprite = null;
 	       
@@ -155,7 +160,14 @@ public class printMap {
 		   Pane arrowLayer = Arrow.init();
 		   root.getChildren().add(arrowLayer);
 		   
+		   //Loads the MovespaceMenu
+		   moveSpaceMenu =  FXMLLoader.load(printMap.class.getResource("scenes\\moveSpaceMenu.fxml"));
+		   root.getChildren().add(moveSpaceMenu);
+		   
+
+		   
 		   printMap.shapes.get(Arrow.arrowTipPosition).setVisible(false);
+		   moveSpaceMenu.setVisible(false);
 		   
 		   
 	   }
@@ -282,12 +294,26 @@ public class printMap {
 		   //Playing path transition   
 		   pathTransition.play();  
 		   resetImg(id);
-		   Adventure.playerListCurrent.get(MapCursor.isOnMover).setHasMoved(true);
-
-		   if(mob == null) {
-			   player.setHasMoved(true);
-		   }
 		   
+		   //Presents the moveSpaceMenu after animation is finished
+		   Timer myTimer = new Timer();
+	          myTimer.schedule(new TimerTask(){
+	            @Override
+	            public void run() {
+	            	System.out.println("Im setting to true: MENU");
+	            	MoveSpaceMenu.showMenu(true);
+	            	
+
+	     	       //Sets the moved player to HasMoved true
+	     		   if(mob == null) {
+	     			   System.out.println("Im setting to true");
+	     			   player.setHasMoved(true);
+	     		   }
+	     		   
+	            	
+	            }
+	          }, directions.size()*250);
+
 		   //Clears the previous move sequence
 		   MapCursor.moveSequence.clear();
 
