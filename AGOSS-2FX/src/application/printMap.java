@@ -301,7 +301,7 @@ public class printMap {
 	            @Override
 	            public void run() {
 	            	System.out.println("Im setting to true: MENU");
-	            	MoveSpaceMenu.showMenu(true);
+	            	MoveSpaceMenu.showMenu(true, player);
 	            	
 
 	     	       //Sets the moved player to HasMoved true

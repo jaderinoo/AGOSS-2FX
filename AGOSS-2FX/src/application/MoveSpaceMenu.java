@@ -37,8 +37,9 @@ public class MoveSpaceMenu {
 	}
 	   
 	   
-	public static void showMenu(boolean decider) {
+	public static void showMenu(boolean decider, Player player) {
 		   if(decider == true) {
+			   printMap.moveSpaceMenu.relocate(player.getMapX()+25,player.getMapY()+25);
 			   printMap.moveSpaceMenu.setVisible(true);
 		   }
 		   
