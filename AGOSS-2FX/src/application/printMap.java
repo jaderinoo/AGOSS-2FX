@@ -318,7 +318,7 @@ public class printMap {
 		   MapCursor.moveSequence.clear();
 
 		   //Allow movement and return;
-		   MapCursor.canMove = true;
+		   //MapCursor.canMove = true;
 
 		   return;
 	   }

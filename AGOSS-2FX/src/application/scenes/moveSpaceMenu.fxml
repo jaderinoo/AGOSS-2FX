@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.VBox?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="111.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="111.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MENU" />
-      <Text fill="WHITE" layoutX="14.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MOVE TO" />
-      <Text fill="WHITE" layoutX="14.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RETURN" />
+      <VBox layoutX="1.0" layoutY="-2.0" prefHeight="153.0" prefWidth="111.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" text="Visit" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Attack" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Trade" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Item" />
+            <Button id="moveTo" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Move To" />
+            <Button id="return" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Return" />
+         </children>
+      </VBox>
    </children>
 </Pane>

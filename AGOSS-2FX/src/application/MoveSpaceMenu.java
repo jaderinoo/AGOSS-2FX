@@ -39,7 +39,20 @@ public class MoveSpaceMenu {
 	   
 	public static void showMenu(boolean decider, Player player) {
 		   if(decider == true) {
-			   printMap.moveSpaceMenu.relocate(player.getMapX()+25,player.getMapY()+25);
+			   if(player.getMapX() == 0 && player.getMapY() == 0) {
+				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() + vertical,horizontal * player.getMapY() + horizontal);
+				   
+			   }else if(player.getMapX() == 4 && player.getMapY() == 0) {
+				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() - vertical,horizontal * player.getMapY() - horizontal); 
+				   
+			   }else if(player.getMapX() == 0 && player.getMapY() == 4) {
+				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() + vertical,horizontal * player.getMapY() - horizontal); 
+				   
+			   }else if(player.getMapX() == 4 && player.getMapY() == 4) {
+				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() - vertical,horizontal * player.getMapY() - horizontal); 
+				   
+			   }
+			   
 			   printMap.moveSpaceMenu.setVisible(true);
 		   }
 		   
