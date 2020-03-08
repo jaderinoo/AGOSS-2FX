@@ -13,7 +13,7 @@
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Trade" />
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Item" />
             <Button id="moveTo" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Move To" />
-            <Button id="return" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Return" />
+            <Button id="returnTo" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Return" />
          </children>
       </VBox>
    </children>

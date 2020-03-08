@@ -5,8 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -29,11 +31,29 @@ public class MoveSpaceMenu {
 	private ResourceBundle resources;
 	
 	@FXML
+	public Button moveTo;
+	
+	@FXML
+	public Button returnTo;
+	
+	@FXML
 	public void init() {
 		arrowX = 0;
 		arrowY = 0;
-
-
+		
+		moveTo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+        		//do stuff
+            }
+        });
+		
+		returnTo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            	//do stuff
+            }
+        });
 	}
 	   
 	   
