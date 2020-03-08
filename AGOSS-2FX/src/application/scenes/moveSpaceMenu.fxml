@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?language JavaScript?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="111.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="111.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MoveSpaceMenu">
    <children>
       <VBox layoutX="1.0" layoutY="-2.0" prefHeight="153.0" prefWidth="111.0">
          <children>
@@ -12,8 +13,8 @@
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Attack" />
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="115.0" text="Trade" />
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" text="Item" />
-            <Button id="moveTo" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Move To" />
-            <Button id="returnTo" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Return" />
+            <Button fx:id="moveTo" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Move To" />
+            <Button fx:id="returnTo" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Return" />
          </children>
       </VBox>
    </children>

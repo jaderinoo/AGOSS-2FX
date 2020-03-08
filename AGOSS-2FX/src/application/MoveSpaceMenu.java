@@ -37,7 +37,7 @@ public class MoveSpaceMenu {
 	public Button returnTo;
 	
 	@FXML
-	public void init() {
+	private void initialize() {
 		arrowX = 0;
 		arrowY = 0;
 		
@@ -45,6 +45,9 @@ public class MoveSpaceMenu {
             @Override
             public void handle(ActionEvent event) {
         		//do stuff
+            	System.out.println("Stop clicking me");
+            	printMap.moveSpaceMenu.setVisible(false);
+            	MapCursor.canMove = true;
             }
         });
 		
@@ -52,6 +55,7 @@ public class MoveSpaceMenu {
             @Override
             public void handle(ActionEvent event) {
             	//do stuff
+            	
             }
         });
 	}
