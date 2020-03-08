@@ -32,8 +32,7 @@ public class OptionsSceneController
 	public Button returnBtn;
 	
 	@FXML
-	private void initialize()
-	{
+	private void initialize() {
 
 		//Check Boxes
 		loadMapBox.setOnAction(new EventHandler<ActionEvent>() {
