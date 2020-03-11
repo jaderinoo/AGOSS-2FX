@@ -339,8 +339,6 @@ public class printMap {
 				   System.out.println("Reseting: " + Adventure.playerListCurrent.get(i).getName());
 			   }  
 			}
-		   
-		   //Reset player positions
 		   Adventure.playerListCurrent.get(playerPos).setMapX(oldX);
 		   Adventure.playerListCurrent.get(playerPos).setMapY(oldY);
 		   
@@ -363,11 +361,25 @@ public class printMap {
 			   }
 		   }
 
+		   //Reset player positions
+		   Adventure.playerListCurrent.get(playerPos).setHasMoved(false);
+		   
+		   
+		   
+			for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
+				System.out.println(Adventure.playerListCurrent.get(i).getName() + " X: " + Adventure.playerListCurrent.get(i).getMapX()
+					+ "  Y: " + Adventure.playerListCurrent.get(i).getMapY());
+			}
+			
 		   //Move back to previous position
-		   shapes.get(shapePos).relocate(vertical * oldX, horizontal * oldY);
+		   shapes.get(shapePos).setTranslateX(0);
+		   shapes.get(shapePos).setTranslateY(0);
+		   MapCursor.resetCursor(playerPos);
+		   
 		   //Reset olds
 		   oldX = 0;
 		   oldY = 0;
+		   playerPos = 0;
 	   }
   
 	   public static void resetImg(String Id) {

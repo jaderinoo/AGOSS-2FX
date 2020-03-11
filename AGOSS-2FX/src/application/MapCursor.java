@@ -35,11 +35,12 @@ public class MapCursor {
 		return cursorLayer;
 	}
 	
-	public static void resetCursor(int pos) {
-		System.out.println("Reseting cursor position to: " + Adventure.playerListCurrent.get(pos).getMapX() + "," + Adventure.playerListCurrent.get(pos).getMapY());
-		printMap.shapes.get(cursorPosition).relocate(vertical * Adventure.playerListCurrent.get(pos).getMapX(), horizontal * Adventure.playerListCurrent.get(pos).getMapY());
-		cursorX = Adventure.playerListCurrent.get(pos).getMapX();
-		cursorY = Adventure.playerListCurrent.get(pos).getMapY();
+	public static void resetCursor(int tempPos) {
+		System.out.println(tempPos);
+		System.out.println("Reseting cursor position to: " + Adventure.playerListCurrent.get(tempPos).getMapX() + "," + Adventure.playerListCurrent.get(tempPos).getMapY());
+		printMap.shapes.get(cursorPosition).relocate(vertical * Adventure.playerListCurrent.get(tempPos).getMapX(), horizontal * Adventure.playerListCurrent.get(tempPos).getMapY());
+		cursorX = Adventure.playerListCurrent.get(tempPos).getMapX();
+		cursorY = Adventure.playerListCurrent.get(tempPos).getMapY();
 	}
 	
 	

@@ -71,7 +71,6 @@ public class MoveSpaceMenu {
 				printMap.moveSpaceMenu.setVisible(false);
 				MapCursor.canMove = true;
 				MapCursor.moveSequence.clear();
-				MapCursor.resetCursor(tempPos);
 
 				//Reset temp vars
 				tempName = "";
