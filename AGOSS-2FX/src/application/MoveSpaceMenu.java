@@ -43,31 +43,41 @@ public class MoveSpaceMenu {
 		arrowY = 0;
 		
 		moveTo.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-        		//do stuff
-            	System.out.println("Stop clicking me");
-            	printMap.moveSpaceMenu.setVisible(false);
-            	MapCursor.canMove = true;
-            }
-        });
-		
+			@Override
+			public void handle(ActionEvent event) {
+				//do stuff
+				System.out.println("Stop clicking me");
+				printMap.moveSpaceMenu.setVisible(false);
+				MapCursor.canMove = true;
+				MapCursor.moveSequence.clear();
+			}
+		});
+
 		returnTo.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-            	//do stuff
-            	int tempPos = 0;
-     		   for(int i = 0; i < printMap.shapes.size(); i++) {
-    			   if(printMap.shapes.get(i).getId() == tempName) {
-    				   System.out.println("Moving character: " + printMap.shapes.get(i).getId());
-    				   tempPos = i;
-    				    
-    			   }  
-    		   }
-     		//WORK PLEASE  WHY WONT YOU WORK
-     		  printMap.shapes.get(tempPos).relocate(vertical * 0, horizontal * 0);
-            }
-        });
+			@Override
+			public void handle(ActionEvent event) {
+				//do stuff
+				int tempPos = 0;
+				for(int i = 0; i < printMap.shapes.size(); i++) {
+					if(printMap.shapes.get(i).getId() == tempName) {
+						System.out.println("Moving character: " + printMap.shapes.get(i).getId());
+						tempPos = i;
+
+					}  
+				}
+
+				//Reset to before the move
+				printMap.resetMove(tempPos, tempName);
+				printMap.moveSpaceMenu.setVisible(false);
+				MapCursor.canMove = true;
+				MapCursor.moveSequence.clear();
+				MapCursor.resetCursor(tempPos);
+
+				//Reset temp vars
+				tempName = "";
+				tempPos = 0;
+			}
+		});
 	}
 	   
 	   
