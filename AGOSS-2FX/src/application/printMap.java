@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.animation.PathTransition;
+import javafx.animation.PathTransition.OrientationType;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -220,7 +221,8 @@ public class printMap {
 				   pathTransition.setNode(shapes.get(pos));  
 			   }  
 		   }
-		   
+		   shapes.get(pos).setLayoutX(0);
+		   shapes.get(pos).setLayoutY(0);
 		   //Depending on direction, move and change sprite
 		   for (int i = 0; i < directions.size(); i++) {
 			   if(directions.get(i) == "left") {
@@ -298,7 +300,6 @@ public class printMap {
 			   }
 		   }
 
-
 		   //setting path for the path transition   
 		   pathTransition.setPath(path);
 		   //Playing path transition   
@@ -317,7 +318,7 @@ public class printMap {
 	     	       //Sets the moved player to HasMoved true
 	     		   if(mob == null) {
 	     			   System.out.println("Im setting to true");
-	     			   player.setHasMoved(true);
+	     			   //player.setHasMoved(true);
 	     		   }
 	     		   
 	            	
@@ -339,41 +340,23 @@ public class printMap {
 				   System.out.println("Reseting: " + Adventure.playerListCurrent.get(i).getName());
 			   }  
 			}
+		   
+		   //Reset the players location
 		   Adventure.playerListCurrent.get(playerPos).setMapX(oldX);
 		   Adventure.playerListCurrent.get(playerPos).setMapY(oldY);
 		   
-		   //Visually reset player positions
-		   for (int i = 0; i < directions.size(); i++) {
-			   if(directions.get(i) == "left") {
-				   oldX += 1; 
-			   }
-
-			   if(directions.get(i) == "right") {
-				   oldX-=1;
-			   }
-
-			   if(directions.get(i) == "up") {
-				   oldY+=1;
-			   }
-
-			   if(directions.get(i) == "down") {
-				   oldY-=1;
-			   }
-		   }
+		   //Reset and relocate the sprite back to its original position
+		   shapes.get(shapePos).setTranslateX(0);
+		   shapes.get(shapePos).setTranslateY(0);
+		   
+		   shapes.get(shapePos).relocate(0,0);
+		   
+		   shapes.get(shapePos).setTranslateX(vertical * oldX);
+		   shapes.get(shapePos).setTranslateY(horizontal * oldY);
 
 		   //Reset player positions
 		   Adventure.playerListCurrent.get(playerPos).setHasMoved(false);
-		   
-		   
-		   
-			for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
-				System.out.println(Adventure.playerListCurrent.get(i).getName() + " X: " + Adventure.playerListCurrent.get(i).getMapX()
-					+ "  Y: " + Adventure.playerListCurrent.get(i).getMapY());
-			}
-			
-		   //Move back to previous position
-		   shapes.get(shapePos).setTranslateX(0);
-		   shapes.get(shapePos).setTranslateY(0);
+
 		   MapCursor.resetCursor(playerPos);
 		   
 		   //Reset olds
