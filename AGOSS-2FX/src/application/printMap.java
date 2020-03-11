@@ -1,6 +1,7 @@
 package application;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,7 +31,7 @@ public class printMap {
 	public static double horizontalSetter = 0, verticalSetter = 0, horizontal = 0 , vertical = 0;
 	static List <Shape> shapes = new ArrayList<>();
 	public static int currentPlayerHover = 0;
-	
+	public static boolean isOnPlayer = false;
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
 	        
 	        Scene scene = new Scene(root, Main.window.getHeight(), Main.window.getWidth());
@@ -91,12 +92,20 @@ public class printMap {
 	            }
 	            
 	            if (event.getCode() == KeyCode.ENTER) {
+	            	//Checks and makes sure that the cursor is on the same tile as the player
+	            	if(MapCursor.cursorX == Adventure.playerListCurrent.get(currentPlayerHover).getMapX() && MapCursor.cursorY == Adventure.playerListCurrent.get(currentPlayerHover).getMapY()) {
+	            		isOnPlayer = true;
+	            		System.out.println(isOnPlayer);
+	            	}else {
+	            		isOnPlayer = false;
+	            	}
+	            	
 	            	if(Arrow.isOn == true) {
 	            		printMap.moveSprite(null, Adventure.playerListCurrent.get(currentPlayerHover), MapCursor.moveSequence);
 	            		Arrow.toggleArrow(false);
-	            		MapCursor.resetCursor();
+	            		MapCursor.resetCursor(currentPlayerHover);
 	            	}else{
-	            		if(Adventure.playerListCurrent.get(currentPlayerHover).getHasMoved() == false) {
+	            		if(Adventure.playerListCurrent.get(currentPlayerHover).getHasMoved() == false && isOnPlayer == true) {
 	            			MapCursor.checkSpace(currentPlayerHover);
 	            		}
 	            	}
@@ -172,6 +181,7 @@ public class printMap {
 	   }
 	   
 	   static int pos = 0;
+	   public static int oldX, oldY;
 	   
 	   public static void moveSprite( Mob1 mob, Player player, ArrayList<String> directions) {
 		   MapCursor.canMove = false;
@@ -195,7 +205,8 @@ public class printMap {
 		   }else if (mob == null) {
 			   id = player.getMapId();
 			   path.getElements().add(new MoveTo((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));
-			   
+			   oldX = player.getMapX();
+			   oldY = player.getMapY();
 		   }
 		   
 		   //Clean the id for shape search
@@ -312,14 +323,51 @@ public class printMap {
 	            	
 	            }
 	          }, directions.size()*250);
-
-		   //Clears the previous move sequence
-		   MapCursor.moveSequence.clear();
-
 		   //Allow movement and return;
 		   //MapCursor.canMove = true;
 
 		   return;
+	   }
+	   
+	   public static void resetMove(int shapePos, String tempName) {
+		   ArrayList<String> directions = MapCursor.moveSequence;
+		   int playerPos = 0;
+		   
+		   for(int i = 0; i < Adventure.playerListCurrent.size(); i++) {
+			   if(Adventure.playerListCurrent.get(i).getMapId() == tempName) {
+				   playerPos = i;
+				   System.out.println("Reseting: " + Adventure.playerListCurrent.get(i).getName());
+			   }  
+			}
+		   
+		   //Reset player positions
+		   Adventure.playerListCurrent.get(playerPos).setMapX(oldX);
+		   Adventure.playerListCurrent.get(playerPos).setMapY(oldY);
+		   
+		   //Visually reset player positions
+		   for (int i = 0; i < directions.size(); i++) {
+			   if(directions.get(i) == "left") {
+				   oldX += 1; 
+			   }
+
+			   if(directions.get(i) == "right") {
+				   oldX-=1;
+			   }
+
+			   if(directions.get(i) == "up") {
+				   oldY+=1;
+			   }
+
+			   if(directions.get(i) == "down") {
+				   oldY-=1;
+			   }
+		   }
+
+		   //Move back to previous position
+		   shapes.get(shapePos).relocate(vertical * oldX, horizontal * oldY);
+		   //Reset olds
+		   oldX = 0;
+		   oldY = 0;
 	   }
   
 	   public static void resetImg(String Id) {
