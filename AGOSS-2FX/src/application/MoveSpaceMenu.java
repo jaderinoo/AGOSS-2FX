@@ -22,7 +22,8 @@ public class MoveSpaceMenu {
 	static int arrowX, arrowY;
 	public static int moveSpacePosition;
 	static boolean isOn;
-
+	static String tempName;
+	
 	// location and resources will be automatically injected by the FXML loader
 	@FXML
 	private URL location;
@@ -55,13 +56,26 @@ public class MoveSpaceMenu {
             @Override
             public void handle(ActionEvent event) {
             	//do stuff
-            	
+            	int tempPos = 0;
+     		   for(int i = 0; i < printMap.shapes.size(); i++) {
+    			   if(printMap.shapes.get(i).getId() == tempName) {
+    				   System.out.println("Moving character: " + printMap.shapes.get(i).getId());
+    				   tempPos = i;
+    				    
+    			   }  
+    		   }
+     		//WORK PLEASE  WHY WONT YOU WORK
+     		  printMap.shapes.get(tempPos).relocate(vertical * 0, horizontal * 0);
             }
         });
 	}
 	   
 	   
 	public static void showMenu(boolean decider, Player player) {
+		
+		//Tempname
+		tempName = player.getName();
+		
 		   if(decider == true) {
 			   if(player.getMapX() == 0 && player.getMapY() == 0) {
 				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() + vertical,horizontal * player.getMapY() + horizontal);

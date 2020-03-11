@@ -61,7 +61,6 @@ public class printMap {
 			//Setup keypress handlers 
 			scene.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
 	            System.out.println("Key pressed");
-	            
 	            for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
 	    			if(MapCursor.cursorX == Adventure.playerListCurrent.get(i).getMapX() && MapCursor.cursorY == Adventure.playerListCurrent.get(i).getMapY()) {
 	    				currentPlayerHover = i;
