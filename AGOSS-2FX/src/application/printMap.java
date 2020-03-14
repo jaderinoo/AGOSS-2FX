@@ -318,7 +318,7 @@ public class printMap {
 	     	       //Sets the moved player to HasMoved true
 	     		   if(mob == null) {
 	     			   System.out.println("Im setting to true");
-	     			   //player.setHasMoved(true);
+	     			   player.setHasMoved(true);
 	     		   }
 	     		   
 	            	
@@ -331,7 +331,6 @@ public class printMap {
 	   }
 	   
 	   public static void resetMove(int shapePos, String tempName) {
-		   ArrayList<String> directions = MapCursor.moveSequence;
 		   int playerPos = 0;
 		   
 		   for(int i = 0; i < Adventure.playerListCurrent.size(); i++) {
