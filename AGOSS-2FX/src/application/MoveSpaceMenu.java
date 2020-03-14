@@ -50,6 +50,9 @@ public class MoveSpaceMenu {
 				printMap.moveSpaceMenu.setVisible(false);
 				MapCursor.canMove = true;
 				MapCursor.moveSequence.clear();
+				
+				//Check player status
+  			   	GameVariables.checkRoundStatus();
 			}
 		});
 
