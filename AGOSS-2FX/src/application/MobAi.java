@@ -1,6 +1,13 @@
 package application;
 
 public class MobAi {
+	
+	//Go through the enemy list until all enemies have moved/tried moving.
+	public static void cycleList() {
+		
+	}
+	
+	//Call enemy ai type
 	public static void moveAi(int type) {
 
 		switch(type) {
