@@ -320,8 +320,6 @@ public class printMap {
 	     			   System.out.println("Im setting to true");
 	     			   player.setHasMoved(true);
 	     		   }
-	     		   
-	            	
 	            }
 	          }, directions.size()*250);
 		   //Allow movement and return;
