@@ -66,6 +66,8 @@ public class mapInitialization {
 		
 		//We have the Map, mobList, playerList, mapDetails, tileSets, and all positions
 		
+		//Start mapTimer
+		GameVariables.timer();
 		
 		//Print map background
 		printMap.mapPrinter(map,rows,cols);
