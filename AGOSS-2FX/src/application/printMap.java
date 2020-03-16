@@ -46,8 +46,8 @@ public class printMap {
 	        Rectangle rect = null;
 	      
 			//Print map
-			for (int y=0; y < rows; y++) {
-			    for (int x=0; x < cols; x++) {
+	        for (int y=0; y < cols; y++) {
+			    for (int x=0; x < rows; x++) {
 	                rect = new Rectangle(horizontal * x, vertical * y, horizontal, vertical);
 	                rect.setStroke(new Color(1f,1f,1f,.05f));
 	                System.out.println("application\\tilesets\\tilesets\\" + map[x][y].getType() + ".png");
@@ -173,7 +173,7 @@ public class printMap {
 	       //Loads the Interface
 	       gameInterface =  FXMLLoader.load(printMap.class.getResource("scenes\\gameInterface.fxml"));
 	       root.getChildren().add(gameInterface);
-			
+
 		   //Loads the MovespaceMenu
 		   moveSpaceMenu =  FXMLLoader.load(printMap.class.getResource("scenes\\moveSpaceMenu.fxml"));
 		   root.getChildren().add(moveSpaceMenu);

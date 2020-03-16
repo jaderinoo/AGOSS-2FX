@@ -11,9 +11,11 @@ public class loadMap {
 		GridSpace [][] map = new GridSpace[rows][cols];
 		int next = 0;
 		double maxRow = 0;
-		maxRow = Math.sqrt(data.length()/4);
-		for (int y=0; y < maxRow; y++) {
-		    for (int x=0; x < maxRow; x++) {
+		maxRow = rows;
+		for (int y=0; y < cols; y++) {
+		    for (int x=0; x < rows; x++) {
+		    	System.out.println("Row# " + y);
+		    	System.out.println("Col# " + x);
 		    	char type = data.charAt(next++);
 		    	char occupant = data.charAt(next++);
 		    	int occupantInt = Character.getNumericValue((data.charAt(next++)));
