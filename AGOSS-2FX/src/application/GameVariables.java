@@ -3,6 +3,8 @@ package application;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
+
 public class GameVariables {
 	public static int round = 0;
 	
@@ -34,12 +36,13 @@ public class GameVariables {
 	
 	public static void timer() {
 		   Timer myTimer = new Timer();
-	          myTimer.schedule(new TimerTask(){
+	          myTimer.scheduleAtFixedRate(new TimerTask(){
 	            @Override
 	            public void run() {
 	            	currentTime++;
 	            	timeString = secondsToString(currentTime);
 	            	System.out.println("Game time: " + timeString);
+	            	//Interface.timeUpdater(timeString);
 	            }
 	          }, 1000, 1000);
 	}
