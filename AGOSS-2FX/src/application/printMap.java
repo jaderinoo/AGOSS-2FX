@@ -29,13 +29,14 @@ import javafx.util.Duration;
 public class printMap {
 	static AnchorPane root = new AnchorPane();
 	static Pane moveSpaceMenu = new Pane();
+	static Pane gameInterface = new Pane();
 	public static double horizontalSetter = 0, verticalSetter = 0, horizontal = 0 , vertical = 0;
 	static List <Shape> shapes = new ArrayList<>();
 	public static int currentPlayerHover = 0;
 	public static boolean isOnPlayer = false;
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
 	        
-	        Scene scene = new Scene(root, Main.window.getHeight(), Main.window.getWidth());
+	        Scene scene = new Scene(root, Main.window.getWidth(), Main.window.getHeight()+150);
 	        horizontalSetter = (Main.window.getWidth()/cols);
 	        verticalSetter = (Main.window.getHeight()/rows);
 	        
@@ -47,7 +48,7 @@ public class printMap {
 			//Print map
 			for (int y=0; y < rows; y++) {
 			    for (int x=0; x < cols; x++) {
-	                rect = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
+	                rect = new Rectangle(horizontal * x, vertical * y, horizontal, vertical);
 	                rect.setStroke(new Color(1f,1f,1f,.05f));
 	                System.out.println("application\\tilesets\\tilesets\\" + map[x][y].getType() + ".png");
 		    		Image img = new Image("application\\tilesets\\tilesets\\" + map[x][y].getType() + ".png");
@@ -129,7 +130,7 @@ public class printMap {
 			    for (int x=0; x < cols; x++) {
 			    	for (int i = 0; i < Adventure.playerListCurrent.size(); i++) {
 				    	if(x == Adventure.playerListCurrent.get(i).getMapX() && y == Adventure.playerListCurrent.get(i).getMapY()) {
-				    		sprite = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
+				    		sprite = new Rectangle(horizontal * x, vertical * y, horizontal, vertical);
 				    		sprite.setFill(new ImagePattern(Adventure.playerListCurrent.get(i).getImg()));
 				    		//Sets the Sprites ID 
 				    		sprite.setId(Adventure.playerListCurrent.get(i).getName());
@@ -144,7 +145,7 @@ public class printMap {
 			    	
 			    	for (int i = 0; i < mapInitialization.mobList.size(); i++) {
 				    	if(x == mapInitialization.mobList.get(i).getMapX() && y == mapInitialization.mobList.get(i).getMapY()) {
-				    		sprite = new Rectangle(vertical * x, horizontal * y, vertical, horizontal);
+				    		sprite = new Rectangle(horizontal * x, vertical * y, horizontal, vertical);
 				    		sprite.setFill(new ImagePattern(mapInitialization.mobList.get(i).getImg()));
 				    		
 				    		//Sets the Sprites ID 
@@ -169,11 +170,13 @@ public class printMap {
 		   Pane arrowLayer = Arrow.init();
 		   root.getChildren().add(arrowLayer);
 		   
+	       //Loads the Interface
+	       gameInterface =  FXMLLoader.load(printMap.class.getResource("scenes\\gameInterface.fxml"));
+	       root.getChildren().add(gameInterface);
+			
 		   //Loads the MovespaceMenu
 		   moveSpaceMenu =  FXMLLoader.load(printMap.class.getResource("scenes\\moveSpaceMenu.fxml"));
 		   root.getChildren().add(moveSpaceMenu);
-		   
-
 		   
 		   printMap.shapes.get(Arrow.arrowTipPosition).setVisible(false);
 		   moveSpaceMenu.setVisible(false);
@@ -201,11 +204,11 @@ public class printMap {
 		     
 		   if(player == null) {
 			   id = mob.getMapId();
-			   path.getElements().add(new MoveTo(vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2)));
+			   path.getElements().add(new MoveTo(horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2)));
 			   
 		   }else if (mob == null) {
 			   id = player.getMapId();
-			   path.getElements().add(new MoveTo((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));
+			   path.getElements().add(new MoveTo((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));
 			   oldX = player.getMapX();
 			   oldY = player.getMapY();
 		   }
@@ -236,12 +239,12 @@ public class printMap {
 				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapX(mob.getMapX()-1);
-					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 
+					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 
  	
 				   }else if (mob == null) {
 					   player.setMapX(player.getMapX()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));  
+					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));  
 				   }
 			   }
 
@@ -255,11 +258,11 @@ public class printMap {
 				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapX(mob.getMapX()+1);
-					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
+					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 	
 				   }else if (mob == null) {
 					   player.setMapX(player.getMapX()+1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));   
+					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));   
 				   }
 			   }
 
@@ -273,11 +276,11 @@ public class printMap {
 				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()-1);
-					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
+					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 	
 				   }else if (mob == null) {
 					   player.setMapY(player.getMapY()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));  
+					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));  
 				   }
 			   }
 
@@ -291,11 +294,11 @@ public class printMap {
 				   System.out.println(directions.get(i));
 				   if(player == null) {
 					   mob.setMapY(mob.getMapY()+1);
-					   path.getElements().add (new LineTo (vertical * mob.getMapX() + (vertical/2), horizontal * mob.getMapY() + (horizontal/2))); 	
+					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 	
 				   }else if (mob == null) {
 					   player.setMapY(player.getMapY()+1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
-					   path.getElements().add (new LineTo ((vertical * player.getMapX()) + (vertical/2), horizontal * player.getMapY() + (horizontal/2)));
+					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));
 				   }
 			   }
 		   }
@@ -348,8 +351,8 @@ public class printMap {
 		   
 		   shapes.get(shapePos).relocate(0,0);
 		   
-		   shapes.get(shapePos).setTranslateX(vertical * oldX);
-		   shapes.get(shapePos).setTranslateY(horizontal * oldY);
+		   shapes.get(shapePos).setTranslateX(horizontal * oldX);
+		   shapes.get(shapePos).setTranslateY(vertical * oldY);
 
 		   //Reset player positions
 		   Adventure.playerListCurrent.get(playerPos).setHasMoved(false);

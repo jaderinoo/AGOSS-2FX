@@ -23,7 +23,7 @@ public class Arrow {
 		
 		tempArrow = new Image("application\\tilesets\\cursor\\arrow.gif");
 		
-		arrow = new Rectangle(vertical * arrowX, horizontal * arrowY, vertical, horizontal);
+		arrow = new Rectangle(horizontal * arrowX, vertical * arrowY, horizontal, vertical);
 		arrow.setFill(new ImagePattern(tempArrow));
 		arrow.setId("arrowTip");
 
@@ -51,7 +51,7 @@ public class Arrow {
 	   public static void setLocation(int x, int y) {
 		   arrowX = x;
 		   arrowY = y;
-		   printMap.shapes.get(arrowTipPosition).relocate(vertical * x, horizontal * y);
+		   printMap.shapes.get(arrowTipPosition).relocate(horizontal * x, vertical * y);
 	   }
 	   
 }

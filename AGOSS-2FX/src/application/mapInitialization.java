@@ -68,7 +68,7 @@ public class mapInitialization {
 		
 		//Start mapTimer
 		GameVariables.timer();
-		
+
 		//Print map background
 		printMap.mapPrinter(map,rows,cols);
 
