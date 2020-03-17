@@ -62,6 +62,8 @@ public class printMap {
 		        horizontal = vertical;
 	        }
 	        
+	        //Adds a variable padding to the left side of the screen
+	        root.setLayoutX(vertical*3);
 	        Rectangle rect = null;
 	      
 			//Print map
