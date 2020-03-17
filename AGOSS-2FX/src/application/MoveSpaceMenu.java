@@ -17,7 +17,6 @@ import javafx.scene.shape.Rectangle;
 
 public class MoveSpaceMenu {
 	
-	public static double horizontal = 32*(printMap.horizontalSetter/32), vertical = 32*(printMap.verticalSetter/32);
 	static Rectangle arrow = null;
 	static int arrowX, arrowY;
 	public static int moveSpacePosition;
@@ -90,16 +89,16 @@ public class MoveSpaceMenu {
 		
 		   if(decider == true) {
 			   if(player.getMapX() == 0 && player.getMapY() == 0) {
-				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() + vertical,horizontal * player.getMapY() + horizontal);
+				   printMap.moveSpaceMenu.relocate(printMap.horizontal * player.getMapX() + printMap.horizontal,printMap.vertical * player.getMapY() + printMap.vertical);
 				   
 			   }else if(player.getMapX() == 4 && player.getMapY() == 0) {
-				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() - vertical,horizontal * player.getMapY() - horizontal); 
+				   printMap.moveSpaceMenu.relocate(printMap.horizontal * player.getMapX() - printMap.horizontal,printMap.vertical * player.getMapY() - printMap.vertical); 
 				   
 			   }else if(player.getMapX() == 0 && player.getMapY() == 4) {
-				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() + vertical,horizontal * player.getMapY() - horizontal); 
+				   printMap.moveSpaceMenu.relocate(printMap.horizontal * player.getMapX() + printMap.horizontal,printMap.vertical * player.getMapY() - printMap.vertical); 
 				   
 			   }else if(player.getMapX() == 4 && player.getMapY() == 4) {
-				   printMap.moveSpaceMenu.relocate(vertical * player.getMapX() - vertical,horizontal * player.getMapY() - horizontal); 
+				   printMap.moveSpaceMenu.relocate(printMap.horizontal * player.getMapX() - printMap.horizontal,printMap.vertical * player.getMapY() - printMap.vertical); 
 				   
 			   }
 			   

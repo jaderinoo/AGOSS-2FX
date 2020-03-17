@@ -10,6 +10,7 @@ import javafx.animation.PathTransition;
 import javafx.animation.PathTransition.OrientationType;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -28,6 +29,7 @@ import javafx.util.Duration;
 
 public class printMap {
 	static AnchorPane root = new AnchorPane();
+	static Pane gameLayer = new Pane();
 	static Pane moveSpaceMenu = new Pane();
 	static Pane gameInterface = new Pane();
 	public static double horizontalSetter = 0, verticalSetter = 0, horizontal = 0 , vertical = 0;
@@ -63,7 +65,7 @@ public class printMap {
 	        }
 	        
 	        //Adds a variable padding to the left side of the screen
-	        root.setLayoutX(vertical*3);
+	        gameLayer.setLayoutX(vertical*3);
 	        Rectangle rect = null;
 	      
 			//Print map
@@ -74,11 +76,14 @@ public class printMap {
 	                System.out.println("application\\tilesets\\tilesets\\" + map[x][y].getType() + ".png");
 		    		Image img = new Image("application\\tilesets\\tilesets\\" + map[x][y].getType() + ".png");
 		    		rect.setFill(new ImagePattern(img));
-	                root.getChildren().add(rect);
+		    		gameLayer.getChildren().add(rect);
 			    }
 			    System.out.println();
 			}
 			
+	        //Add the layer to the anchorpane
+	        root.getChildren().add(gameLayer);
+	        
 			//Print map foreground
 			spriteLayer(map,rows,cols);
 			
@@ -181,24 +186,35 @@ public class printMap {
 			    	}
 			    }
 	       }
-		   root.getChildren().add(spriteLayer);
+	       
+	       Group groupLayers = new Group();
+	       
+	       groupLayers.setLayoutX(vertical*3);
+	       groupLayers.getChildren().add(spriteLayer);
 		   
 		   //Loads cursor layer and pastes icon
 		   Pane cursorLayer = MapCursor.init();
-		   root.getChildren().add(cursorLayer);
+		   groupLayers.getChildren().add(cursorLayer);
 		   
 		   //Loads the arrow layer
 		   Pane arrowLayer = Arrow.init();
-		   root.getChildren().add(arrowLayer);
+		   groupLayers.getChildren().add(arrowLayer);
 		   
-	       //Loads the Interface
-	       gameInterface =  FXMLLoader.load(printMap.class.getResource("scenes\\gameInterface.fxml"));
-	       root.getChildren().add(gameInterface);
+		   //Adds all game based layers
+		   root.getChildren().add(groupLayers);
+
+	       //Loads the Interface and adds it ontop of game layers
+	       //gameInterface =  FXMLLoader.load(printMap.class.getResource("scenes\\gameInterface.fxml"));
+		   Group UILayer = new Group();
+		   UILayer = Interface.initialize();
+	       root.getChildren().add(UILayer);
 
 		   //Loads the MovespaceMenu
 		   moveSpaceMenu =  FXMLLoader.load(printMap.class.getResource("scenes\\moveSpaceMenu.fxml"));
+		   moveSpaceMenu.setLayoutX(vertical*3);
 		   root.getChildren().add(moveSpaceMenu);
 		   
+		   //Setup Arrowcursor
 		   printMap.shapes.get(Arrow.arrowTipPosition).setVisible(false);
 		   moveSpaceMenu.setVisible(false);
 		   
