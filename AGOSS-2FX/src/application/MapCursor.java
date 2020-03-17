@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 public class MapCursor {
 	private static Image cursor;
 	private static int cursorPosition;
-	public static double horizontal = 32*(printMap.horizontalSetter/32), vertical = 32*(printMap.verticalSetter/32);
 	static int cursorX = Adventure.playerListCurrent.get(0).getMapX(), cursorY = Adventure.playerListCurrent.get(0).getMapY();
 	public static boolean canMove = true;
 	public static ArrayList<String> moveSequence = new ArrayList<String>();
@@ -20,7 +19,7 @@ public class MapCursor {
 		Rectangle sprite = null;
 		cursor = new Image("application\\tilesets\\cursor\\cursor.gif");
 		
-		sprite = new Rectangle(horizontal * cursorX, vertical * cursorY, horizontal, vertical);
+		sprite = new Rectangle(printMap.horizontal * cursorX, printMap.vertical * cursorY, printMap.horizontal, printMap.vertical);
 		sprite.setFill(new ImagePattern(cursor));
 		sprite.setId("cursor");
 		
@@ -38,7 +37,7 @@ public class MapCursor {
 	public static void resetCursor(int tempPos) {
 		System.out.println(tempPos);
 		System.out.println("Reseting cursor position to: " + Adventure.playerListCurrent.get(tempPos).getMapX() + "," + Adventure.playerListCurrent.get(tempPos).getMapY());
-		printMap.shapes.get(cursorPosition).relocate(horizontal * Adventure.playerListCurrent.get(tempPos).getMapX(), vertical * Adventure.playerListCurrent.get(tempPos).getMapY());
+		printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * Adventure.playerListCurrent.get(tempPos).getMapX(), printMap.vertical * Adventure.playerListCurrent.get(tempPos).getMapY());
 		cursorX = Adventure.playerListCurrent.get(tempPos).getMapX();
 		cursorY = Adventure.playerListCurrent.get(tempPos).getMapY();
 	}
@@ -53,12 +52,12 @@ public class MapCursor {
 		if(canMove == true) {
 			cursorY--;
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(horizontal * cursorX, vertical * cursorY);
+			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
 		}
 		
 		if(Arrow.isOn == true) {
 			Arrow.arrowY--;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(horizontal * Arrow.arrowX, vertical * Arrow.arrowY);
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 			moveSequence.add("up");
 		}
     }
@@ -68,12 +67,12 @@ public class MapCursor {
 		if(canMove == true) {
 			cursorY++;
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(horizontal * cursorX, vertical * cursorY);
+			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
 		}
 		
 		if(Arrow.isOn == true) {
 			Arrow.arrowY++;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(horizontal * Arrow.arrowX, vertical * Arrow.arrowY);
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 			moveSequence.add("down");
 		}
     }
@@ -83,12 +82,12 @@ public class MapCursor {
 		if(canMove == true) {
 			cursorX--;
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(horizontal * cursorX, vertical * cursorY);
+			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
 		}
 		
 		if(Arrow.isOn == true) {
 			Arrow.arrowX--;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(horizontal * Arrow.arrowX, vertical * Arrow.arrowY);
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 			moveSequence.add("left");
 		}
     }
@@ -98,12 +97,12 @@ public class MapCursor {
 		if(canMove == true) {
 			cursorX++;
 			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(horizontal * cursorX, vertical * cursorY);
+			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
 		}
 		
 		if(Arrow.isOn == true) {
 			Arrow.arrowX++;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(horizontal * Arrow.arrowX, vertical * Arrow.arrowY);
+			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 			moveSequence.add("right");
 		}
     }

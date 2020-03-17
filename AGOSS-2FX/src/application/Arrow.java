@@ -9,7 +9,6 @@ import javafx.scene.shape.Rectangle;
 public class Arrow {
 	private static Image tempArrow;
 	public static int arrowTipPosition;
-	public static double horizontal = 32*(printMap.horizontalSetter/32), vertical = 32*(printMap.verticalSetter/32);
 	static Rectangle arrow = null;
 	static int arrowX, arrowY;
 	static boolean isOn;
@@ -23,7 +22,7 @@ public class Arrow {
 		
 		tempArrow = new Image("application\\tilesets\\cursor\\arrow.gif");
 		
-		arrow = new Rectangle(horizontal * arrowX, vertical * arrowY, horizontal, vertical);
+		arrow = new Rectangle(printMap.horizontal * arrowX, printMap.vertical * arrowY, printMap.horizontal, printMap.vertical);
 		arrow.setFill(new ImagePattern(tempArrow));
 		arrow.setId("arrowTip");
 
@@ -51,7 +50,7 @@ public class Arrow {
 	   public static void setLocation(int x, int y) {
 		   arrowX = x;
 		   arrowY = y;
-		   printMap.shapes.get(arrowTipPosition).relocate(horizontal * x, vertical * y);
+		   printMap.shapes.get(arrowTipPosition).relocate(printMap.horizontal * x, printMap.vertical * y);
 	   }
 	   
 }

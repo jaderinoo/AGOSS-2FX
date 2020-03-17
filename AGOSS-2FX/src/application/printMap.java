@@ -37,20 +37,30 @@ public class printMap {
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
 		   Scene scene = new Scene(root, 1280, 720);
 		   
+		   //Setup multiple video resolutions
 		   System.out.println("ResType" + OptionsSceneController.resType);
 	        if (OptionsSceneController.resType == "1280x720" || OptionsSceneController.resType == "") {
 	        	Main.window.setWidth(1280);
 	        	Main.window.setHeight(720);
+	        	
+	        	horizontalSetter = (Main.window.getWidth()/cols);
+		        verticalSetter = (Main.window.getHeight()/rows);
+		        
+		        vertical = 21.44*(verticalSetter/21.44);
+		        horizontal = vertical;
+		        
+		        System.out.println("H: " + horizontal);
+		        System.out.println("V: " + vertical);
 	        }else if(OptionsSceneController.resType == "1920x1080") {
 	        	Main.window.setWidth(1920);
 	        	Main.window.setHeight(1080);
+	        	
+	        	horizontalSetter = (Main.window.getWidth()/cols);
+		        verticalSetter = (Main.window.getHeight()/rows);
+		        
+		        vertical = 32*(verticalSetter/32);
+		        horizontal = vertical;
 	        }
-	        
-	        horizontalSetter = (Main.window.getWidth()/cols);
-	        verticalSetter = (Main.window.getHeight()/rows);
-	        
-	        horizontal = 32*(horizontalSetter/32); 
-	        vertical = 32*(verticalSetter/32);
 	        
 	        Rectangle rect = null;
 	      
