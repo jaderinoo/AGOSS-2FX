@@ -35,8 +35,17 @@ public class printMap {
 	public static int currentPlayerHover = 0;
 	public static boolean isOnPlayer = false;
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
+		   Scene scene = new Scene(root, 1280, 720);
+		   
+		   System.out.println("ResType" + OptionsSceneController.resType);
+	        if (OptionsSceneController.resType == "1280x720" || OptionsSceneController.resType == "") {
+	        	Main.window.setWidth(1280);
+	        	Main.window.setHeight(720);
+	        }else if(OptionsSceneController.resType == "1920x1080") {
+	        	Main.window.setWidth(1920);
+	        	Main.window.setHeight(1080);
+	        }
 	        
-	        Scene scene = new Scene(root, Main.window.getWidth(), Main.window.getHeight()+150);
 	        horizontalSetter = (Main.window.getWidth()/cols);
 	        verticalSetter = (Main.window.getHeight()/rows);
 	        
