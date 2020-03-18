@@ -79,31 +79,43 @@ public class MapCursor {
 	
 	public static void moveLeft() 
     {
-		if(canMove == true) {
-			cursorX--;
-			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
-		}
-		
-		if(Arrow.isOn == true) {
-			Arrow.arrowX--;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-			moveSequence.add("left");
+		if(cursorX > 0) {
+			if(canMove == true) {
+				cursorX--;
+				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
+				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+			}
+			
+			if(Arrow.isOn == true) {
+				Arrow.arrowX--;
+				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
+				moveSequence.add("left");
+			}
+			
+			if(cursorX < printMap.colsCompare-14) {
+				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() -64);
+			}
 		}
     }
 	
 	public static void moveRight() 
     {
-		if(canMove == true) {
-			cursorX++;
-			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
-		}
-		
-		if(Arrow.isOn == true) {
-			Arrow.arrowX++;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-			moveSequence.add("right");
+		if(cursorX < printMap.colsCompare) {
+			if(canMove == true) {
+				cursorX++;
+				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
+				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+			}
+			
+			if(Arrow.isOn == true) {
+				Arrow.arrowX++;
+				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
+				moveSequence.add("right");
+			}
+			
+			if(cursorX >= printMap.colsCompare) {
+				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() +64);
+			}
 		}
     }
 	

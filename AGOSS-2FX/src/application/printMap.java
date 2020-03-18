@@ -12,6 +12,7 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -29,14 +30,20 @@ import javafx.util.Duration;
 
 public class printMap {
 	static AnchorPane root = new AnchorPane();
+	static ScrollPane scrollLayer = new ScrollPane();
 	static Pane gameLayer = new Pane();
 	static Pane moveSpaceMenu = new Pane();
 	static Pane gameInterface = new Pane();
-	public static double horizontalSetter = 0, verticalSetter = 0, horizontal = 0 , vertical = 0;
+	static int rowsCompare, colsCompare;
+	public static double horizontal = 0 , vertical = 0;
 	static List <Shape> shapes = new ArrayList<>();
 	public static int currentPlayerHover = 0;
 	public static boolean isOnPlayer = false;
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
+		   colsCompare = rows-1;
+		   rowsCompare = cols-1;
+		   
+		   System.out.println(colsCompare);
 		   Scene scene = new Scene(root, 1280, 720);
 		   
 		   //Setup multiple video resolutions
@@ -44,28 +51,28 @@ public class printMap {
 	        if (OptionsSceneController.resType == "1280x720" || OptionsSceneController.resType == "") {
 	        	Main.window.setWidth(1280);
 	        	Main.window.setHeight(720);
-	        	
-	        	horizontalSetter = (Main.window.getWidth()/cols);
-		        verticalSetter = (Main.window.getHeight()/rows);
 		        
-		        vertical = 21.44*(verticalSetter/21.44);
+		        vertical = 64;
 		        horizontal = vertical;
 		        
-		        System.out.println("H: " + horizontal);
-		        System.out.println("V: " + vertical);
 	        }else if(OptionsSceneController.resType == "1920x1080") {
 	        	Main.window.setWidth(1920);
 	        	Main.window.setHeight(1080);
 	        	
-	        	horizontalSetter = (Main.window.getWidth()/cols);
-		        verticalSetter = (Main.window.getHeight()/rows);
-		        
-		        vertical = 32*(verticalSetter/32);
+		        vertical = 48;
 		        horizontal = vertical;
 	        }
 	        
 	        //Adds a variable padding to the left side of the screen
-	        gameLayer.setLayoutX(vertical*3);
+	        scrollLayer.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+	        scrollLayer.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+	        scrollLayer.prefHeight(640);
+	        scrollLayer.setMaxHeight(640);
+	        scrollLayer.setMinHeight(640);
+	        scrollLayer.prefWidth(960);
+	        scrollLayer.setMaxWidth(960);
+	        scrollLayer.setMinWidth(960);
+	        scrollLayer.setLayoutX(vertical*3);
 	        Rectangle rect = null;
 	      
 			//Print map
@@ -80,9 +87,6 @@ public class printMap {
 			    }
 			    System.out.println();
 			}
-			
-	        //Add the layer to the anchorpane
-	        root.getChildren().add(gameLayer);
 	        
 			//Print map foreground
 			spriteLayer(map,rows,cols);
@@ -188,7 +192,11 @@ public class printMap {
 	       }
 	       
 	       Group groupLayers = new Group();
+		   
+	       //Adds gameLayer to the bottom of te list
+	       groupLayers.getChildren().add(gameLayer);
 	       
+	       //Adds sprites ontop
 	       groupLayers.setLayoutX(vertical*3);
 	       groupLayers.getChildren().add(spriteLayer);
 		   
@@ -199,16 +207,19 @@ public class printMap {
 		   //Loads the arrow layer
 		   Pane arrowLayer = Arrow.init();
 		   groupLayers.getChildren().add(arrowLayer);
-		   
-		   //Adds all game based layers
-		   root.getChildren().add(groupLayers);
+
+		   //Adds all the layers to the scrollLayer
+	       scrollLayer.setContent(groupLayers);
+	       //Adds scrollLayer to root
+	       root.getChildren().add(scrollLayer);
+
 
 	       //Loads the Interface and adds it ontop of game layers
-	       //gameInterface =  FXMLLoader.load(printMap.class.getResource("scenes\\gameInterface.fxml"));
 		   Group UILayer = new Group();
 		   UILayer = Interface.initialize();
 	       root.getChildren().add(UILayer);
 
+	       
 		   //Loads the MovespaceMenu
 		   moveSpaceMenu =  FXMLLoader.load(printMap.class.getResource("scenes\\moveSpaceMenu.fxml"));
 		   moveSpaceMenu.setLayoutX(vertical*3);
