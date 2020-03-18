@@ -43,7 +43,8 @@ public class printMap {
 		   colsCompare = rows-1;
 		   rowsCompare = cols-1;
 		   
-		   System.out.println(colsCompare);
+		   System.out.println("Amount of cols: " + colsCompare);
+		   System.out.println("Amount of rows: " + rowsCompare);
 		   Scene scene = new Scene(root, 1280, 720);
 		   
 		   //Setup multiple video resolutions
@@ -66,9 +67,9 @@ public class printMap {
 	        //Adds a variable padding to the left side of the screen
 	        scrollLayer.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 	        scrollLayer.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-	        scrollLayer.prefHeight(640);
-	        scrollLayer.setMaxHeight(640);
-	        scrollLayer.setMinHeight(640);
+	        scrollLayer.prefHeight(512);
+	        scrollLayer.setMaxHeight(512);
+	        scrollLayer.setMinHeight(512);
 	        scrollLayer.prefWidth(960);
 	        scrollLayer.setMaxWidth(960);
 	        scrollLayer.setMinWidth(960);

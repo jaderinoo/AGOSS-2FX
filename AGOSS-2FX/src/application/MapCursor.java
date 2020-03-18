@@ -11,11 +11,23 @@ public class MapCursor {
 	private static Image cursor;
 	private static int cursorPosition;
 	static int cursorX = Adventure.playerListCurrent.get(0).getMapX(), cursorY = Adventure.playerListCurrent.get(0).getMapY();
+	public static float horizontalScrollVariable = 0, verticalScrollVariable = 0;
 	public static boolean canMove = true;
 	public static ArrayList<String> moveSequence = new ArrayList<String>();
 	
 	public static Pane init()
 	{
+		//Initialize the amount needed to move across the board
+		int tempx = printMap.colsCompare-14;
+		int tempy = printMap.rowsCompare-7;
+		
+		
+		horizontalScrollVariable = (float) ((double)1/tempx);
+		verticalScrollVariable = (float) ((double)1/tempy);
+		
+		System.out.println("vertscrollvar: " + tempy);
+		System.out.println("vertscrollvar: " + verticalScrollVariable);
+		
 		Rectangle sprite = null;
 		cursor = new Image("application\\tilesets\\cursor\\cursor.gif");
 		
@@ -49,31 +61,43 @@ public class MapCursor {
 	
 	public static void moveUp() 
     {
-		if(canMove == true) {
-			cursorY--;
-			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
-		}
-		
-		if(Arrow.isOn == true) {
-			Arrow.arrowY--;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-			moveSequence.add("up");
+		if(cursorY > 0) {
+			if(canMove == true) {
+				cursorY--;
+				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
+				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+			}
+			
+			if(Arrow.isOn == true) {
+				Arrow.arrowY--;
+				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
+				moveSequence.add("up");
+			}
+			
+			if(cursorY <= printMap.rowsCompare-) {
+				printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() - verticalScrollVariable);
+			}
 		}
     }
 	
 	public static void moveDown() 
     {
-		if(canMove == true) {
-			cursorY++;
-			System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
-			printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
-		}
-		
-		if(Arrow.isOn == true) {
-			Arrow.arrowY++;
-			printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-			moveSequence.add("down");
+		if(cursorY < printMap.rowsCompare) {
+			if(canMove == true) {
+				cursorY++;
+				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
+				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+			}
+			
+			if(Arrow.isOn == true) {
+				Arrow.arrowY++;
+				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
+				moveSequence.add("down");
+			}
+			
+			if(cursorY >= printMap.rowsCompare-) {
+				printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() + verticalScrollVariable);
+			}
 		}
     }
 	
@@ -92,8 +116,8 @@ public class MapCursor {
 				moveSequence.add("left");
 			}
 			
-			if(cursorX < printMap.colsCompare-14) {
-				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() -64);
+			if(cursorX <= printMap.colsCompare-) {
+				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() - horizontalScrollVariable);
 			}
 		}
     }
@@ -113,8 +137,9 @@ public class MapCursor {
 				moveSequence.add("right");
 			}
 			
-			if(cursorX >= printMap.colsCompare) {
-				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() +64);
+			if(cursorX >= printMap.colsCompare-) {
+				System.out.println(printMap.scrollLayer.getHvalue());
+				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() + horizontalScrollVariable);
 			}
 		}
     }
