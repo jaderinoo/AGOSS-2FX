@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -23,14 +24,15 @@ public class Interface {
 		
 		Group group = new Group();
 
-	    VBox leftBar =  FXMLLoader.load(printMap.class.getResource("scenes\\sidebarUI.fxml"));
+	    VBox leftBar =  FXMLLoader.load(printMap.class.getResource("scenes\\leftBarUI.fxml"));
 	    group.getChildren().add(leftBar);
 	    
-	    VBox rightBar =  FXMLLoader.load(printMap.class.getResource("scenes\\sidebarUI.fxml"));
-	    group.getChildren().add(rightBar);
-	    
-	    VBox bottomBar =  FXMLLoader.load(printMap.class.getResource("scenes\\sidebarUI.fxml"));
+	    HBox bottomBar =  FXMLLoader.load(printMap.class.getResource("scenes\\bottomBarUI.fxml"));
+	    bottomBar.setLayoutY(Main.window.getHeight()-250);
 	    group.getChildren().add(bottomBar);
+	    
+	    //VBox bottomBar =  FXMLLoader.load(printMap.class.getResource("scenes\\sidebarUI.fxml"));
+	    //group.getChildren().add(bottomBar);
 		
 		return group;
     }    
