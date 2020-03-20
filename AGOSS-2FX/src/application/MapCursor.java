@@ -58,6 +58,8 @@ public class MapCursor {
 	
 	//Referred to in printMap()
 	//			V
+	//Map scroll movement + Cursor and arrow movement all done here.
+	//Listeners check for map boundaries using location of cursor/arrow at the time and multiply them by the decided scroll vars.
 	
 	public static void moveUp() 
     {
@@ -75,7 +77,15 @@ public class MapCursor {
 			if(Arrow.isOn == true && Arrow.arrowY > 0) {
 				Arrow.arrowY--;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-				moveSequence.add("up");
+				if(moveSequence.size() != 0) {
+					if (moveSequence.get(moveSequence.size() - 1) != "down") {
+						moveSequence.add("up");
+					} else {
+						moveSequence.remove( moveSequence.size() - 1);
+					}
+				} else {
+					moveSequence.add("up");
+				}
 
 				if(Arrow.arrowY * verticalScrollVariable < printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 3)) {
 				printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() - verticalScrollVariable);
@@ -100,7 +110,15 @@ public class MapCursor {
 			if(Arrow.isOn == true && Arrow.arrowY < printMap.rowsCompare) {
 				Arrow.arrowY++;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-				moveSequence.add("down");
+				if(moveSequence.size() != 0) {
+					if (moveSequence.get(moveSequence.size() - 1) != "up") {
+						moveSequence.add("down");
+					} else {
+						moveSequence.remove( moveSequence.size() - 1);
+					}
+				} else {
+					moveSequence.add("down");
+				}
 
 				if(Arrow.arrowY * verticalScrollVariable > printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 4)) {
 					printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() + verticalScrollVariable);
@@ -125,7 +143,15 @@ public class MapCursor {
 			if(Arrow.isOn == true && Arrow.arrowX > 0) {
 				Arrow.arrowX--;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-				moveSequence.add("left");
+				if(moveSequence.size() != 0) {
+					if (moveSequence.get(moveSequence.size() - 1) != "right") {
+						moveSequence.add("left");
+					} else {
+						moveSequence.remove( moveSequence.size() - 1);
+					}
+				} else {
+					moveSequence.add("left");
+				}
 				
 				if(Arrow.arrowX * horizontalScrollVariable < printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 3)) {
 					printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() - horizontalScrollVariable);
@@ -150,7 +176,15 @@ public class MapCursor {
 			if(Arrow.isOn == true && Arrow.arrowX < printMap.colsCompare) {
 				Arrow.arrowX++;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
-				moveSequence.add("right");
+				if(moveSequence.size() != 0) {
+					if (moveSequence.get(moveSequence.size() - 1) != "left") {
+						moveSequence.add("right");
+					} else {
+						moveSequence.remove( moveSequence.size() - 1);
+					}
+				} else {
+					moveSequence.add("right");
+				}
 				
 				if(Arrow.arrowX * horizontalScrollVariable > printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 11)) {
 					printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() + horizontalScrollVariable);
