@@ -66,16 +66,20 @@ public class MapCursor {
 				cursorY--;
 				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+				
+				if(cursorY * verticalScrollVariable < printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 3)) {
+					printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() - verticalScrollVariable);
+				}
 			}
 			
-			if(Arrow.isOn == true) {
+			if(Arrow.isOn == true && Arrow.arrowY > 0) {
 				Arrow.arrowY--;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 				moveSequence.add("up");
-			}
-			
-			if(cursorY * verticalScrollVariable < printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 3)) {
+
+				if(Arrow.arrowY * verticalScrollVariable < printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 3)) {
 				printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() - verticalScrollVariable);
+				}
 			}
 		}
     }
@@ -87,16 +91,20 @@ public class MapCursor {
 				cursorY++;
 				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+				
+				if(cursorY * verticalScrollVariable > printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 4)) {
+					printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() + verticalScrollVariable);
+				}
 			}
 			
-			if(Arrow.isOn == true) {
+			if(Arrow.isOn == true && Arrow.arrowY < printMap.rowsCompare) {
 				Arrow.arrowY++;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 				moveSequence.add("down");
-			}
-			
-			if(cursorY * verticalScrollVariable > printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 4)) {
-				printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() + verticalScrollVariable);
+
+				if(Arrow.arrowY * verticalScrollVariable > printMap.scrollLayer.getVvalue() + (verticalScrollVariable * 4)) {
+					printMap.scrollLayer.setVvalue(printMap.scrollLayer.getVvalue() + verticalScrollVariable);
+				}
 			}
 		}
     }
@@ -108,16 +116,20 @@ public class MapCursor {
 				cursorX--;
 				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+				
+				if(cursorX * horizontalScrollVariable < printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 3)) {
+					printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() - horizontalScrollVariable);
+				}
 			}
 			
-			if(Arrow.isOn == true) {
+			if(Arrow.isOn == true && Arrow.arrowX > 0) {
 				Arrow.arrowX--;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 				moveSequence.add("left");
-			}
-			
-			if(cursorX * horizontalScrollVariable < printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 3)) {
-				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() - horizontalScrollVariable);
+				
+				if(Arrow.arrowX * horizontalScrollVariable < printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 3)) {
+					printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() - horizontalScrollVariable);
+				}
 			}
 		}
     }
@@ -129,17 +141,20 @@ public class MapCursor {
 				cursorX++;
 				System.out.println("CursorX: " + cursorX + " ,CursorY: " + cursorY );
 				printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * cursorX, printMap.vertical * cursorY);
+				
+				if(cursorX * horizontalScrollVariable > printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 11)) {
+					printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() + horizontalScrollVariable);
+				}
 			}
 			
-			if(Arrow.isOn == true) {
+			if(Arrow.isOn == true && Arrow.arrowX < printMap.colsCompare) {
 				Arrow.arrowX++;
 				printMap.shapes.get(Arrow.arrowTipPosition).relocate(printMap.horizontal * Arrow.arrowX, printMap.vertical * Arrow.arrowY);
 				moveSequence.add("right");
-			}
-			
-			if(cursorX * horizontalScrollVariable > printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 11)) {
-				System.out.println(printMap.scrollLayer.getHvalue());
-				printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() + horizontalScrollVariable);
+				
+				if(Arrow.arrowX * horizontalScrollVariable > printMap.scrollLayer.getHvalue() + (horizontalScrollVariable * 11)) {
+					printMap.scrollLayer.setHvalue(printMap.scrollLayer.getHvalue() + horizontalScrollVariable);
+				}
 			}
 		}
     }
