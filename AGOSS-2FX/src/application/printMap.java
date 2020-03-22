@@ -467,7 +467,7 @@ public class printMap {
 		   		case "clear":
 		   			//Hides the list
 		   			System.out.println("CLEARING ARROWLIST");
-		   			for(int i = 0; i >= MapCursor.moveSequence.size(); i++) {
+		   			for(int i = 0; i < tempArrow.size(); i++) {
 		   				tempArrow.get(i).setVisible(false);
 		   			}
 		   			tempArrow.clear();
