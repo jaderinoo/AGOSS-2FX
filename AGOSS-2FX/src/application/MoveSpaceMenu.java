@@ -64,7 +64,6 @@ public class MoveSpaceMenu {
 					if(printMap.shapes.get(i).getId() == tempName) {
 						System.out.println("Moving character: " + printMap.shapes.get(i).getId());
 						tempPos = i;
-
 					}  
 				}
 
@@ -100,10 +99,8 @@ public class MoveSpaceMenu {
 				   printMap.moveSpaceMenu.relocate(printMap.horizontal * player.getMapX() + printMap.horizontal,printMap.vertical * player.getMapY() - printMap.vertical); 
 				   
 			   }else if(player.getMapX() == 4 && player.getMapY() == 4) {
-				   printMap.moveSpaceMenu.relocate(printMap.horizontal * player.getMapX() - printMap.horizontal,printMap.vertical * player.getMapY() - printMap.vertical); 
-				   
+				   printMap.moveSpaceMenu.relocate(printMap.horizontal * player.getMapX() - printMap.horizontal,printMap.vertical * player.getMapY() - printMap.vertical); 	   
 			   }
-			   
 			   printMap.moveSpaceMenu.setVisible(true);
 		   }
 		   

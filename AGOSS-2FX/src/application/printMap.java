@@ -145,12 +145,9 @@ public class printMap {
 	            		}
 	            	}
 	            }	
-	            
 	            event.consume();
 	        });
-			
-			
-			
+
 			//Set the scene
 	        Main.window.setScene(scene);
 	         
@@ -361,6 +358,9 @@ public class printMap {
 		   pathTransition.play();  
 		   resetImg(id);
 		   
+		   //Clear the follow arrow
+		   printMap.postArrow("clear", "null", 0, 0);
+		   
 		   //Presents the moveSpaceMenu after animation is finished
 		   Timer myTimer = new Timer();
 	          myTimer.schedule(new TimerTask(){
@@ -369,7 +369,6 @@ public class printMap {
 	            	System.out.println("Im setting to true: MENU");
 	            	MoveSpaceMenu.showMenu(true, player);
 	            	
-
 	     	       //Sets the moved player to HasMoved true
 	     		   if(mob == null) {
 	     			   System.out.println("Im setting to true");
@@ -377,9 +376,7 @@ public class printMap {
 	     		   }
 	            }
 	          }, directions.size()*250);
-		   //Allow movement and return;
-		   //MapCursor.canMove = true;
-
+	          
 		   return;
 	   }
 	   
@@ -428,7 +425,7 @@ public class printMap {
 		   			switch(direction) {
 		   				case "up": case "down":
 		   					img = new Image("application\\tilesets\\arrow\\arrow_path_vertical.png");
-		   					
+	
 		   					//Makes sure the arrow is behind the cursor
 		   					if(direction == "up") {
 		   						y++;
@@ -451,6 +448,29 @@ public class printMap {
 		   					break;
 		   			}
 		   			
+		   			//Catches corners coming from horizontal plain
+   					System.out.println(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2));
+   					if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "right" && direction == "up") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_left_up.png");
+   					} else if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "right" && direction == "down") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_left_down.png");
+   					} else if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "left" && direction == "down") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_right_down.png");
+   					} else if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "left" && direction == "up") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_right_up.png");
+   					}
+   					
+   					//Catches corners coming from vertical plain
+   					if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "down" && direction == "left") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_left_up.png");
+   					} else if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "down" && direction == "right") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_right_up.png");
+   					} else if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "up" && direction == "left") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_left_down.png");
+   					} else if(MapCursor.moveSequence.get(MapCursor.moveSequence.size() -2) == "up" && direction == "right") {
+   						img = new Image("application\\tilesets\\arrow\\arrow_path_right_down.png");
+   					}
+   					
 		   			//Posts the arrow
 		   			Rectangle arrowLine = new Rectangle(horizontal * x ,vertical * y, horizontal, vertical);
 		   			arrowLine.setFill(new ImagePattern(img));
@@ -471,9 +491,7 @@ public class printMap {
 		   				tempArrow.get(i).setVisible(false);
 		   			}
 		   			tempArrow.clear();
-		   			break;
-		   			
-		   			
+		   			break;		
 		   }
 	   }
 	   
