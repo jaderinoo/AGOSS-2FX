@@ -80,8 +80,10 @@ public class MapCursor {
 				if(moveSequence.size() != 0) {
 					if (moveSequence.get(moveSequence.size() - 1) != "down") {
 						moveSequence.add("up");
+						printMap.postArrow("post", "up", Arrow.arrowX,Arrow.arrowY);
 					} else {
-						moveSequence.remove( moveSequence.size() - 1);
+						moveSequence.remove(moveSequence.size() - 1);
+						printMap.postArrow("hide", "up", Arrow.arrowX,Arrow.arrowY);
 					}
 				} else {
 					moveSequence.add("up");
@@ -113,8 +115,10 @@ public class MapCursor {
 				if(moveSequence.size() != 0) {
 					if (moveSequence.get(moveSequence.size() - 1) != "up") {
 						moveSequence.add("down");
+						printMap.postArrow("post", "down", Arrow.arrowX,Arrow.arrowY);
 					} else {
 						moveSequence.remove( moveSequence.size() - 1);
+						printMap.postArrow("hide", "down", Arrow.arrowX,Arrow.arrowY);
 					}
 				} else {
 					moveSequence.add("down");
@@ -146,8 +150,10 @@ public class MapCursor {
 				if(moveSequence.size() != 0) {
 					if (moveSequence.get(moveSequence.size() - 1) != "right") {
 						moveSequence.add("left");
+						printMap.postArrow("post", "left", Arrow.arrowX,Arrow.arrowY);
 					} else {
 						moveSequence.remove( moveSequence.size() - 1);
+						printMap.postArrow("hide", "left", Arrow.arrowX,Arrow.arrowY);
 					}
 				} else {
 					moveSequence.add("left");
@@ -179,8 +185,10 @@ public class MapCursor {
 				if(moveSequence.size() != 0) {
 					if (moveSequence.get(moveSequence.size() - 1) != "left") {
 						moveSequence.add("right");
+						printMap.postArrow("post", "right", Arrow.arrowX,Arrow.arrowY);
 					} else {
 						moveSequence.remove( moveSequence.size() - 1);
+						printMap.postArrow("hide", "right", Arrow.arrowX,Arrow.arrowY);
 					}
 				} else {
 					moveSequence.add("right");

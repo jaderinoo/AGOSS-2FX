@@ -34,9 +34,11 @@ public class printMap {
 	static Pane gameLayer = new Pane();
 	static Pane moveSpaceMenu = new Pane();
 	static Pane gameInterface = new Pane();
+	static Pane arrowLayer = new Pane();
 	static int rowsCompare, colsCompare;
 	public static double horizontal = 0 , vertical = 0;
 	static List <Shape> shapes = new ArrayList<>();
+	static List <Shape> tempArrow = new ArrayList<>();
 	public static int currentPlayerHover = 0;
 	public static boolean isOnPlayer = false;
 	   public static void mapPrinter(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
@@ -153,6 +155,67 @@ public class printMap {
 	        Main.window.setScene(scene);
 	         
 	   }
+	   
+	   public static void postArrow(String type, String direction, int x, int y) {
+		   Image img = new Image("application\\tilesets\\unknown.png");
+		   switch(type) {
+		   		case "post":
+		   			
+		   			//Determines which arrow path to use
+		   			switch(direction) {
+		   				case "up": case "down":
+		   					img = new Image("application\\tilesets\\arrow\\arrow_path_vertical.png");
+		   					
+		   					//Makes sure the arrow is behind the cursor
+		   					if(direction == "up") {
+		   						y++;
+		   					}else {
+		   						y--;
+		   					}
+		   					
+		   					break;
+
+		   				case "left": case "right":
+		   					img = new Image("application\\tilesets\\arrow\\arrow_path_horizontal.png");
+		   					
+		   					//Makes sure the arrow is behind the cursor
+		   					if(direction == "right") {
+		   						x--;
+		   					}else {
+		   						x++;
+		   					}
+		   					
+		   					break;
+		   			}
+		   			
+		   			//Posts the arrow
+		   			System.out.println(x + " " + y);
+		   			System.out.println("moveSize" + MapCursor.moveSequence.size());
+		   			Rectangle arrowLine = new Rectangle(horizontal * x ,vertical * y, horizontal, vertical);
+		   			arrowLine.setFill(new ImagePattern(img));
+		   			arrowLayer.getChildren().add(arrowLine);
+		    		tempArrow.add(arrowLine);
+		   			break;
+		   			
+		   		case "hide":
+		   			System.out.println("moveSize" + MapCursor.moveSequence.size());
+		   			tempArrow.get(MapCursor.moveSequence.size() - 1).setVisible(false);
+		   			break;
+		   			
+		   		case "clear":
+		   			//Hides the list
+		   			System.out.println("CLEARING ARROWLIST");
+		   			for(int i = 0; i >= MapCursor.moveSequence.size(); i++) {
+		   				tempArrow.get(i).setVisible(false);
+		   			}
+		   			tempArrow.clear();
+		   			break;
+		   			
+		   			
+		   }
+	   }
+	   
+	   
 	   public static void spriteLayer(GridSpace[][] map, int rows, int cols) throws InterruptedException, IOException {
 		   Pane spriteLayer = new Pane(); 
 	       Rectangle sprite = null;
@@ -206,7 +269,7 @@ public class printMap {
 		   groupLayers.getChildren().add(cursorLayer);
 		   
 		   //Loads the arrow layer
-		   Pane arrowLayer = Arrow.init();
+		   arrowLayer = Arrow.init();
 		   groupLayers.getChildren().add(arrowLayer);
 
 		   //Adds all the layers to the scrollLayer

@@ -77,6 +77,8 @@ public class MoveSpaceMenu {
 				//Reset temp vars
 				tempName = "";
 				tempPos = 0;
+				printMap.postArrow("clear", "null", 0, 0);
+				
 			}
 		});
 	}
