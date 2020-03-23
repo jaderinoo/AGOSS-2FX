@@ -13,12 +13,18 @@ public class MobAi {
 		myTimer.scheduleAtFixedRate(new TimerTask(){
 			@Override
 			public void run() {
+				ArrayList <String> mobMove = new ArrayList<>();
 				char type = mapInitialization.mobList.get(i).getType();
+				
+				//Get the moveset
 				if(type == 'f') {
-					moveAi(mapInitialization.mobList.get(i), 0);
+					mobMove = moveAi(mapInitialization.mobList.get(i), 0);
 				}else if(type == 'k') {
-					moveAi(mapInitialization.mobList.get(i), 0);
+					mobMove = moveAi(mapInitialization.mobList.get(i), 0);
 				}
+
+				//Send the arraylist to the moveSprite method
+				printMap.moveSprite(mapInitialization.mobList.get(i), null, mobMove);
 				
 				//Increment i and compare to total size
 				i++;
@@ -26,6 +32,7 @@ public class MobAi {
 				if(i == mapInitialization.mobList.size()) {
 					i = 0;
 					myTimer.cancel();
+					mobMove.clear();
 					GameVariables.roundReset();
 				}
 			}
@@ -33,18 +40,14 @@ public class MobAi {
 	}
 
 	//Call enemy ai type
-	public static void moveAi(Mob1 mob, int type) {
-
+	public static ArrayList <String>  moveAi(Mob1 mob, int type) {
+		ArrayList <String> mobeMove = new ArrayList<>();
 		switch(type) {
 		//Aggressive ai
 		case 0:
-			ArrayList <String> mobeMove = new ArrayList<>();
 			mobeMove.add("up");
 			mobeMove.add("up");
 			mobeMove.add("left");
-
-			printMap.moveSprite(mob, null, mobeMove);
-
 
 			System.out.println(mob.getName());
 			break;
@@ -64,5 +67,6 @@ public class MobAi {
 		default:
 
 		}
+		return mobeMove;
 	}
 }
