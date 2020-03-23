@@ -6,29 +6,38 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 
 public class GameVariables {
-	public static int round = 0;
+	public static int round = 1;
 	
 	public static void checkRoundStatus() {
 		int tempCheck = 0;
+		//Makes sure all player units have moved
 		for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
 			if(Adventure.playerListCurrent.get(i).getHasMoved() == true) {
 				tempCheck++;
 			}
 		}
-		
+		//If all units have moved, proceed to sprite movement
 		if(tempCheck == Adventure.playerListCurrent.size()) {
+			
+			//Increment the round
 			round++;
-			System.out.println("Round#: " + round);
 			
 			//Move to enemy turn
 			MobAi.cycleList();
-			
-			//After enemy move finishes, reset vars if necessary
-			
-			//Move to "other" turn
-			
-			//If no other exist, reset phase to 0
 		}
+	}
+	
+	public static void roundReset() {
+		
+		//Allow units to move again
+		for(int i = 0; i != Adventure.playerListCurrent.size(); i++) {
+			Adventure.playerListCurrent.get(i).setHasMoved(false);
+		}
+		
+		//Allows cursor movement
+		MapCursor.canMove = true;
+		
+		System.out.println("Round#: " + round);
 	}
 	
 	public static int currentTime = 0;
