@@ -136,11 +136,11 @@ public class printMap {
 	            	}
 	            	
 	            	if(Arrow.isOn == true) {
-	            		printMap.moveSprite(null, Adventure.playerListCurrent.get(currentPlayerHover), MapCursor.moveSequence);
+	            		moveSprite(null, Adventure.playerListCurrent.get(currentPlayerHover), MapCursor.moveSequence);
 	            		Arrow.toggleArrow(false);
 	            		MapCursor.resetCursor(currentPlayerHover);
 	            	}else{
-	            		if(Adventure.playerListCurrent.get(currentPlayerHover).getHasMoved() == false && isOnPlayer == true) {
+	            		if(Adventure.playerListCurrent.get(currentPlayerHover).getHasMoved() == false && isOnPlayer == true && MapCursor.canMove == true) {
 	            			MapCursor.checkSpace(currentPlayerHover);
 	            		}
 	            	}
@@ -273,6 +273,7 @@ public class printMap {
 				   pathTransition.setNode(shapes.get(pos));  
 			   }  
 		   }
+		   
 		   shapes.get(pos).setLayoutX(0);
 		   shapes.get(pos).setLayoutY(0);
 		   //Depending on direction, move and change sprite
@@ -366,13 +367,12 @@ public class printMap {
 	          myTimer.schedule(new TimerTask(){
 	            @Override
 	            public void run() {
-	            	System.out.println("Im setting to true: MENU");
-	            	MoveSpaceMenu.showMenu(true, player);
-	            	
 	     	       //Sets the moved player to HasMoved true
 	     		   if(mob == null) {
-	     			   System.out.println("Im setting to true");
-	     			   player.setHasMoved(true);
+		            	System.out.println("Im setting to true: MENU");
+		            	MoveSpaceMenu.showMenu(true, player);
+		            	System.out.println("Im setting to true");
+		            	player.setHasMoved(true);
 	     		   }
 	            }
 	          }, directions.size()*250);
@@ -488,7 +488,8 @@ public class printMap {
 		   			//Hides the list
 		   			System.out.println("CLEARING ARROWLIST");
 		   			for(int i = 0; i < tempArrow.size(); i++) {
-		   				tempArrow.get(i).setVisible(false);
+		   				//Removes the shapes from the layer
+		   				arrowLayer.getChildren().remove(tempArrow.get(i));
 		   			}
 		   			tempArrow.clear();
 		   			break;		
