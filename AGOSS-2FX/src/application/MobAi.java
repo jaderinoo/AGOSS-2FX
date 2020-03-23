@@ -10,33 +10,26 @@ public class MobAi {
 	public static void cycleList() {
 		Timer myTimer = new Timer();
 
-        myTimer.scheduleAtFixedRate(new TimerTask(){
-          @Override
-          public void run() {
-          	moveAi(mapInitialization.mobList.get(i), 0);
-          	i++;
-			if(i == mapInitialization.mobList.size()) {
-				i = 0;
-				myTimer.cancel();
-				GameVariables.roundReset();
-			}
-				//if(type == 'f') {
-				//	moveAi(mapInitialization.mobList.get(i), 0);
-				//}else if(type == 'k') {
-				//	moveAi(mapInitialization.mobList.get(i), 0);
-				//}
+		myTimer.scheduleAtFixedRate(new TimerTask(){
+			@Override
+			public void run() {
+				char type = mapInitialization.mobList.get(i).getType();
+				if(type == 'f') {
+					moveAi(mapInitialization.mobList.get(i), 0);
+				}else if(type == 'k') {
+					moveAi(mapInitialization.mobList.get(i), 0);
+				}
+				
+				//Increment i and compare to total size
+				i++;
+
+				if(i == mapInitialization.mobList.size()) {
+					i = 0;
+					myTimer.cancel();
+					GameVariables.roundReset();
+				}
 			}
 		}, 1000, 1000);
-
-		
-		
-		
-		
-		
-		//for(i = 0; i < mapInitialization.mobList.size(); i++) {
-		//	char type = mapInitialization.mobList.get(i).getType();
-
-		//}
 	}
 
 	//Call enemy ai type
@@ -49,7 +42,7 @@ public class MobAi {
 			mobeMove.add("up");
 			mobeMove.add("up");
 			mobeMove.add("left");
-			
+
 			printMap.moveSprite(mob, null, mobeMove);
 
 
