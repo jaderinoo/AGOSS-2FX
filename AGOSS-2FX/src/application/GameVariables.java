@@ -24,6 +24,7 @@ public class GameVariables {
 			
 			//Move to enemy turn
 			MobAi.cycleList();
+			
 		}
 	}
 	
