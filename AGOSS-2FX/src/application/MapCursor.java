@@ -1,6 +1,8 @@
 package application;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
@@ -46,15 +48,49 @@ public class MapCursor {
 		return cursorLayer;
 	}
 	
+	static int moverX;
+	static int moverY;
 	public static void resetCursor(int tempPos) {
 		System.out.println(tempPos);
 		System.out.println("Reseting cursor position to: " + Adventure.playerListCurrent.get(tempPos).getMapX() + "," + Adventure.playerListCurrent.get(tempPos).getMapY());
 		printMap.shapes.get(cursorPosition).relocate(printMap.horizontal * Adventure.playerListCurrent.get(tempPos).getMapX(), printMap.vertical * Adventure.playerListCurrent.get(tempPos).getMapY());
+		
+		//Set cursorx and y to new location
 		cursorX = Adventure.playerListCurrent.get(tempPos).getMapX();
 		cursorY = Adventure.playerListCurrent.get(tempPos).getMapY();
+		moveMap(0,0);
 	}
 	
-	
+	public static void moveMap(int timerTime, int directionSize) {
+		
+		if(directionSize == 0) {
+			printMap.scrollLayer.setVvalue((cursorY - 3) * verticalScrollVariable);
+			printMap.scrollLayer.setHvalue((cursorX - 3) * horizontalScrollVariable);
+		}else {
+			
+			int stepX = (moverX/cursorX - 3)/directionSize;
+			int stepY = (moverY/cursorY - 3)/directionSize;
+			
+			
+			System.out.println(moverY + ":Y mover X:" + moverX);
+			System.out.println(stepY + ":Y step X:" + stepX);
+			System.out.println(cursorY + ":Y cursor X:" + cursorX);
+			   Timer menuTimer = new Timer();
+			   	menuTimer.schedule(new TimerTask(){
+			   		int i = 0;
+		            @Override
+		            public void run() {
+		            	while(i != directionSize) {
+			        		moverY = moverY + stepY;
+			        		moverX = moverX + stepX;
+			        		printMap.scrollLayer.setVvalue((moverY) * verticalScrollVariable);
+			        		printMap.scrollLayer.setHvalue((moverX) * horizontalScrollVariable);
+			        		i++;
+		            	}
+		            }
+		          },250 , timerTime);
+		}
+	}
 	
 	//Referred to in printMap()
 	//			V

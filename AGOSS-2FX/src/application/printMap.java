@@ -140,7 +140,7 @@ public class printMap {
 	            	if(Arrow.isOn == true) {
 	            		moveSprite(null, Adventure.playerListCurrent.get(currentPlayerHover), MapCursor.moveSequence);
 	            		Arrow.toggleArrow(false);
-	            		MapCursor.resetCursor(currentPlayerHover);
+	            		//MapCursor.resetCursor(currentPlayerHover);
 	            	}else{
 	            		if(Adventure.playerListCurrent.get(currentPlayerHover).getHasMoved() == false && isOnPlayer == true && MapCursor.canMove == true) {
 	            			MapCursor.checkSpace(currentPlayerHover);
@@ -296,6 +296,7 @@ public class printMap {
 					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 
  	
 				   }else if (mob == null) {
+					   tempDirections.add("left");
 					   player.setMapX(player.getMapX()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
 					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));  
@@ -313,6 +314,7 @@ public class printMap {
 					   mob.setMapX(mob.getMapX()+1);
 					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 	
 				   }else if (mob == null) {
+					   tempDirections.add("right");
 					   player.setMapX(player.getMapX()+1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
 					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));   
@@ -330,6 +332,7 @@ public class printMap {
 					   mob.setMapY(mob.getMapY()-1);
 					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 	
 				   }else if (mob == null) {
+					   tempDirections.add("up");
 					   player.setMapY(player.getMapY()-1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
 					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));  
@@ -347,15 +350,29 @@ public class printMap {
 					   mob.setMapY(mob.getMapY()+1);
 					   path.getElements().add (new LineTo (horizontal * mob.getMapX() + (horizontal/2), vertical * mob.getMapY() + (vertical/2))); 	
 				   }else if (mob == null) {
+					   tempDirections.add("down");
 					   player.setMapY(player.getMapY()+1);
 					   System.out.println(player.getMapX() + ", " + player.getMapY());
 					   path.getElements().add (new LineTo ((horizontal * player.getMapX()) + (horizontal/2), vertical * player.getMapY() + (vertical/2)));
 				   }
 			   }
+			   System.out.println("Temp SIZE: " + tempDirections.size());
 		   }
 			
 		   //setting path for the path transition   
 		   pathTransition.setPath(path);
+		   
+		   System.out.println("Temp SIZE: " + tempDirections.size());
+		   if(player == null) {
+			   MapCursor.moverX = mob.getMapX();
+			   MapCursor.moverY = mob.getMapX();
+			   MapCursor.moveMap(tempDirections.size()*250,tempDirections.size());
+		   } else {
+			   MapCursor.moverX = player.getMapX();
+			   MapCursor.moverY = player.getMapX();
+			   MapCursor.moveMap(tempDirections.size()*250,tempDirections.size());
+		   }
+
 		   
 		   //Playing path transition
 		   pathTransition.play();     
@@ -376,7 +393,6 @@ public class printMap {
 	     		   }
 	            }
 	          }, directions.size()*250);
-	          
 		   return;
 	   }
 	   

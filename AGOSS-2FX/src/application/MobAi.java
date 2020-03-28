@@ -42,6 +42,7 @@ public class MobAi {
 					i = 0;
 					cycleTimer.cancel();
 					GameVariables.roundReset();
+					MapCursor.resetCursor(0);
 					System.out.println("Ememy phase completed");
 				}
 			}
